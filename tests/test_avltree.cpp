@@ -1,4 +1,4 @@
-// test_avltree.cpp
+
 #include "catch_amalgamated.hpp"
 #include "avltree.h"
 
@@ -7,15 +7,14 @@
 #include <cstdint>
 #include <iostream>
 
-// =============================================================
-// 1. БАЗОВЫЕ СВОЙСТВА ДЕРЕВА
-// =============================================================
+
+
 
 TEST_CASE("AvlTree: конструктор по умолчанию, пустота и размер", "[AvlTree]")
 {
     AvlTree tree;
     REQUIRE(tree.empty());
-    REQUIRE(tree.size() == 0U);
+    REQUIRE(tree.size() == 0);
 
     // Печать пустого дерева для покрытия print/printRec(nullptr)
     std::ostringstream oss;
@@ -24,9 +23,9 @@ TEST_CASE("AvlTree: конструктор по умолчанию, пустот
     std::cout.rdbuf(oldBuf);
 }
 
-// =============================================================
+
 // 2. ВСТАВКА И ПОИСК
-// =============================================================
+
 
 TEST_CASE("AvlTree: простая вставка и contains", "[AvlTree]")
 {
@@ -36,7 +35,7 @@ TEST_CASE("AvlTree: простая вставка и contains", "[AvlTree]")
     tree.insert("c");
 
     REQUIRE_FALSE(tree.empty());
-    REQUIRE(tree.size() == 3U);
+    REQUIRE(tree.size() == 3);
     REQUIRE(tree.contains("a"));
     REQUIRE(tree.contains("b"));
     REQUIRE(tree.contains("c"));
@@ -61,9 +60,9 @@ TEST_CASE("AvlTree: повторная вставка не добавляет д
     REQUIRE(tree.contains("b"));
 }
 
-// =============================================================
+
 // 3. БАЛАНСИРОВКА / ПОВОРОТЫ (ОБЩАЯ ПРОВЕРКА)
-// =============================================================
+
 
 TEST_CASE("AvlTree: вставки вызывают балансировку дерева", "[AvlTree]")
 {
@@ -74,7 +73,7 @@ TEST_CASE("AvlTree: вставки вызывают балансировку д�
         tree.insert("20");
         tree.insert("10");
 
-        REQUIRE(tree.size() == 3U);
+        REQUIRE(tree.size() == 3);
         REQUIRE(tree.contains("30"));
         REQUIRE(tree.contains("20"));
         REQUIRE(tree.contains("10"));
@@ -87,7 +86,7 @@ TEST_CASE("AvlTree: вставки вызывают балансировку д�
         tree.insert("20");
         tree.insert("30");
 
-        REQUIRE(tree.size() == 3U);
+        REQUIRE(tree.size() == 3);
         REQUIRE(tree.contains("10"));
         REQUIRE(tree.contains("20"));
         REQUIRE(tree.contains("30"));
@@ -100,16 +99,16 @@ TEST_CASE("AvlTree: вставки вызывают балансировку д�
         tree.insert("10");
         tree.insert("20");
 
-        REQUIRE(tree.size() == 3U);
+        REQUIRE(tree.size() == 3);
         REQUIRE(tree.contains("10"));
         REQUIRE(tree.contains("20"));
         REQUIRE(tree.contains("30"));
     }
 }
 
-// =============================================================
+
 // 4. УДАЛЕНИЕ ЭЛЕМЕНТОВ
-// =============================================================
+
 
 TEST_CASE("AvlTree: удаление листа, корня и несуществующего элемента", "[AvlTree]")
 {
@@ -119,19 +118,19 @@ TEST_CASE("AvlTree: удаление листа, корня и несущест�
     tree.insert("c");
     tree.insert("d");
 
-    REQUIRE(tree.size() == 4U);
+    REQUIRE(tree.size() == 4);
 
     SECTION("удаление листа")
     {
         tree.remove("d");
-        REQUIRE(tree.size() == 3U);
+        REQUIRE(tree.size() == 3);
         REQUIRE_FALSE(tree.contains("d"));
     }
 
     SECTION("удаление корня с двумя детьми")
     {
         tree.remove("b");
-        REQUIRE(tree.size() == 3U);
+        REQUIRE(tree.size() == 3);
         REQUIRE_FALSE(tree.contains("b"));
     }
 
@@ -144,9 +143,9 @@ TEST_CASE("AvlTree: удаление листа, корня и несущест�
     }
 }
 
-// =============================================================
+
 // 5. ПРАВИЛО ПЯТИ: КОПИЯ / ПЕРЕМЕЩЕНИЕ / SWAP
-// =============================================================
+
 
 TEST_CASE("AvlTree: копирующий конструктор создаёт независимую копию", "[AvlTree]")
 {
@@ -163,8 +162,8 @@ TEST_CASE("AvlTree: копирующий конструктор создаёт �
     REQUIRE(copy.contains("c"));
 
     original.insert("d");
-    REQUIRE(original.size() == 4U);
-    REQUIRE(copy.size() == 3U);
+    REQUIRE(original.size() == 4);
+    REQUIRE(copy.size() == 3);
     REQUIRE_FALSE(copy.contains("d"));
 }
 
@@ -187,7 +186,7 @@ TEST_CASE("AvlTree: копирующее присваивание и самоп�
 
     // самоприсваивание
     b = b;
-    REQUIRE(b.size() == 2U);
+    REQUIRE(b.size() == 2);
     REQUIRE(b.contains("1"));
     REQUIRE(b.contains("2"));
 }
@@ -206,7 +205,7 @@ TEST_CASE("AvlTree: перемещающий конструктор и пере�
     REQUIRE(moved.contains("a"));
     REQUIRE(moved.contains("b"));
     REQUIRE(moved.contains("c"));
-    REQUIRE(source.size() == 0U);
+    REQUIRE(source.size() == 0);
     REQUIRE(source.empty());
 
     AvlTree target;
@@ -242,9 +241,9 @@ TEST_CASE("AvlTree: swap обменивает содержимое деревь�
     REQUIRE(b.contains("a2"));
 }
 
-// =============================================================
+
 // 6. ТЕКСТОВАЯ СЕРИАЛИЗАЦИЯ
-// =============================================================
+
 
 TEST_CASE("AvlTree: текстовая serialize/deserialize возвращает то же множество ключей", "[AvlTree]")
 {
@@ -271,13 +270,13 @@ TEST_CASE("AvlTree: deserialize очищает старое дерево и по
     AvlTree tree;
     tree.insert("x");
     tree.insert("y");
-    REQUIRE(tree.size() == 2U);
+    REQUIRE(tree.size() == 2);
 
     SECTION("deserialize с пустой строкой -> пустое дерево")
     {
         tree.deserialize("");
         REQUIRE(tree.empty());
-        REQUIRE(tree.size() == 0U);
+        REQUIRE(tree.size() == 0);
     }
 
     SECTION("deserialize перезаписывает дерево новыми данными")
@@ -297,9 +296,9 @@ TEST_CASE("AvlTree: deserialize очищает старое дерево и по
     }
 }
 
-// =============================================================
+
 // 7. БИНАРНАЯ СЕРИАЛИЗАЦИЯ (ПОЗИТИВНЫЙ КЕЙС + ПАРА ОШИБОК)
-// =============================================================
+
 
 TEST_CASE("AvlTree: бинарная serialize/deserialize сохраняет дерево", "[AvlTree]")
 {
@@ -341,7 +340,7 @@ TEST_CASE("AvlTree: serializeBinary выбрасывает, если поток 
     tree.insert("y");
 
     std::ostringstream oss(std::ios::binary);
-    oss.setstate(std::ios::badbit); // заранее ломаем поток
+    oss.setstate(std::ios::badbit); 
 
     REQUIRE_THROWS_AS(tree.serializeBinary(oss), std::runtime_error);
 }

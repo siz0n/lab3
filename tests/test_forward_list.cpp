@@ -1,4 +1,4 @@
-// test_forward_list.cpp
+
 #include "catch_amalgamated.hpp"
 #include "forward_list.h"
 
@@ -6,9 +6,9 @@
 #include <iostream>
 #include <stdexcept>
 
-// -------------------------------------------------------------
+
 // БАЗОВОЕ СОСТОЯНИЕ / ДЕСТРУКТОР / CLEAR
-// -------------------------------------------------------------
+
 
 TEST_CASE("ForwardList: default ctor, пустой список, clear на пустом", "[ForwardList]")
 {
@@ -21,9 +21,9 @@ TEST_CASE("ForwardList: default ctor, пустой список, clear на пу
     list.deserializeText(emptyStream);
 }
 
-// -------------------------------------------------------------
+
 // PUSH / POP (front/back)
-// -------------------------------------------------------------
+
 
 TEST_CASE("ForwardList: pushFront / pushBack / popFront / popBack базовые случаи", "[ForwardList]")
 {
@@ -92,9 +92,9 @@ TEST_CASE("ForwardList: pushFront / pushBack / popFront / popBack базовые
     }
 }
 
-// -------------------------------------------------------------
+
 // removeByValue / findNode
-// -------------------------------------------------------------
+
 
 TEST_CASE("ForwardList: removeByValue удаляет все вхождения", "[ForwardList]")
 {
@@ -137,9 +137,9 @@ TEST_CASE("ForwardList: findNode возвращает nullptr, если не н�
     REQUIRE(list.findNode("zzz") == nullptr);
 }
 
-// -------------------------------------------------------------
+
 // insertAfter / insertBefore / removeAfter / removeBefore
-// -------------------------------------------------------------
+
 
 TEST_CASE("ForwardList: insertAfter вставляет после найденного значения", "[ForwardList]")
 {
@@ -306,9 +306,9 @@ TEST_CASE("ForwardList: removeBefore обрабатывает граничные
     }
 }
 
-// -------------------------------------------------------------
+
 // PRINT
-// -------------------------------------------------------------
+
 
 TEST_CASE("ForwardList: print выводит список в ожидаемом формате", "[ForwardList]")
 {
@@ -325,9 +325,9 @@ TEST_CASE("ForwardList: print выводит список в ожидаемом 
     REQUIRE(oss.str() == "[a->b->c]\n");
 }
 
-// -------------------------------------------------------------
+
 // ТЕКСТОВАЯ СЕРИАЛИЗАЦИЯ
-// -------------------------------------------------------------
+
 
 TEST_CASE("ForwardList: serialize/deserialize text round-trip", "[ForwardList]")
 {
@@ -371,9 +371,9 @@ TEST_CASE("ForwardList: deserialize с пустой строкой делает 
     REQUIRE(list.findNode("x") == nullptr);
 }
 
-// -------------------------------------------------------------
+
 // БИНАРНАЯ СЕРИАЛИЗАЦИЯ: УСПЕШНЫЕ СЛУЧАИ
-// -------------------------------------------------------------
+
 
 TEST_CASE("ForwardList: binary serialize/deserialize round-trip", "[ForwardList]")
 {
@@ -413,9 +413,9 @@ TEST_CASE("ForwardList: binary serialize/deserialize пустого списка
     REQUIRE(restored.findNode("anything") == nullptr);
 }
 
-// -------------------------------------------------------------
+
 // БИНАРНАЯ СЕРИАЛИЗАЦИЯ: ОШИБКИ
-// -------------------------------------------------------------
+
 
 TEST_CASE("ForwardList: deserializeBinary бросает, если не может прочитать count", "[ForwardList]")
 {

@@ -6,36 +6,30 @@
 #include <stdexcept>
 #include <string>
 
-// =====================================================
-// 1. Базовые свойства и конструкторы
-// =====================================================
-
 TEST_CASE("MyArray: конструктор по умолчанию и базовые свойства", "[MyArray]")
 {
     MyArray arr; // по умолчанию
 
-    REQUIRE(arr.size() == 0U);
-    REQUIRE(arr.getCapacity() >= 1U);
+    REQUIRE(arr.size() == 0);
+    REQUIRE(arr.getCapacity() >= 1);
     REQUIRE(arr.empty());
 }
 
-TEST_CASE("MyArray: пользовательская ёмкость и нормализация нуля", "[MyArray]")
+TEST_CASE("MyArray:  ёмкость и нормализация нуля", "[MyArray]")
 {
     MyArray arr1(16);
-    REQUIRE(arr1.getCapacity() == 16U);
-    REQUIRE(arr1.size() == 0U);
+    REQUIRE(arr1.getCapacity() == 16);
+    REQUIRE(arr1.size() == 0);
     REQUIRE(arr1.empty());
 
     // При запросе capacity = 0 внутренняя ёмкость должна нормализоваться
     MyArray arr2(0);
-    REQUIRE(arr2.getCapacity() == 1U);
-    REQUIRE(arr2.size() == 0U);
+    REQUIRE(arr2.getCapacity() == 1);
+    REQUIRE(arr2.size() == 0);
     REQUIRE(arr2.empty());
 }
 
-// =====================================================
 // 2. pushBack / оператор[] / at / set
-// =====================================================
 
 TEST_CASE("MyArray: pushBack добавляет элементы и при необходимости увеличивает ёмкость", "[MyArray]")
 {
@@ -44,15 +38,15 @@ TEST_CASE("MyArray: pushBack добавляет элементы и при не�
     arr.pushBack("a");
     arr.pushBack("b");
 
-    REQUIRE(arr.size() == 2U);
+    REQUIRE(arr.size() == 2);
     REQUIRE(arr[0] == "a");
     REQUIRE(arr[1] == "b");
 
     // При добавлении третьего элемента должен сработать resize
     arr.pushBack("c");
-    REQUIRE(arr.size() == 3U);
+    REQUIRE(arr.size() == 3);
     REQUIRE(arr[2] == "c");
-    REQUIRE(arr.getCapacity() >= 3U);
+    REQUIRE(arr.getCapacity() >= 3);
 
     // Проверяем at (с проверкой границ)
     REQUIRE(arr.at(0) == "a");
@@ -97,9 +91,8 @@ TEST_CASE("MyArray: operator[] не проверяет границы, но да
     REQUIRE(constArr[1] == "world");
 }
 
-// =====================================================
 // 3. insert / removeAt
-// =====================================================
+
 
 TEST_CASE("MyArray: insert вставляет в начало, середину и конец", "[MyArray]")
 {
@@ -110,7 +103,7 @@ TEST_CASE("MyArray: insert вставляет в начало, середину 
     SECTION("вставка в начало")
     {
         arr.insert(0, "zero");
-        REQUIRE(arr.size() == 3U);
+        REQUIRE(arr.size() == 3);
         REQUIRE(arr[0] == "zero");
         REQUIRE(arr[1] == "one");
         REQUIRE(arr[2] == "three");
@@ -119,7 +112,7 @@ TEST_CASE("MyArray: insert вставляет в начало, середину 
     SECTION("вставка в середину")
     {
         arr.insert(1, "two");
-        REQUIRE(arr.size() == 3U);
+        REQUIRE(arr.size() == 3);
         REQUIRE(arr[0] == "one");
         REQUIRE(arr[1] == "two");
         REQUIRE(arr[2] == "three");
@@ -128,7 +121,7 @@ TEST_CASE("MyArray: insert вставляет в начало, середину 
     SECTION("вставка в конец (index == size)")
     {
         arr.insert(arr.size(), "four");
-        REQUIRE(arr.size() == 3U);
+        REQUIRE(arr.size() == 3);
         REQUIRE(arr[0] == "one");
         REQUIRE(arr[1] == "three");
         REQUIRE(arr[2] == "four");
@@ -155,7 +148,7 @@ TEST_CASE("MyArray: removeAt удаляет первый, средний и по
     SECTION("удаление первого элемента")
     {
         arr.removeAt(0);
-        REQUIRE(arr.size() == 3U);
+        REQUIRE(arr.size() == 3);
         REQUIRE(arr[0] == "b");
         REQUIRE(arr[1] == "c");
         REQUIRE(arr[2] == "d");
@@ -164,7 +157,7 @@ TEST_CASE("MyArray: removeAt удаляет первый, средний и по
     SECTION("удаление среднего элемента")
     {
         arr.removeAt(1);
-        REQUIRE(arr.size() == 3U);
+        REQUIRE(arr.size() == 3);
         REQUIRE(arr[0] == "a");
         REQUIRE(arr[1] == "c");
         REQUIRE(arr[2] == "d");
@@ -191,9 +184,9 @@ TEST_CASE("MyArray: removeAt выбрасывает исключение при 
     REQUIRE_THROWS_AS(arr.removeAt(100), std::out_of_range);
 }
 
-// =====================================================
+
 // 4. resize / empty
-// =====================================================
+
 
 TEST_CASE("MyArray: resize увеличивает и уменьшает ёмкость, при уменьшении обрезает лишние элементы", "[MyArray]")
 {
@@ -204,8 +197,8 @@ TEST_CASE("MyArray: resize увеличивает и уменьшает ёмко
     SECTION("resize в большую ёмкость сохраняет элементы")
     {
         arr.resize(5);
-        REQUIRE(arr.getCapacity() == 5U);
-        REQUIRE(arr.size() == 2U);
+        REQUIRE(arr.getCapacity() == 5);
+        REQUIRE(arr.size() == 2);
         REQUIRE(arr[0] == "one");
         REQUIRE(arr[1] == "two");
     }
@@ -213,11 +206,11 @@ TEST_CASE("MyArray: resize увеличивает и уменьшает ёмко
     SECTION("resize в меньшую ёмкость обрезает размер")
     {
         arr.pushBack("three");
-        REQUIRE(arr.size() == 3U);
+        REQUIRE(arr.size() == 3);
 
         arr.resize(2);
-        REQUIRE(arr.getCapacity() == 2U);
-        REQUIRE(arr.size() == 2U);
+        REQUIRE(arr.getCapacity() == 2;
+        REQUIRE(arr.size() == 2);
         REQUIRE(arr[0] == "one");
         REQUIRE(arr[1] == "two");
     }
@@ -225,14 +218,13 @@ TEST_CASE("MyArray: resize увеличивает и уменьшает ёмко
     SECTION("resize в 0 нормализуется к capacity = 1", "[MyArray]")
     {
         arr.resize(0);
-        REQUIRE(arr.getCapacity() == 1U);
-        REQUIRE(arr.size() <= 1U);
+        REQUIRE(arr.getCapacity() == 1);
+        REQUIRE(arr.size() <= 1);
     }
 }
 
-// =====================================================
+
 // 5. Правило пяти: копирование, перемещение, swap
-// =====================================================
 
 TEST_CASE("MyArray: копирующий конструктор делает глубокую копию", "[MyArray]")
 {
@@ -266,7 +258,7 @@ TEST_CASE("MyArray: копирующее присваивание использ
     b.pushBack("3");
 
     b = a; // копирующее присваивание
-    REQUIRE(b.size() == 2U);
+    REQUIRE(b.size() == 2);
     REQUIRE(b.at(0) == "x");
     REQUIRE(b.at(1) == "y");
 
@@ -293,8 +285,8 @@ TEST_CASE("MyArray: перемещающий конструктор перено
     REQUIRE(moved.at(0) == "foo");
     REQUIRE(moved.at(1) == "bar");
 
-    // Источник после перемещения должен быть "пустым" логически
-    REQUIRE(source.size() == 0U);
+    // Источник после перемещения должен быть "пустым"
+    REQUIRE(source.size() == 0);
 }
 
 TEST_CASE("MyArray: перемещающее присваивание переносит данные и очищает источник", "[MyArray]")
@@ -332,19 +324,18 @@ TEST_CASE("MyArray: swap обменивает содержимое двух ма
 
     a.swap(b);
 
-    REQUIRE(a.size() == 1U);
+    REQUIRE(a.size() == 1);
     REQUIRE(a.at(0) == "b1");
     REQUIRE(a.getCapacity() == bCap);
 
-    REQUIRE(b.size() == 2U);
+    REQUIRE(b.size() == 2);
     REQUIRE(b.at(0) == "a1");
     REQUIRE(b.at(1) == "a2");
     REQUIRE(b.getCapacity() == aCap);
 }
 
-// =====================================================
+
 // 6. Текстовая сериализация
-// =====================================================
 
 TEST_CASE("MyArray: текстовая serialize/deserialize через потоки сохраняет порядок элементов", "[MyArray]")
 {
@@ -378,14 +369,12 @@ TEST_CASE("MyArray: текстовая serialize/deserialize через стро
     MyArray restored;
     restored.deserialize(data);
 
-    REQUIRE(restored.size() == 2U);
+    REQUIRE(restored.size() == 2);
     REQUIRE(restored.at(0) == "hello");
     REQUIRE(restored.at(1) == "world");
 }
 
-// =====================================================
 // 7. Бинарная сериализация
-// =====================================================
 
 TEST_CASE("MyArray: бинарная serialize/deserialize корректно восстанавливает массив", "[MyArray]")
 {

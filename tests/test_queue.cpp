@@ -6,30 +6,30 @@
 #include <iostream>
 #include <stdexcept>
 
-// -------------------------------------------------------------
+
 // БАЗОВОЕ СОСТОЯНИЕ / CLEAR / ДЕСТРУКТОР
-// -------------------------------------------------------------
+
 
 TEST_CASE("Queue: конструктор по умолчанию, empty, clear", "[Queue]")
 {
     Queue q;
-    REQUIRE(q.size() == 0U);
+    REQUIRE(q.size() == 0);
     REQUIRE(q.empty());
 
     // clear вызывается через deserialize/deserializeText
     q.deserialize("");
-    REQUIRE(q.size() == 0U);
+    REQUIRE(q.size() == 0);
     REQUIRE(q.empty());
 
     std::istringstream iss("");
     q.deserializeText(iss);
-    REQUIRE(q.size() == 0U);
+    REQUIRE(q.size() == 0);
     REQUIRE(q.empty());
 }
 
-// -------------------------------------------------------------
+
 // PUSH / POP / FRONT / BACK / SIZE / EMPTY
-// -------------------------------------------------------------
+
 
 TEST_CASE("Queue: push, pop, front, back — базовое поведение", "[Queue]")
 {
@@ -38,14 +38,14 @@ TEST_CASE("Queue: push, pop, front, back — базовое поведение",
     SECTION("push в пустую и непустую очередь")
     {
         q.push("a");
-        REQUIRE(q.size() == 1U);
+        REQUIRE(q.size() == 1);
         REQUIRE_FALSE(q.empty());
         REQUIRE(q.front() == "a");
         REQUIRE(q.back() == "a");
 
         q.push("b");
         q.push("c");
-        REQUIRE(q.size() == 3U);
+        REQUIRE(q.size() == 3);
         REQUIRE(q.front() == "a");
         REQUIRE(q.back() == "c");
     }
@@ -56,15 +56,15 @@ TEST_CASE("Queue: push, pop, front, back — базовое поведение",
         q.push("two");
         q.push("three");
 
-        REQUIRE(q.size() == 3U);
+        REQUIRE(q.size() == 3);
         REQUIRE(q.pop() == "one");
-        REQUIRE(q.size() == 2U);
+        REQUIRE(q.size() == 2);
         REQUIRE(q.front() == "two");
         REQUIRE(q.back() == "three");
 
         REQUIRE(q.pop() == "two");
         REQUIRE(q.pop() == "three");
-        REQUIRE(q.size() == 0U);
+        REQUIRE(q.size() == 0);
         REQUIRE(q.empty());
     }
 
@@ -84,15 +84,15 @@ TEST_CASE("Queue: push, pop, front, back — базовое поведение",
         q.push("x");
         REQUIRE(q.pop() == "x");
         REQUIRE(q.empty());
-        REQUIRE(q.size() == 0U);
+        REQUIRE(q.size() == 0);
         REQUIRE_THROWS_AS(q.front(), std::out_of_range);
         REQUIRE_THROWS_AS(q.back(), std::out_of_range);
     }
 }
 
-// -------------------------------------------------------------
+
 // PRINT
-// -------------------------------------------------------------
+
 
 TEST_CASE("Queue: print печатает ожидаемый формат", "[Queue]")
 {
@@ -109,9 +109,9 @@ TEST_CASE("Queue: print печатает ожидаемый формат", "[Que
     REQUIRE(oss.str() == "[a, b, c]\n");
 }
 
-// -------------------------------------------------------------
+
 // RULE OF FIVE: COPY/MOVE CTOR, COPY/MOVE ASSIGNMENT, SWAP
-// -------------------------------------------------------------
+
 
 TEST_CASE("Queue: конструктор копирования копирует элементы в порядке FIFO", "[Queue]")
 {
@@ -130,11 +130,11 @@ TEST_CASE("Queue: конструктор копирования копирует
     original.pop();      // удалили "one"
     original.push("four");
 
-    REQUIRE(original.size() == 3U);
+    REQUIRE(original.size() == 3);
     REQUIRE(original.front() == "two");
     REQUIRE(original.back() == "four");
 
-    REQUIRE(copy.size() == 3U);
+    REQUIRE(copy.size() == 3);
     REQUIRE(copy.front() == "one");
     REQUIRE(copy.back() == "three");
 }
@@ -178,7 +178,7 @@ TEST_CASE("Queue: конструктор перемещения переноси
     REQUIRE(dst.front() == "a");
     REQUIRE(dst.back() == "c");
 
-    REQUIRE(src.size() == 0U);
+    REQUIRE(src.size() == 0);
     REQUIRE(src.empty());
     REQUIRE_THROWS_AS(src.front(), std::out_of_range);
 }
@@ -195,11 +195,11 @@ TEST_CASE("Queue: оператор перемещающего присваива
 
     dst = std::move(src);
 
-    REQUIRE(dst.size() == 2U);
+    REQUIRE(dst.size() == 2);
     REQUIRE(dst.front() == "one");
     REQUIRE(dst.back() == "two");
 
-    REQUIRE(src.size() == 0U);
+    REQUIRE(src.size() == 0;
     REQUIRE(src.empty());
     REQUIRE_THROWS_AS(src.front(), std::out_of_range);
 }
@@ -227,11 +227,11 @@ TEST_CASE("Queue: swap обменивает содержимое очереде�
     REQUIRE(b.back() == "a2");
 }
 
-// -------------------------------------------------------------
-// ТЕКСТОВАЯ СЕРИАЛИЗАЦИЯ (serialize/deserialize)
-// -------------------------------------------------------------
 
-TEST_CASE("Queue: текстовая serialize/deserialize round-trip", "[Queue]")
+// ТЕКСТОВАЯ СЕРИАЛИЗАЦИЯ (serialize/deserialize)
+
+
+TEST_CASE("Queue: текстовая serialize/deserialize , "[Queue]")
 {
     Queue q;
     q.push("first");
@@ -276,9 +276,9 @@ TEST_CASE("Queue: deserialize из пустой строки делает оче
     REQUIRE_THROWS_AS(q.front(), std::out_of_range);
 }
 
-// -------------------------------------------------------------
+
 // БИНАРНАЯ СЕРИАЛИЗАЦИЯ (УСПЕШНЫЕ СЛУЧАИ)
-// -------------------------------------------------------------
+
 
 TEST_CASE("Queue: бинарная serialize/deserialize round-trip", "[Queue]")
 {
@@ -321,9 +321,9 @@ TEST_CASE("Queue: бинарная serialize/deserialize пустой очере
     REQUIRE(restored.size() == 0U);
 }
 
-// -------------------------------------------------------------
+
 // БИНАРНАЯ СЕРИАЛИЗАЦИЯ — МИНИМАЛЬНЫЕ ОШИБКИ
-// -------------------------------------------------------------
+
 
 TEST_CASE("Queue: deserializeBinary бросает, если не может прочитать count", "[Queue]")
 {
