@@ -31,8 +31,8 @@ TEST_CASE("Benchmark: MyArray insert at random", "[!benchmark]")
         arr.pushBack("x");
 
     BENCHMARK("MyArray::insert middle (5000)") {
-        arr.insert(arr.length / 2, "new");
-        return arr.length;
+        arr.insert(arr.size() / 2, "new");
+        return arr.size();
     };
 }
 
@@ -44,8 +44,8 @@ TEST_CASE("Benchmark: MyArray insert at random", "[!benchmark]")
 TEST_CASE("Benchmark: ForwardList pushBack", "[!benchmark]")
 {
     ForwardList list;
-    BENCHMARK("ForwardList::pushBack (20000)") {
-        for (int i = 0; i < 20000; ++i)
+    BENCHMARK("ForwardList::pushBack (2000)") {
+        for (int i = 0; i < 2000; ++i)
             list.pushBack("x");
     };
 }
@@ -53,11 +53,11 @@ TEST_CASE("Benchmark: ForwardList pushBack", "[!benchmark]")
 TEST_CASE("Benchmark: ForwardList find", "[!benchmark]")
 {
     ForwardList list;
-    for (int i = 0; i < 20000; ++i)
+    for (int i = 0; i < 2000; ++i)
         list.pushBack("x" + std::to_string(i));
 
-    BENCHMARK("ForwardList::findNode middle (20000)") {
-        return list.findNode("x10000");
+    BENCHMARK("ForwardList::findNode middle (2000)") {
+        return list.findNode("x1000");
     };
 }
 
@@ -91,41 +91,59 @@ TEST_CASE("Benchmark: List insertBefore", "[!benchmark]")
 //  STACK 
 
 
-TEST_CASE("Benchmark: Stack push/pop", "[!benchmark]")
+TEST_CASE("Benchmark: Stack operations", "[!benchmark][Stack]")
 {
-    Stack s;
-
-    BENCHMARK("Stack::push 50000") {
-        for (int i = 0; i < 50000; ++i)
-            s.push("v");
+    BENCHMARK("Stack::push 5000")
+    {
+        Stack s;
+        for (std::size_t i = 0; i < 5000; ++i) {
+            s.push("value");
+        }
+        // стек живёт только внутри одной итерации бенчмарка
+        return 0;
     };
 
-    for (int i = 0; i < 50000; ++i)
-        s.pop();
-
-    BENCHMARK("Stack::pop 50000") {
-        for (int i = 0; i < 50000; ++i)
+    BENCHMARK("Stack::pop 5000")
+    {
+        Stack s;
+        
+        for (std::size_t i = 0; i < 5000; ++i) {
+            s.push("value");
+        }
+        for (std::size_t i = 0; i < 5000; ++i) {
             s.pop();
+        }
+        return 0;
     };
 }
-
 
 
 //  QUEUE 
 
 
-TEST_CASE("Benchmark: Queue push/pop", "[!benchmark]")
+TEST_CASE("Benchmark: Queue operations", "[!benchmark][Queue]")
 {
-    Queue q;
-
-    BENCHMARK("Queue::push 50000") {
-        for (int i = 0; i < 50000; ++i)
-            q.push("v");
+    BENCHMARK("Queue::push 5000")
+    {
+        Queue q;
+        for (std::size_t i = 0; i < 5000; ++i) {
+            q.push("value");
+        }
+        return 0;
     };
 
-    BENCHMARK("Queue::pop 50000") {
-        for (int i = 0; i < 50000; ++i)
+    BENCHMARK("Queue::pop 5000")
+    {
+        Queue q;
+        // Заполняем очередь
+        for (std::size_t i = 0; i < 5000; ++i) {
+            q.push("value");
+        }
+        // А теперь 5000 pop — без выхода в пустую
+        for (std::size_t i = 0; i < 5000; ++i) {
             q.pop();
+        }
+        return 0;
     };
 }
 
@@ -205,4 +223,5 @@ TEST_CASE("Benchmark: AvlTree contains", "[!benchmark]")
         return t.contains("15000");
     };
 }
-//./tests_run "[!benchmark]"
+//./tests_run "[!benchmark]" --benchmark-samples 10
+

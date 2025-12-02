@@ -209,7 +209,7 @@ TEST_CASE("MyArray: resize увеличивает и уменьшает ёмко
         REQUIRE(arr.size() == 3);
 
         arr.resize(2);
-        REQUIRE(arr.getCapacity() == 2;
+        REQUIRE(arr.getCapacity() == 2);
         REQUIRE(arr.size() == 2);
         REQUIRE(arr[0] == "one");
         REQUIRE(arr[1] == "two");
@@ -397,3 +397,4 @@ TEST_CASE("MyArray: бинарная serialize/deserialize корректно в
         REQUIRE(restored.at(i) == original.at(i));
     }
 }
+

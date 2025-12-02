@@ -199,7 +199,7 @@ TEST_CASE("Queue: оператор перемещающего присваива
     REQUIRE(dst.front() == "one");
     REQUIRE(dst.back() == "two");
 
-    REQUIRE(src.size() == 0;
+    REQUIRE(src.size() == 0);
     REQUIRE(src.empty());
     REQUIRE_THROWS_AS(src.front(), std::out_of_range);
 }
@@ -231,7 +231,7 @@ TEST_CASE("Queue: swap обменивает содержимое очереде�
 // ТЕКСТОВАЯ СЕРИАЛИЗАЦИЯ (serialize/deserialize)
 
 
-TEST_CASE("Queue: текстовая serialize/deserialize , "[Queue]")
+TEST_CASE("Queue: текстовая serialize/deserialize ", "[Queue]")
 {
     Queue q;
     q.push("first");
