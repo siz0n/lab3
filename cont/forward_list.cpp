@@ -5,7 +5,7 @@
 #include <sstream>
 #include <stdexcept>
 
-// ---------- базовые операции ----------
+//  базовые операции 
 
 ForwardList::ForwardList() noexcept = default;
 
@@ -197,7 +197,7 @@ void ForwardList::print() const
     std::cout << "]\n";
 }
 
-// ---------- текстовая сериализация ----------
+//  текстовая сериализация 
 
 void ForwardList::serializeText(std::ostream& outputStream) const
 {
@@ -233,7 +233,7 @@ void ForwardList::deserialize(const std::string& text)
     deserializeText(input);
 }
 
-// ---------- бинарная сериализация ----------
+//  бинарная сериализация 
 
 void ForwardList::serializeBinary(std::ostream& outputStream) const
 {
@@ -251,17 +251,15 @@ void ForwardList::serializeBinary(std::ostream& outputStream) const
     while (current != nullptr) {
         std::uint64_t length =
             static_cast<std::uint64_t>(current->value.size());
-        outputStream.write(reinterpret_cast<const char*>(&length),
-                           sizeof(length));
+        outputStream.write(reinterpret_cast<const char*>(&length), sizeof(length));
         if (length > 0) {
-            outputStream.write(current->value.data(),
-                               static_cast<std::streamsize>(length));
+            outputStream.write(current->value.data(), static_cast<std::streamsize>(length));
         }
         current = current->next;
     }
 
     if (!outputStream) {
-        throw std::runtime_error("ForwardList::serializeBinary: write error");
+        throw std::runtime_error("ForwardList::serializeBinary:  error");
     }
 }
 
@@ -273,7 +271,7 @@ void ForwardList::deserializeBinary(std::istream& inputStream)
     inputStream.read(reinterpret_cast<char*>(&count), sizeof(count));
     if (!inputStream) {
         throw std::runtime_error(
-            "ForwardList::deserializeBinary: cannot read count");
+            "ForwardList::deserializeBinary: error");
     }
 
     for (std::uint64_t i = 0; i < count; ++i) {
@@ -281,7 +279,7 @@ void ForwardList::deserializeBinary(std::istream& inputStream)
         inputStream.read(reinterpret_cast<char*>(&length), sizeof(length));
         if (!inputStream) {
             throw std::runtime_error(
-                "ForwardList::deserializeBinary: cannot read string size");
+                "ForwardList::deserializeBinary: error");
         }
 
         std::string value;
@@ -291,7 +289,7 @@ void ForwardList::deserializeBinary(std::istream& inputStream)
                              static_cast<std::streamsize>(length));
             if (!inputStream) {
                 throw std::runtime_error(
-                    "ForwardList::deserializeBinary: cannot read string data");
+                    "ForwardList::deserializeBinary: error");
             }
         }
         pushBack(value);

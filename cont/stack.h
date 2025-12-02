@@ -4,7 +4,7 @@
 #include <string>
 #include <utility>
 
-class Stack;  // forward
+class Stack;  
 
 class StackNode
 {

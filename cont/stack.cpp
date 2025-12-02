@@ -6,7 +6,7 @@
 #include <stdexcept>
 #include <vector>
 
-// ---------- базовые операции / управление памятью ----------
+//  базовые операции / управление памятью 
 
 Stack::Stack() noexcept = default;
 
@@ -66,7 +66,7 @@ bool Stack::empty() const noexcept
     return topNode == nullptr;
 }
 
-// ---------- текстовая сериализация ----------
+//  текстовая сериализация 
 
 void Stack::serializeText(std::ostream& os) const {
     for (StackNode* n = topNode; n != nullptr; n = n->next)
@@ -86,9 +86,6 @@ void Stack::deserializeText(std::istream& input)
         }
     }
 
-    // serializeText записывает: top, then next, then next...
-    // Stack push puts new elements ON TOP.
-    // So we must push in REVERSE order to restore the same stack.
 
     for (int i = (int)lines.size() - 1; i >= 0; --i)
         push(lines[i]);
@@ -111,7 +108,7 @@ void Stack::deserialize(const std::string& text)
     deserializeText(input);
 }
 
-// ---------- бинарная сериализация ----------
+//  бинарная сериализация 
 
 void Stack::serializeBinary(std::ostream& outputStream) const
 {
@@ -139,7 +136,7 @@ void Stack::serializeBinary(std::ostream& outputStream) const
     }
 
     if (!outputStream) {
-        throw std::runtime_error("Stack::serializeBinary: write error");
+        throw std::runtime_error("Stack::serializeBinary: ERROR");
     }
 }
 
@@ -151,7 +148,7 @@ void Stack::deserializeBinary(std::istream& inputStream)
     inputStream.read(reinterpret_cast<char*>(&count), sizeof(count));
     if (!inputStream) {
         throw std::runtime_error(
-            "Stack::deserializeBinary: cannot read count");
+            "Stack::deserializeBinary: ERROR");
     }
 
     std::vector<std::string> lines;
@@ -162,7 +159,7 @@ void Stack::deserializeBinary(std::istream& inputStream)
         inputStream.read(reinterpret_cast<char*>(&length), sizeof(length));
         if (!inputStream) {
             throw std::runtime_error(
-                "Stack::deserializeBinary: cannot read string size");
+                "Stack::deserializeBinary: ERROR");
         }
 
         std::string value;
@@ -172,7 +169,7 @@ void Stack::deserializeBinary(std::istream& inputStream)
                              static_cast<std::streamsize>(length));
             if (!inputStream) {
                 throw std::runtime_error(
-                    "Stack::deserializeBinary: cannot read string data");
+                    "Stack::deserializeBinary: ERROR");
             }
         }
         lines.push_back(std::move(value));

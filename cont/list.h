@@ -4,7 +4,7 @@
 #include <string>
 #include <utility>
 
-class List; // forward
+class List; 
 
 class LNode
 {

@@ -5,7 +5,7 @@
 #include <sstream>
 #include <stdexcept>
 
-// ---------- базовые операции ----------
+// базовые операции
 
 List::List() noexcept = default;
 
@@ -237,7 +237,7 @@ void List::print() const
     std::cout << "]\n";
 }
 
-// ---------- текстовая сериализация ----------
+// текстовая сериализация
 
 void List::serializeText(std::ostream& outputStream) const
 {
@@ -273,7 +273,7 @@ void List::deserialize(const std::string& text)
     deserializeText(input);
 }
 
-// ---------- бинарная сериализация ----------
+// бинарная сериализация
 
 void List::serializeBinary(std::ostream& outputStream) const
 {
@@ -300,7 +300,7 @@ void List::serializeBinary(std::ostream& outputStream) const
     }
 
     if (!outputStream) {
-        throw std::runtime_error("List::serializeBinary: write error");
+        throw std::runtime_error("List::serializeBinary: ERROR");
     }
 }
 
@@ -312,7 +312,7 @@ void List::deserializeBinary(std::istream& inputStream)
     inputStream.read(reinterpret_cast<char*>(&count), sizeof(count));
     if (!inputStream) {
         throw std::runtime_error(
-            "List::deserializeBinary: cannot read count");
+            "List::deserializeBinary: ERROR");
     }
 
     for (std::uint64_t i = 0; i < count; ++i) {
@@ -320,7 +320,7 @@ void List::deserializeBinary(std::istream& inputStream)
         inputStream.read(reinterpret_cast<char*>(&length), sizeof(length));
         if (!inputStream) {
             throw std::runtime_error(
-                "List::deserializeBinary: cannot read string size");
+                "List::deserializeBinary: ERROR ");
         }
 
         std::string value;
@@ -330,7 +330,7 @@ void List::deserializeBinary(std::istream& inputStream)
                              static_cast<std::streamsize>(length));
             if (!inputStream) {
                 throw std::runtime_error(
-                    "List::deserializeBinary: cannot read string data");
+                    "List::deserializeBinary: ERROR");
             }
         }
         pushBack(value);

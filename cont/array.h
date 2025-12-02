@@ -42,15 +42,15 @@ public:
     void print() const;
     void resize(std::size_t newCapacity);
 
-    // --- ТЕКСТОВАЯ СЕРИАЛИЗАЦИЯ (в строку) ---
+    // ТЕКСТОВАЯ СЕРИАЛИЗАЦИЯ (в строку) 
     [[nodiscard]] std::string serialize() const;
     void deserialize(const std::string& dataString);
 
-    // --- ТЕКСТОВАЯ СЕРИАЛИЗАЦИЯ ЧЕРЕЗ ПОТОК ---
+    // ТЕКСТОВАЯ СЕРИАЛИЗАЦИЯ ЧЕРЕЗ ПОТОК 
     void serializeText(std::ostream& outputStream) const;
     void deserializeText(std::istream& inputStream);
 
-    // --- БИНАРНАЯ СЕРИАЛИЗАЦИЯ ---
+    // bИНАРНАЯ СЕРИАЛИЗАЦИЯ 
     void serializeBinary(std::ostream& outputStream) const;
     void deserializeBinary(std::istream& inputStream);
 

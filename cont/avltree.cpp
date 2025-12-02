@@ -8,7 +8,7 @@
 #include <vector>
 #include <cstdint>
 
-// ---------- конструктор / деструктор ----------
+//  конструктор / деструктор 
 
 AvlTree::AvlTree()
     : root_(nullptr),
@@ -23,7 +23,7 @@ AvlTree::~AvlTree()
     size_ = 0;
 }
 
-// ---------- вспомогательные функции очистки/клонирования ----------
+//  вспомогательные функции очистки/клонирования 
 
 void AvlTree::clearSubtree(Node* node) noexcept
 {
@@ -48,7 +48,7 @@ AvlTree::Node* AvlTree::cloneSubtree(Node* node)
     return newNode;
 }
 
-// ---------- высота / баланс ----------
+//  высота / баланс 
 
 int AvlTree::heightOf(Node* node) noexcept
 {
@@ -60,7 +60,7 @@ int AvlTree::balanceFactor(Node* node) noexcept
     return node != nullptr ? heightOf(node->left) - heightOf(node->right) : 0;
 }
 
-// ---------- повороты ----------
+//  повороты 
 
 AvlTree::Node* AvlTree::rotateRight(Node* parentNode)
 {
@@ -90,7 +90,7 @@ AvlTree::Node* AvlTree::rotateLeft(Node* parentNode)
     return rightChild;
 }
 
-// ---------- вставка ----------
+//  вставка 
 
 AvlTree::Node* AvlTree::insertNode(Node* node, const std::string& value, bool& inserted)
 {
@@ -145,7 +145,7 @@ void AvlTree::insert(const std::string& value)
     }
 }
 
-// ---------- удаление ----------
+//  удаление 
 
 AvlTree::Node* AvlTree::removeNode(Node* node, const std::string& value, bool& removed)
 {
@@ -233,7 +233,7 @@ void AvlTree::remove(const std::string& value)
 }
 
 
-// ---------- поиск ----------
+//  поиск 
 
 bool AvlTree::containsNode(Node* node, const std::string& value)
 {
@@ -254,7 +254,7 @@ bool AvlTree::contains(const std::string& value) const
     return containsNode(root_, value);
 }
 
-// ---------- печать ----------
+//  печать 
 
 void AvlTree::printRec(Node* node, int depth)
 {
@@ -275,7 +275,7 @@ void AvlTree::print() const
     printRec(root_, 0);
 }
 
-// ---------- размер / пустота ----------
+//  размер / пустота 
 
 std::size_t AvlTree::size() const noexcept
 {
@@ -287,7 +287,7 @@ bool AvlTree::empty() const noexcept
     return size_ == 0;
 }
 
-// ---------- текстовая сериализация ----------
+//  текстовая сериализация 
 
 void AvlTree::serializeRec(std::ostringstream& oss, Node* node)
 {
@@ -355,7 +355,7 @@ void AvlTree::deserialize(const std::string& data)
     size_ = count;
 }
 
-// ---------- бинарная сериализация ----------
+//  бинарная сериализация 
 
 void AvlTree::serializeBinaryRec(std::ostream& outputStream, Node* node)
 {
@@ -379,7 +379,7 @@ void AvlTree::serializeBinary(std::ostream& outputStream) const
 {
     serializeBinaryRec(outputStream, root_);
     if (!outputStream) {
-        throw std::runtime_error("AvlTree::serializeBinary: write error");
+        throw std::runtime_error("AvlTree::serializeBinary: error");
     }
 }
 
@@ -388,7 +388,7 @@ AvlTree::Node* AvlTree::deserializeBinaryRec(std::istream& inputStream)
     std::uint8_t flag = 0;
     inputStream.read(reinterpret_cast<char*>(&flag), sizeof(flag));
     if (!inputStream) {
-        throw std::runtime_error("AvlTree::deserializeBinaryRec: cannot read flag");
+        throw std::runtime_error("AvlTree::deserializeBinaryRec: error");
     }
 
     if (flag == 0) {
@@ -398,7 +398,7 @@ AvlTree::Node* AvlTree::deserializeBinaryRec(std::istream& inputStream)
     std::uint64_t len = 0;
     inputStream.read(reinterpret_cast<char*>(&len), sizeof(len));
     if (!inputStream) {
-        throw std::runtime_error("AvlTree::deserializeBinaryRec: cannot read string length");
+        throw std::runtime_error("AvlTree::deserializeBinaryRec: error");
     }
 
     std::string value;
@@ -406,7 +406,7 @@ AvlTree::Node* AvlTree::deserializeBinaryRec(std::istream& inputStream)
     if (len > 0) {
         inputStream.read(value.data(), static_cast<std::streamsize>(len));
         if (!inputStream) {
-            throw std::runtime_error("AvlTree::deserializeBinaryRec: cannot read string data");
+            throw std::runtime_error("AvlTree::deserializeBinaryRec: error");
         }
     }
 
@@ -445,7 +445,7 @@ void AvlTree::deserializeBinary(std::istream& inputStream)
     size_ = count;
 }
 
-// ---------- Rule of Five: копирование / перемещение ----------
+//  Rule of Five: копирование / перемещение 
 
 AvlTree::AvlTree(const AvlTree& other)
     : root_(cloneSubtree(other.root_)),
@@ -489,7 +489,7 @@ AvlTree& AvlTree::operator=(AvlTree&& other) noexcept
     return *this;
 }
 
-// ---------- swap ----------
+//  swap 
 
 void AvlTree::swap(AvlTree& other) noexcept
 {

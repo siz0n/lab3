@@ -6,9 +6,9 @@
 #include <string>
 #include <utility>
 
-// ============================================================================
-//                 HashTable — цепная хеш-таблица
-// ============================================================================
+
+//  HashTable — цепная хеш-таблица
+
 
 class HashTable
 {
@@ -88,21 +88,21 @@ public:
     void clear() noexcept;
     void print() const;
 
-    // --- текстовая сериализация ---
+    // екстовая сериализация 
     void serializeText(std::ostream& outStream) const;
     [[nodiscard]] std::string serialize() const;
     void deserializeText(std::istream& inStream);
     void deserialize(const std::string& textData);
 
-    // --- бинарная сериализация ---
+    //  бинарная сериализация 
     void serializeBinary(std::ostream& outStream) const;
     void deserializeBinary(std::istream& inStream);
 };
 
 
-// ============================================================================
-//                 HashTableOpen — открытая адресация
-// ============================================================================
+
+//ashTableOpen — открытая адресация
+
 
 class HashTableOpen
 {
@@ -148,13 +148,13 @@ public:
     void clear() noexcept;
     void print() const;
 
-    // --- текстовая сериализация ---
+    //  текстовая сериализация
     void serializeText(std::ostream& outStream) const;
     [[nodiscard]] std::string serialize() const;
     void deserializeText(std::istream& inStream);
     void deserialize(const std::string& textData);
 
-    // --- бинарная сериализация ---
+    //  бинарная сериализация 
     void serializeBinary(std::ostream& outStream) const;
     void deserializeBinary(std::istream& inStream);
 };

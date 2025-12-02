@@ -6,7 +6,7 @@
 #include <stdexcept>
 #include <utility>
 
-// ---------- конструкторы / деструктор ----------
+// конструкторы / деструктор
 
 Queue::Queue() noexcept = default;
 
@@ -28,7 +28,7 @@ void Queue::clear() noexcept
     sizeValue = 0;
 }
 
-// ---------- Rule of Five ----------
+// Rule of Five
 
 Queue::Queue(const Queue& other)
     : frontNode(nullptr), //NOLINT
@@ -89,7 +89,7 @@ void Queue::swap(Queue& other) noexcept
     swap(sizeValue, other.sizeValue);
 }
 
-// ---------- базовые операции ----------
+// базовые операции
 
 void Queue::push(const std::string& value)
 {
@@ -160,7 +160,7 @@ void Queue::print() const
     std::cout << "]\n";
 }
 
-// ---------- текстовая сериализация ----------
+// текстовая сериализация
 
 void Queue::serializeText(std::ostream& outputStream) const
 {
@@ -195,7 +195,7 @@ void Queue::deserialize(const std::string& textData)
     deserializeText(input);
 }
 
-// ---------- бинарная сериализация ----------
+// бинарная сериализация
 
 void Queue::serializeBinary(std::ostream& outputStream) const
 {
@@ -216,7 +216,7 @@ void Queue::serializeBinary(std::ostream& outputStream) const
     }
 
     if (!outputStream) {
-        throw std::runtime_error("Queue::serializeBinary: write error");
+        throw std::runtime_error("Queue::serializeBinary: ERROR");
     }
 }
 
@@ -228,7 +228,7 @@ void Queue::deserializeBinary(std::istream& inputStream)
     inputStream.read(reinterpret_cast<char*>(&count), sizeof(count));
     if (!inputStream) {
         throw std::runtime_error(
-            "Queue::deserializeBinary: cannot read count");
+            "Queue::deserializeBinary: ERROR");
     }
 
     for (std::uint64_t i = 0; i < count; ++i) {
@@ -236,7 +236,7 @@ void Queue::deserializeBinary(std::istream& inputStream)
         inputStream.read(reinterpret_cast<char*>(&length), sizeof(length));
         if (!inputStream) {
             throw std::runtime_error(
-                "Queue::deserializeBinary: cannot read string size");
+                "Queue::deserializeBinary: ERROR");
         }
 
         std::string value;
@@ -246,7 +246,7 @@ void Queue::deserializeBinary(std::istream& inputStream)
                              static_cast<std::streamsize>(length));
             if (!inputStream) {
                 throw std::runtime_error(
-                    "Queue::deserializeBinary: cannot read string data");
+                    "Queue::deserializeBinary: ERROR");
             }
         }
         push(value);

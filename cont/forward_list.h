@@ -4,7 +4,7 @@
 #include <string>
 #include <utility>
 
-class ForwardList;  // forward-declare
+class ForwardList;  
 
 class FNode
 {
@@ -26,7 +26,7 @@ public:
 
 private:
     std::string value;
-    FNode* next = nullptr;   // default member initializer, то что просит clang-tidy
+    FNode* next = nullptr;   
 
     friend class ForwardList;
 };
@@ -55,19 +55,19 @@ public:
     void removeAfter(const std::string& afterValue);
     void removeBefore(const std::string& beforeValue);
 
-    // --- текстовая сериализация ---
+    //текстовая сериализация
     [[nodiscard]] std::string serialize() const;
     void deserialize(const std::string& text);
 
     void serializeText(std::ostream& outputStream) const;
     void deserializeText(std::istream& inputStream);
 
-    // --- бинарная сериализация ---
+    // бинарная сериализация
     void serializeBinary(std::ostream& outputStream) const;
     void deserializeBinary(std::istream& inputStream);
 
 private:
-    FNode* head = nullptr;   // тоже без подчёркивания, с дефолтной инициализацией
+    FNode* head = nullptr;   
 
     void clear() noexcept;
 };

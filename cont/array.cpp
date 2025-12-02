@@ -8,7 +8,7 @@
 #include <utility>
 #include <cstdint>
 
-// ---------- конструкторы / деструктор ----------
+// конструкторы / деструктор 
 
 MyArray::MyArray(std::size_t initialCapacity)
     : dataPtr(nullptr),
@@ -30,7 +30,7 @@ MyArray::~MyArray()
     length = 0;
 }
 
-// ---------- копирующий конструктор ----------
+// копирующий конструктор 
 
 MyArray::MyArray(const MyArray& other)
     : dataPtr(nullptr),
@@ -43,7 +43,7 @@ MyArray::MyArray(const MyArray& other)
     }
 }
 
-// ---------- move-конструктор ----------
+// move-конструктор 
 
 MyArray::MyArray(MyArray&& other) noexcept
     : dataPtr(other.dataPtr),
@@ -55,7 +55,7 @@ MyArray::MyArray(MyArray&& other) noexcept
     other.length = 0;
 }
 
-// ---------- копирующее присваивание ----------
+// копирующее присваивание 
 
 MyArray& MyArray::operator=(const MyArray& other)
 {
@@ -68,7 +68,7 @@ MyArray& MyArray::operator=(const MyArray& other)
     return *this;
 }
 
-// ---------- move-присваивание ----------
+// move-присваивание 
 
 MyArray& MyArray::operator=(MyArray&& other) noexcept
 {
@@ -89,7 +89,7 @@ MyArray& MyArray::operator=(MyArray&& other) noexcept
     return *this;
 }
 
-// ---------- swap ----------
+// swap 
 
 void MyArray::swap(MyArray& other) noexcept
 {
@@ -99,7 +99,7 @@ void MyArray::swap(MyArray& other) noexcept
     swap(length, other.length);
 }
 
-// ---------- базовые операции ----------
+// базовые операции 
 
 void MyArray::pushBack(const std::string& value)
 {
@@ -112,7 +112,7 @@ void MyArray::pushBack(const std::string& value)
 void MyArray::insert(std::size_t index, const std::string& value)
 {
     if (index > length) {
-        throw std::out_of_range("MyArray::insert: index out of range");
+        throw std::out_of_range("MyArray::insert: error");
     }
 
     if (length == capacity) {
@@ -130,7 +130,7 @@ void MyArray::insert(std::size_t index, const std::string& value)
 void MyArray::removeAt(std::size_t index)
 {
     if (index >= length) {
-        throw std::out_of_range("MyArray::removeAt: index out of range");
+        throw std::out_of_range("MyArray::removeAt: error");
     }
 
     for (std::size_t i = index; i + 1 < length; ++i) {
@@ -142,7 +142,7 @@ void MyArray::removeAt(std::size_t index)
 std::string& MyArray::at(std::size_t index)
 {
     if (index >= length) {
-        throw std::out_of_range("MyArray::at: index out of range");
+        throw std::out_of_range("MyArray::at: error");
     }
     return dataPtr[index];
 }
@@ -150,7 +150,7 @@ std::string& MyArray::at(std::size_t index)
 const std::string& MyArray::at(std::size_t index) const
 {
     if (index >= length) {
-        throw std::out_of_range("MyArray::at: index out of range");
+        throw std::out_of_range("MyArray::at: error");
     }
     return dataPtr[index];
 }
@@ -158,12 +158,12 @@ const std::string& MyArray::at(std::size_t index) const
 void MyArray::set(std::size_t index, const std::string& value)
 {
     if (index >= length) {
-        throw std::out_of_range("MyArray::set: index out of range");
+        throw std::out_of_range("MyArray::set: error");
     }
     dataPtr[index] = value;
 }
 
-// ---------- operator[] ----------
+// operator[] 
 
 std::string& MyArray::operator[](std::size_t index) noexcept
 {
@@ -175,7 +175,7 @@ const std::string& MyArray::operator[](std::size_t index) const noexcept
     return dataPtr[index];
 }
 
-// ---------- вспомогательные методы ----------
+// вспомогательные методы 
 
 std::size_t MyArray::size() const noexcept
 {
@@ -222,7 +222,7 @@ void MyArray::resize(std::size_t newCapacity)
     capacity = newCapacity;
 }
 
-// ---------- текстовая сериализация через поток ----------
+// текстовая сериализация через поток 
 
 void MyArray::serializeText(std::ostream& outputStream) const
 {
@@ -236,7 +236,7 @@ void MyArray::deserializeText(std::istream& inputStream)
 {
     std::size_t newLength = 0;
     if (!(inputStream >> newLength)) {
-        throw std::runtime_error("MyArray::deserializeText: cannot read length");
+        throw std::runtime_error("MyArray::deserializeText: error");
     }
 
     inputStream.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
@@ -248,12 +248,12 @@ void MyArray::deserializeText(std::istream& inputStream)
     length = newLength;
     for (std::size_t i = 0; i < length; ++i) {
         if (!std::getline(inputStream, dataPtr[i])) {
-            throw std::runtime_error("MyArray::deserializeText: not enough lines");
+            throw std::runtime_error("MyArray::deserializeText: error");
         }
     }
 }
 
-// ---------- старый интерфейс (в строку) ----------
+// текстовая сериализация в строку
 
 std::string MyArray::serialize() const
 {
@@ -268,7 +268,7 @@ void MyArray::deserialize(const std::string& dataString)
     deserializeText(iss);
 }
 
-// ---------- бинарная сериализация ----------
+// бинарная сериализация 
 
 void MyArray::serializeBinary(std::ostream& outputStream) const
 {
@@ -285,7 +285,7 @@ void MyArray::serializeBinary(std::ostream& outputStream) const
     }
 
     if (!outputStream) {
-        throw std::runtime_error("MyArray::serializeBinary: write error");
+        throw std::runtime_error("MyArray::serializeBinary: error");
     }
 }
 
@@ -294,7 +294,7 @@ void MyArray::deserializeBinary(std::istream& inputStream)
     std::uint64_t len = 0;
     inputStream.read(reinterpret_cast<char*>(&len), sizeof(len));
     if (!inputStream) {
-        throw std::runtime_error("MyArray::deserializeBinary: cannot read length");
+        throw std::runtime_error("MyArray::deserializeBinary: error");
     }
 
     if (len > static_cast<std::uint64_t>(capacity)) {
@@ -307,7 +307,7 @@ void MyArray::deserializeBinary(std::istream& inputStream)
         std::uint64_t sizeValue = 0;
         inputStream.read(reinterpret_cast<char*>(&sizeValue), sizeof(sizeValue));
         if (!inputStream) {
-            throw std::runtime_error("MyArray::deserializeBinary: cannot read string size");
+            throw std::runtime_error("MyArray::deserializeBinary: error");
         }
 
         std::string tmp;
@@ -315,7 +315,7 @@ void MyArray::deserializeBinary(std::istream& inputStream)
         if (sizeValue > 0) {
             inputStream.read(tmp.data(), static_cast<std::streamsize>(sizeValue));
             if (!inputStream) {
-                throw std::runtime_error("MyArray::deserializeBinary: cannot read string data");
+                throw std::runtime_error("MyArray::deserializeBinary: error");
             }
         }
         dataPtr[i] = std::move(tmp);

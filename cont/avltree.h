@@ -28,11 +28,11 @@ public:
     [[nodiscard]] std::size_t size() const noexcept;
     [[nodiscard]] bool empty() const noexcept;
 
-    // --- текстовая сериализация (префиксный обход, '#' для nullptr) ---
+    //  текстовая сериализация (префиксный обход, '#' для nullptr) 
     [[nodiscard]] std::string serialize() const;
     void deserialize(const std::string& data);
 
-    // --- бинарная сериализация ---
+    //  бинарная сериализация 
     void serializeBinary(std::ostream& outputStream) const;
     void deserializeBinary(std::istream& inputStream);
 
