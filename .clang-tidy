@@ -1,0 +1,55 @@
+Checks: >
+  clang-analyzer-*,
+  bugprone-*,
+  performance-*,
+  modernize-*,
+  cppcoreguidelines-*,
+  google-*,
+  misc-*,
+  readability-*,
+  -modernize-use-auto,
+  -modernize-use-trailing-return-type,
+  -cppcoreguidelines-avoid-magic-numbers,
+  -readability-magic-numbers,
+  -cppcoreguidelines-owning-memory,
+  -cppcoreguidelines-pro-bounds-pointer-arithmetic,
+  -bugprone-easily-swappable-parameters,
+  -readability-inconsistent-declaration-parameter-name,
+  -readability-use-anyofallof,
+  -cppcoreguidelines-pro-type-reinterpret-cast,
+  -cppcoreguidelines-no-malloc,
+  -google-readability-casting,
+  -cppcoreguidelines-pro-bounds-constant-array-index,
+  -misc-no-recursion
+
+
+HeaderFilterRegex: "cont/.*"
+
+ExcludePaths:
+  - ".*/tests/.*"
+  - ".*/utils/.*"
+  - ".*/build/.*"
+
+CheckOptions:
+  - key: readability-identifier-naming.ClassCase
+    value: CamelCase
+  - key: readability-identifier-naming.FunctionCase
+    value: camelBack
+  - key: readability-identifier-naming.GlobalFunctionCase
+    value: camelBack
+  - key: readability-identifier-naming.VariableCase
+    value: camelBack
+  - key: readability-identifier-naming.MemberCase
+    value: camelBack
+  - key: readability-identifier-naming.ParameterCase
+    value: camelBack
+  - key: readability-identifier-naming.EnumConstantCase
+    value: CamelCase
+  - key: readability-function-cognitive-complexity.Threshold
+    value: 100
+
+
+WarningsAsErrors: '*'
+
+
+FormatStyle: file
