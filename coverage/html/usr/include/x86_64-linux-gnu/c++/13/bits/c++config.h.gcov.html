@@ -4,7 +4,7 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>LCOV - coverage.info - usr/include/x86_64-linux-gnu/c++/13/bits/c++config.h</title>
+  <title>LCOV - coverage_filtered.info - usr/include/x86_64-linux-gnu/c++/13/bits/c++config.h</title>
   <link rel="stylesheet" type="text/css" href="../../../../../../gcov.css">
 </head>
 
@@ -28,21 +28,21 @@
           </tr>
           <tr>
             <td class="headerItem">Test:</td>
-            <td class="headerValue">coverage.info</td>
+            <td class="headerValue">coverage_filtered.info</td>
             <td></td>
             <td class="headerItem">Lines:</td>
-            <td class="headerCovTableEntryLo">0.0&nbsp;%</td>
+            <td class="headerCovTableEntryHi">100.0&nbsp;%</td>
             <td class="headerCovTableEntry">2</td>
-            <td class="headerCovTableEntry">0</td>
+            <td class="headerCovTableEntry">2</td>
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2025-12-02 18:56:06</td>
+            <td class="headerValue">2025-12-07 14:18:31</td>
             <td></td>
             <td class="headerItem">Functions:</td>
-            <td class="headerCovTableEntryLo">0.0&nbsp;%</td>
+            <td class="headerCovTableEntryHi">100.0&nbsp;%</td>
             <td class="headerCovTableEntry">1</td>
-            <td class="headerCovTableEntry">0</td>
+            <td class="headerCovTableEntry">1</td>
           </tr>
                   <tr><td><img src="../../../../../../glass.png" width=3 height=3 alt=""></td></tr>
                 </table>
@@ -599,14 +599,14 @@
 <span id="L537"><span class="lineNum">     537</span>              :   // The macro _GLIBCXX_HAVE_IS_CONSTANT_EVALUATED can be used to check if</span>
 <span id="L538"><span class="lineNum">     538</span>              :   // the compiler support is present to make this function work as expected.</span>
 <span id="L539"><span class="lineNum">     539</span>              :   _GLIBCXX_CONSTEXPR inline bool</span>
-<span id="L540"><span class="lineNum">     540</span> <span class="tlaUNC tlaBgUNC">           0 :   __is_constant_evaluated() _GLIBCXX_NOEXCEPT</span></span>
+<span id="L540"><span class="lineNum">     540</span> <span class="tlaGNC tlaBgGNC">        2867 :   __is_constant_evaluated() _GLIBCXX_NOEXCEPT</span></span>
 <span id="L541"><span class="lineNum">     541</span>              :   {</span>
 <span id="L542"><span class="lineNum">     542</span>              : #if __cpp_if_consteval &gt;= 202106L</span>
 <span id="L543"><span class="lineNum">     543</span>              : # define _GLIBCXX_HAVE_IS_CONSTANT_EVALUATED 1</span>
 <span id="L544"><span class="lineNum">     544</span>              :     if consteval { return true; } else { return false; }</span>
 <span id="L545"><span class="lineNum">     545</span>              : #elif __cplusplus &gt;= 201103L &amp;&amp; __has_builtin(__builtin_is_constant_evaluated)</span>
 <span id="L546"><span class="lineNum">     546</span>              : # define _GLIBCXX_HAVE_IS_CONSTANT_EVALUATED 1</span>
-<span id="L547"><span class="lineNum">     547</span> <span class="tlaUNC">           0 :     return __builtin_is_constant_evaluated();</span></span>
+<span id="L547"><span class="lineNum">     547</span> <span class="tlaGNC">        2867 :     return __builtin_is_constant_evaluated();</span></span>
 <span id="L548"><span class="lineNum">     548</span>              : #else</span>
 <span id="L549"><span class="lineNum">     549</span>              :     return false;</span>
 <span id="L550"><span class="lineNum">     550</span>              : #endif</span>

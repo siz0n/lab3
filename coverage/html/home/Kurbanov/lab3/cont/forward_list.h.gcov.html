@@ -4,7 +4,7 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>LCOV - coverage.info - home/Kurbanov/lab3/cont/forward_list.h</title>
+  <title>LCOV - coverage_filtered.info - home/Kurbanov/lab3/cont/forward_list.h</title>
   <link rel="stylesheet" type="text/css" href="../../../../gcov.css">
 </head>
 
@@ -28,21 +28,21 @@
           </tr>
           <tr>
             <td class="headerItem">Test:</td>
-            <td class="headerValue">coverage.info</td>
+            <td class="headerValue">coverage_filtered.info</td>
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntryHi">100.0&nbsp;%</td>
-            <td class="headerCovTableEntry">3</td>
-            <td class="headerCovTableEntry">3</td>
+            <td class="headerCovTableEntry">7</td>
+            <td class="headerCovTableEntry">7</td>
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2025-12-02 18:56:06</td>
+            <td class="headerValue">2025-12-07 14:18:31</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntryHi">100.0&nbsp;%</td>
-            <td class="headerCovTableEntry">1</td>
-            <td class="headerCovTableEntry">1</td>
+            <td class="headerCovTableEntry">3</td>
+            <td class="headerCovTableEntry">3</td>
           </tr>
                   <tr><td><img src="../../../../glass.png" width=3 height=3 alt=""></td></tr>
                 </table>
@@ -66,7 +66,7 @@
 <span id="L4"><span class="lineNum">       4</span>              : #include &lt;string&gt;</span>
 <span id="L5"><span class="lineNum">       5</span>              : #include &lt;utility&gt;</span>
 <span id="L6"><span class="lineNum">       6</span>              : </span>
-<span id="L7"><span class="lineNum">       7</span>              : class ForwardList;  // forward-declare</span>
+<span id="L7"><span class="lineNum">       7</span>              : class ForwardList;  </span>
 <span id="L8"><span class="lineNum">       8</span>              : </span>
 <span id="L9"><span class="lineNum">       9</span>              : class FNode</span>
 <span id="L10"><span class="lineNum">      10</span>              : {</span>
@@ -76,19 +76,19 @@
 <span id="L14"><span class="lineNum">      14</span>              :     {</span>
 <span id="L15"><span class="lineNum">      15</span> <span class="tlaGNC">          88 :     }</span></span>
 <span id="L16"><span class="lineNum">      16</span>              : </span>
-<span id="L17"><span class="lineNum">      17</span>              :     [[nodiscard]] const std::string&amp; getValue() const noexcept</span>
+<span id="L17"><span class="lineNum">      17</span> <span class="tlaGNC">           2 :     [[nodiscard]] const std::string&amp; getValue() const noexcept</span></span>
 <span id="L18"><span class="lineNum">      18</span>              :     {</span>
-<span id="L19"><span class="lineNum">      19</span>              :         return value;</span>
+<span id="L19"><span class="lineNum">      19</span> <span class="tlaGNC">           2 :         return value;</span></span>
 <span id="L20"><span class="lineNum">      20</span>              :     }</span>
 <span id="L21"><span class="lineNum">      21</span>              : </span>
-<span id="L22"><span class="lineNum">      22</span>              :     [[nodiscard]] FNode* getNext() const noexcept</span>
+<span id="L22"><span class="lineNum">      22</span> <span class="tlaGNC">          12 :     [[nodiscard]] FNode* getNext() const noexcept</span></span>
 <span id="L23"><span class="lineNum">      23</span>              :     {</span>
-<span id="L24"><span class="lineNum">      24</span>              :         return next;</span>
+<span id="L24"><span class="lineNum">      24</span> <span class="tlaGNC">          12 :         return next;</span></span>
 <span id="L25"><span class="lineNum">      25</span>              :     }</span>
 <span id="L26"><span class="lineNum">      26</span>              : </span>
 <span id="L27"><span class="lineNum">      27</span>              : private:</span>
 <span id="L28"><span class="lineNum">      28</span>              :     std::string value;</span>
-<span id="L29"><span class="lineNum">      29</span>              :     FNode* next = nullptr;   // default member initializer, то что просит clang-tidy</span>
+<span id="L29"><span class="lineNum">      29</span>              :     FNode* next = nullptr;   </span>
 <span id="L30"><span class="lineNum">      30</span>              : </span>
 <span id="L31"><span class="lineNum">      31</span>              :     friend class ForwardList;</span>
 <span id="L32"><span class="lineNum">      32</span>              : };</span>
@@ -117,19 +117,19 @@
 <span id="L55"><span class="lineNum">      55</span>              :     void removeAfter(const std::string&amp; afterValue);</span>
 <span id="L56"><span class="lineNum">      56</span>              :     void removeBefore(const std::string&amp; beforeValue);</span>
 <span id="L57"><span class="lineNum">      57</span>              : </span>
-<span id="L58"><span class="lineNum">      58</span>              :     // --- текстовая сериализация ---</span>
+<span id="L58"><span class="lineNum">      58</span>              :     //текстовая сериализация</span>
 <span id="L59"><span class="lineNum">      59</span>              :     [[nodiscard]] std::string serialize() const;</span>
 <span id="L60"><span class="lineNum">      60</span>              :     void deserialize(const std::string&amp; text);</span>
 <span id="L61"><span class="lineNum">      61</span>              : </span>
 <span id="L62"><span class="lineNum">      62</span>              :     void serializeText(std::ostream&amp; outputStream) const;</span>
 <span id="L63"><span class="lineNum">      63</span>              :     void deserializeText(std::istream&amp; inputStream);</span>
 <span id="L64"><span class="lineNum">      64</span>              : </span>
-<span id="L65"><span class="lineNum">      65</span>              :     // --- бинарная сериализация ---</span>
+<span id="L65"><span class="lineNum">      65</span>              :     // бинарная сериализация</span>
 <span id="L66"><span class="lineNum">      66</span>              :     void serializeBinary(std::ostream&amp; outputStream) const;</span>
 <span id="L67"><span class="lineNum">      67</span>              :     void deserializeBinary(std::istream&amp; inputStream);</span>
 <span id="L68"><span class="lineNum">      68</span>              : </span>
 <span id="L69"><span class="lineNum">      69</span>              : private:</span>
-<span id="L70"><span class="lineNum">      70</span>              :     FNode* head = nullptr;   // тоже без подчёркивания, с дефолтной инициализацией</span>
+<span id="L70"><span class="lineNum">      70</span>              :     FNode* head = nullptr;   </span>
 <span id="L71"><span class="lineNum">      71</span>              : </span>
 <span id="L72"><span class="lineNum">      72</span>              :     void clear() noexcept;</span>
 <span id="L73"><span class="lineNum">      73</span>              : };</span>

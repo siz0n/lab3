@@ -4,7 +4,7 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>LCOV - coverage.info - home/Kurbanov/lab3/cont/array.cpp</title>
+  <title>LCOV - coverage_filtered.info - home/Kurbanov/lab3/cont/array.cpp</title>
   <link rel="stylesheet" type="text/css" href="../../../../gcov.css">
 </head>
 
@@ -28,7 +28,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test:</td>
-            <td class="headerValue">coverage.info</td>
+            <td class="headerValue">coverage_filtered.info</td>
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntryHi">90.4&nbsp;%</td>
@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2025-12-02 18:56:06</td>
+            <td class="headerValue">2025-12-07 14:18:31</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntryHi">96.2&nbsp;%</td>
@@ -70,7 +70,7 @@
 <span id="L8"><span class="lineNum">       8</span>              : #include &lt;utility&gt;</span>
 <span id="L9"><span class="lineNum">       9</span>              : #include &lt;cstdint&gt;</span>
 <span id="L10"><span class="lineNum">      10</span>              : </span>
-<span id="L11"><span class="lineNum">      11</span>              : // ---------- конструкторы / деструктор ----------</span>
+<span id="L11"><span class="lineNum">      11</span>              : // конструкторы / деструктор </span>
 <span id="L12"><span class="lineNum">      12</span>              : </span>
 <span id="L13"><span class="lineNum">      13</span> <span class="tlaGNC tlaBgGNC">          31 : MyArray::MyArray(std::size_t initialCapacity)</span></span>
 <span id="L14"><span class="lineNum">      14</span> <span class="tlaGNC">          31 :     : dataPtr(nullptr),</span></span>
@@ -92,7 +92,7 @@
 <span id="L30"><span class="lineNum">      30</span> <span class="tlaGNC">          34 :     length = 0;</span></span>
 <span id="L31"><span class="lineNum">      31</span> <span class="tlaGNC">          34 : }</span></span>
 <span id="L32"><span class="lineNum">      32</span>              : </span>
-<span id="L33"><span class="lineNum">      33</span>              : // ---------- копирующий конструктор ----------</span>
+<span id="L33"><span class="lineNum">      33</span>              : // копирующий конструктор </span>
 <span id="L34"><span class="lineNum">      34</span>              : </span>
 <span id="L35"><span class="lineNum">      35</span> <span class="tlaGNC">           2 : MyArray::MyArray(const MyArray&amp; other)</span></span>
 <span id="L36"><span class="lineNum">      36</span> <span class="tlaGNC">           2 :     : dataPtr(nullptr),</span></span>
@@ -105,7 +105,7 @@
 <span id="L43"><span class="lineNum">      43</span>              :     }</span>
 <span id="L44"><span class="lineNum">      44</span> <span class="tlaGNC">           2 : }</span></span>
 <span id="L45"><span class="lineNum">      45</span>              : </span>
-<span id="L46"><span class="lineNum">      46</span>              : // ---------- move-конструктор ----------</span>
+<span id="L46"><span class="lineNum">      46</span>              : // move-конструктор </span>
 <span id="L47"><span class="lineNum">      47</span>              : </span>
 <span id="L48"><span class="lineNum">      48</span> <span class="tlaGNC">           1 : MyArray::MyArray(MyArray&amp;&amp; other) noexcept</span></span>
 <span id="L49"><span class="lineNum">      49</span> <span class="tlaGNC">           1 :     : dataPtr(other.dataPtr),</span></span>
@@ -117,7 +117,7 @@
 <span id="L55"><span class="lineNum">      55</span> <span class="tlaGNC">           1 :     other.length = 0;</span></span>
 <span id="L56"><span class="lineNum">      56</span> <span class="tlaGNC">           1 : }</span></span>
 <span id="L57"><span class="lineNum">      57</span>              : </span>
-<span id="L58"><span class="lineNum">      58</span>              : // ---------- копирующее присваивание ----------</span>
+<span id="L58"><span class="lineNum">      58</span>              : // копирующее присваивание </span>
 <span id="L59"><span class="lineNum">      59</span>              : </span>
 <span id="L60"><span class="lineNum">      60</span> <span class="tlaGNC">           2 : MyArray&amp; MyArray::operator=(const MyArray&amp; other)</span></span>
 <span id="L61"><span class="lineNum">      61</span>              : {</span>
@@ -130,7 +130,7 @@
 <span id="L68"><span class="lineNum">      68</span> <span class="tlaGNC">           1 :     return *this;</span></span>
 <span id="L69"><span class="lineNum">      69</span> <span class="tlaGNC">           1 : }</span></span>
 <span id="L70"><span class="lineNum">      70</span>              : </span>
-<span id="L71"><span class="lineNum">      71</span>              : // ---------- move-присваивание ----------</span>
+<span id="L71"><span class="lineNum">      71</span>              : // move-присваивание </span>
 <span id="L72"><span class="lineNum">      72</span>              : </span>
 <span id="L73"><span class="lineNum">      73</span> <span class="tlaGNC">           1 : MyArray&amp; MyArray::operator=(MyArray&amp;&amp; other) noexcept</span></span>
 <span id="L74"><span class="lineNum">      74</span>              : {</span>
@@ -151,7 +151,7 @@
 <span id="L89"><span class="lineNum">      89</span> <span class="tlaGNC">           1 :     return *this;</span></span>
 <span id="L90"><span class="lineNum">      90</span>              : }</span>
 <span id="L91"><span class="lineNum">      91</span>              : </span>
-<span id="L92"><span class="lineNum">      92</span>              : // ---------- swap ----------</span>
+<span id="L92"><span class="lineNum">      92</span>              : // swap </span>
 <span id="L93"><span class="lineNum">      93</span>              : </span>
 <span id="L94"><span class="lineNum">      94</span> <span class="tlaGNC">           2 : void MyArray::swap(MyArray&amp; other) noexcept</span></span>
 <span id="L95"><span class="lineNum">      95</span>              : {</span>
@@ -161,7 +161,7 @@
 <span id="L99"><span class="lineNum">      99</span> <span class="tlaGNC">           2 :     swap(length, other.length);</span></span>
 <span id="L100"><span class="lineNum">     100</span> <span class="tlaGNC">           2 : }</span></span>
 <span id="L101"><span class="lineNum">     101</span>              : </span>
-<span id="L102"><span class="lineNum">     102</span>              : // ---------- базовые операции ----------</span>
+<span id="L102"><span class="lineNum">     102</span>              : // базовые операции </span>
 <span id="L103"><span class="lineNum">     103</span>              : </span>
 <span id="L104"><span class="lineNum">     104</span> <span class="tlaGNC">          63 : void MyArray::pushBack(const std::string&amp; value)</span></span>
 <span id="L105"><span class="lineNum">     105</span>              : {</span>
@@ -174,7 +174,7 @@
 <span id="L112"><span class="lineNum">     112</span> <span class="tlaGNC">           4 : void MyArray::insert(std::size_t index, const std::string&amp; value)</span></span>
 <span id="L113"><span class="lineNum">     113</span>              : {</span>
 <span id="L114"><span class="lineNum">     114</span> <span class="tlaGNC">           4 :     if (index &gt; length) {</span></span>
-<span id="L115"><span class="lineNum">     115</span> <span class="tlaGNC">           1 :         throw std::out_of_range(&quot;MyArray::insert: index out of range&quot;);</span></span>
+<span id="L115"><span class="lineNum">     115</span> <span class="tlaGNC">           1 :         throw std::out_of_range(&quot;MyArray::insert: error&quot;);</span></span>
 <span id="L116"><span class="lineNum">     116</span>              :     }</span>
 <span id="L117"><span class="lineNum">     117</span>              : </span>
 <span id="L118"><span class="lineNum">     118</span> <span class="tlaGNC">           3 :     if (length == capacity) {</span></span>
@@ -192,7 +192,7 @@
 <span id="L130"><span class="lineNum">     130</span> <span class="tlaGNC">           5 : void MyArray::removeAt(std::size_t index)</span></span>
 <span id="L131"><span class="lineNum">     131</span>              : {</span>
 <span id="L132"><span class="lineNum">     132</span> <span class="tlaGNC">           5 :     if (index &gt;= length) {</span></span>
-<span id="L133"><span class="lineNum">     133</span> <span class="tlaGNC">           2 :         throw std::out_of_range(&quot;MyArray::removeAt: index out of range&quot;);</span></span>
+<span id="L133"><span class="lineNum">     133</span> <span class="tlaGNC">           2 :         throw std::out_of_range(&quot;MyArray::removeAt: error&quot;);</span></span>
 <span id="L134"><span class="lineNum">     134</span>              :     }</span>
 <span id="L135"><span class="lineNum">     135</span>              : </span>
 <span id="L136"><span class="lineNum">     136</span> <span class="tlaGNC">           8 :     for (std::size_t i = index; i + 1 &lt; length; ++i) {</span></span>
@@ -204,7 +204,7 @@
 <span id="L142"><span class="lineNum">     142</span> <span class="tlaGNC">          40 : std::string&amp; MyArray::at(std::size_t index)</span></span>
 <span id="L143"><span class="lineNum">     143</span>              : {</span>
 <span id="L144"><span class="lineNum">     144</span> <span class="tlaGNC">          40 :     if (index &gt;= length) {</span></span>
-<span id="L145"><span class="lineNum">     145</span> <span class="tlaGNC">           1 :         throw std::out_of_range(&quot;MyArray::at: index out of range&quot;);</span></span>
+<span id="L145"><span class="lineNum">     145</span> <span class="tlaGNC">           1 :         throw std::out_of_range(&quot;MyArray::at: error&quot;);</span></span>
 <span id="L146"><span class="lineNum">     146</span>              :     }</span>
 <span id="L147"><span class="lineNum">     147</span> <span class="tlaGNC">          39 :     return dataPtr[index];</span></span>
 <span id="L148"><span class="lineNum">     148</span>              : }</span>
@@ -212,7 +212,7 @@
 <span id="L150"><span class="lineNum">     150</span> <span class="tlaGNC">           3 : const std::string&amp; MyArray::at(std::size_t index) const</span></span>
 <span id="L151"><span class="lineNum">     151</span>              : {</span>
 <span id="L152"><span class="lineNum">     152</span> <span class="tlaGNC">           3 :     if (index &gt;= length) {</span></span>
-<span id="L153"><span class="lineNum">     153</span> <span class="tlaGNC">           1 :         throw std::out_of_range(&quot;MyArray::at: index out of range&quot;);</span></span>
+<span id="L153"><span class="lineNum">     153</span> <span class="tlaGNC">           1 :         throw std::out_of_range(&quot;MyArray::at: error&quot;);</span></span>
 <span id="L154"><span class="lineNum">     154</span>              :     }</span>
 <span id="L155"><span class="lineNum">     155</span> <span class="tlaGNC">           2 :     return dataPtr[index];</span></span>
 <span id="L156"><span class="lineNum">     156</span>              : }</span>
@@ -220,12 +220,12 @@
 <span id="L158"><span class="lineNum">     158</span> <span class="tlaGNC">           3 : void MyArray::set(std::size_t index, const std::string&amp; value)</span></span>
 <span id="L159"><span class="lineNum">     159</span>              : {</span>
 <span id="L160"><span class="lineNum">     160</span> <span class="tlaGNC">           3 :     if (index &gt;= length) {</span></span>
-<span id="L161"><span class="lineNum">     161</span> <span class="tlaGNC">           1 :         throw std::out_of_range(&quot;MyArray::set: index out of range&quot;);</span></span>
+<span id="L161"><span class="lineNum">     161</span> <span class="tlaGNC">           1 :         throw std::out_of_range(&quot;MyArray::set: error&quot;);</span></span>
 <span id="L162"><span class="lineNum">     162</span>              :     }</span>
 <span id="L163"><span class="lineNum">     163</span> <span class="tlaGNC">           2 :     dataPtr[index] = value;</span></span>
 <span id="L164"><span class="lineNum">     164</span> <span class="tlaGNC">           2 : }</span></span>
 <span id="L165"><span class="lineNum">     165</span>              : </span>
-<span id="L166"><span class="lineNum">     166</span>              : // ---------- operator[] ----------</span>
+<span id="L166"><span class="lineNum">     166</span>              : // operator[] </span>
 <span id="L167"><span class="lineNum">     167</span>              : </span>
 <span id="L168"><span class="lineNum">     168</span> <span class="tlaGNC">          27 : std::string&amp; MyArray::operator[](std::size_t index) noexcept</span></span>
 <span id="L169"><span class="lineNum">     169</span>              : {</span>
@@ -237,7 +237,7 @@
 <span id="L175"><span class="lineNum">     175</span> <span class="tlaGNC">           1 :     return dataPtr[index];</span></span>
 <span id="L176"><span class="lineNum">     176</span>              : }</span>
 <span id="L177"><span class="lineNum">     177</span>              : </span>
-<span id="L178"><span class="lineNum">     178</span>              : // ---------- вспомогательные методы ----------</span>
+<span id="L178"><span class="lineNum">     178</span>              : // вспомогательные методы </span>
 <span id="L179"><span class="lineNum">     179</span>              : </span>
 <span id="L180"><span class="lineNum">     180</span> <span class="tlaGNC">          44 : std::size_t MyArray::size() const noexcept</span></span>
 <span id="L181"><span class="lineNum">     181</span>              : {</span>
@@ -284,7 +284,7 @@
 <span id="L222"><span class="lineNum">     222</span> <span class="tlaGNC">           8 :     capacity = newCapacity;</span></span>
 <span id="L223"><span class="lineNum">     223</span> <span class="tlaGNC">           8 : }</span></span>
 <span id="L224"><span class="lineNum">     224</span>              : </span>
-<span id="L225"><span class="lineNum">     225</span>              : // ---------- текстовая сериализация через поток ----------</span>
+<span id="L225"><span class="lineNum">     225</span>              : // текстовая сериализация через поток </span>
 <span id="L226"><span class="lineNum">     226</span>              : </span>
 <span id="L227"><span class="lineNum">     227</span> <span class="tlaGNC">           2 : void MyArray::serializeText(std::ostream&amp; outputStream) const</span></span>
 <span id="L228"><span class="lineNum">     228</span>              : {</span>
@@ -298,7 +298,7 @@
 <span id="L236"><span class="lineNum">     236</span>              : {</span>
 <span id="L237"><span class="lineNum">     237</span> <span class="tlaGNC">           2 :     std::size_t newLength = 0;</span></span>
 <span id="L238"><span class="lineNum">     238</span> <span class="tlaGNC">           2 :     if (!(inputStream &gt;&gt; newLength)) {</span></span>
-<span id="L239"><span class="lineNum">     239</span> <span class="tlaUNC tlaBgUNC">           0 :         throw std::runtime_error(&quot;MyArray::deserializeText: cannot read length&quot;);</span></span>
+<span id="L239"><span class="lineNum">     239</span> <span class="tlaUNC tlaBgUNC">           0 :         throw std::runtime_error(&quot;MyArray::deserializeText: error&quot;);</span></span>
 <span id="L240"><span class="lineNum">     240</span>              :     }</span>
 <span id="L241"><span class="lineNum">     241</span>              : </span>
 <span id="L242"><span class="lineNum">     242</span> <span class="tlaGNC tlaBgGNC">           2 :     inputStream.ignore(std::numeric_limits&lt;std::streamsize&gt;::max(), '\n');</span></span>
@@ -310,12 +310,12 @@
 <span id="L248"><span class="lineNum">     248</span> <span class="tlaGNC tlaBgGNC">           2 :     length = newLength;</span></span>
 <span id="L249"><span class="lineNum">     249</span> <span class="tlaGNC">           8 :     for (std::size_t i = 0; i &lt; length; ++i) {</span></span>
 <span id="L250"><span class="lineNum">     250</span> <span class="tlaGNC">           6 :         if (!std::getline(inputStream, dataPtr[i])) {</span></span>
-<span id="L251"><span class="lineNum">     251</span> <span class="tlaUNC tlaBgUNC">           0 :             throw std::runtime_error(&quot;MyArray::deserializeText: not enough lines&quot;);</span></span>
+<span id="L251"><span class="lineNum">     251</span> <span class="tlaUNC tlaBgUNC">           0 :             throw std::runtime_error(&quot;MyArray::deserializeText: error&quot;);</span></span>
 <span id="L252"><span class="lineNum">     252</span>              :         }</span>
 <span id="L253"><span class="lineNum">     253</span>              :     }</span>
 <span id="L254"><span class="lineNum">     254</span> <span class="tlaGNC tlaBgGNC">           2 : }</span></span>
 <span id="L255"><span class="lineNum">     255</span>              : </span>
-<span id="L256"><span class="lineNum">     256</span>              : // ---------- старый интерфейс (в строку) ----------</span>
+<span id="L256"><span class="lineNum">     256</span>              : // текстовая сериализация в строку</span>
 <span id="L257"><span class="lineNum">     257</span>              : </span>
 <span id="L258"><span class="lineNum">     258</span> <span class="tlaGNC">           1 : std::string MyArray::serialize() const</span></span>
 <span id="L259"><span class="lineNum">     259</span>              : {</span>
@@ -330,7 +330,7 @@
 <span id="L268"><span class="lineNum">     268</span> <span class="tlaGNC">           1 :     deserializeText(iss);</span></span>
 <span id="L269"><span class="lineNum">     269</span> <span class="tlaGNC">           1 : }</span></span>
 <span id="L270"><span class="lineNum">     270</span>              : </span>
-<span id="L271"><span class="lineNum">     271</span>              : // ---------- бинарная сериализация ----------</span>
+<span id="L271"><span class="lineNum">     271</span>              : // бинарная сериализация </span>
 <span id="L272"><span class="lineNum">     272</span>              : </span>
 <span id="L273"><span class="lineNum">     273</span> <span class="tlaGNC">           1 : void MyArray::serializeBinary(std::ostream&amp; outputStream) const</span></span>
 <span id="L274"><span class="lineNum">     274</span>              : {</span>
@@ -347,7 +347,7 @@
 <span id="L285"><span class="lineNum">     285</span>              :     }</span>
 <span id="L286"><span class="lineNum">     286</span>              : </span>
 <span id="L287"><span class="lineNum">     287</span> <span class="tlaGNC">           1 :     if (!outputStream) {</span></span>
-<span id="L288"><span class="lineNum">     288</span> <span class="tlaUNC tlaBgUNC">           0 :         throw std::runtime_error(&quot;MyArray::serializeBinary: write error&quot;);</span></span>
+<span id="L288"><span class="lineNum">     288</span> <span class="tlaUNC tlaBgUNC">           0 :         throw std::runtime_error(&quot;MyArray::serializeBinary: error&quot;);</span></span>
 <span id="L289"><span class="lineNum">     289</span>              :     }</span>
 <span id="L290"><span class="lineNum">     290</span> <span class="tlaGNC tlaBgGNC">           1 : }</span></span>
 <span id="L291"><span class="lineNum">     291</span>              : </span>
@@ -356,7 +356,7 @@
 <span id="L294"><span class="lineNum">     294</span> <span class="tlaGNC">           1 :     std::uint64_t len = 0;</span></span>
 <span id="L295"><span class="lineNum">     295</span> <span class="tlaGNC">           1 :     inputStream.read(reinterpret_cast&lt;char*&gt;(&amp;len), sizeof(len));</span></span>
 <span id="L296"><span class="lineNum">     296</span> <span class="tlaGNC">           1 :     if (!inputStream) {</span></span>
-<span id="L297"><span class="lineNum">     297</span> <span class="tlaUNC tlaBgUNC">           0 :         throw std::runtime_error(&quot;MyArray::deserializeBinary: cannot read length&quot;);</span></span>
+<span id="L297"><span class="lineNum">     297</span> <span class="tlaUNC tlaBgUNC">           0 :         throw std::runtime_error(&quot;MyArray::deserializeBinary: error&quot;);</span></span>
 <span id="L298"><span class="lineNum">     298</span>              :     }</span>
 <span id="L299"><span class="lineNum">     299</span>              : </span>
 <span id="L300"><span class="lineNum">     300</span> <span class="tlaGNC tlaBgGNC">           1 :     if (len &gt; static_cast&lt;std::uint64_t&gt;(capacity)) {</span></span>
@@ -369,7 +369,7 @@
 <span id="L307"><span class="lineNum">     307</span> <span class="tlaGNC">           4 :         std::uint64_t sizeValue = 0;</span></span>
 <span id="L308"><span class="lineNum">     308</span> <span class="tlaGNC">           4 :         inputStream.read(reinterpret_cast&lt;char*&gt;(&amp;sizeValue), sizeof(sizeValue));</span></span>
 <span id="L309"><span class="lineNum">     309</span> <span class="tlaGNC">           4 :         if (!inputStream) {</span></span>
-<span id="L310"><span class="lineNum">     310</span> <span class="tlaUNC tlaBgUNC">           0 :             throw std::runtime_error(&quot;MyArray::deserializeBinary: cannot read string size&quot;);</span></span>
+<span id="L310"><span class="lineNum">     310</span> <span class="tlaUNC tlaBgUNC">           0 :             throw std::runtime_error(&quot;MyArray::deserializeBinary: error&quot;);</span></span>
 <span id="L311"><span class="lineNum">     311</span>              :         }</span>
 <span id="L312"><span class="lineNum">     312</span>              : </span>
 <span id="L313"><span class="lineNum">     313</span> <span class="tlaGNC tlaBgGNC">           4 :         std::string tmp;</span></span>
@@ -377,7 +377,7 @@
 <span id="L315"><span class="lineNum">     315</span> <span class="tlaGNC">           4 :         if (sizeValue &gt; 0) {</span></span>
 <span id="L316"><span class="lineNum">     316</span> <span class="tlaGNC">           3 :             inputStream.read(tmp.data(), static_cast&lt;std::streamsize&gt;(sizeValue));</span></span>
 <span id="L317"><span class="lineNum">     317</span> <span class="tlaGNC">           3 :             if (!inputStream) {</span></span>
-<span id="L318"><span class="lineNum">     318</span> <span class="tlaUNC tlaBgUNC">           0 :                 throw std::runtime_error(&quot;MyArray::deserializeBinary: cannot read string data&quot;);</span></span>
+<span id="L318"><span class="lineNum">     318</span> <span class="tlaUNC tlaBgUNC">           0 :                 throw std::runtime_error(&quot;MyArray::deserializeBinary: error&quot;);</span></span>
 <span id="L319"><span class="lineNum">     319</span>              :             }</span>
 <span id="L320"><span class="lineNum">     320</span>              :         }</span>
 <span id="L321"><span class="lineNum">     321</span> <span class="tlaGNC tlaBgGNC">           4 :         dataPtr[i] = std::move(tmp);</span></span>

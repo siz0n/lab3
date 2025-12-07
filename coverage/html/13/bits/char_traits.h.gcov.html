@@ -4,7 +4,7 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>LCOV - coverage.info - 13/bits/char_traits.h</title>
+  <title>LCOV - coverage_filtered.info - 13/bits/char_traits.h</title>
   <link rel="stylesheet" type="text/css" href="../../gcov.css">
 </head>
 
@@ -28,21 +28,21 @@
           </tr>
           <tr>
             <td class="headerItem">Test:</td>
-            <td class="headerValue">coverage.info</td>
+            <td class="headerValue">coverage_filtered.info</td>
             <td></td>
             <td class="headerItem">Lines:</td>
-            <td class="headerCovTableEntryLo">0.0&nbsp;%</td>
-            <td class="headerCovTableEntry">33</td>
-            <td class="headerCovTableEntry">0</td>
+            <td class="headerCovTableEntryLo">18.2&nbsp;%</td>
+            <td class="headerCovTableEntry">44</td>
+            <td class="headerCovTableEntry">8</td>
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2025-12-02 18:56:06</td>
+            <td class="headerValue">2025-12-07 14:18:31</td>
             <td></td>
             <td class="headerItem">Functions:</td>
-            <td class="headerCovTableEntryLo">0.0&nbsp;%</td>
-            <td class="headerCovTableEntry">9</td>
-            <td class="headerCovTableEntry">0</td>
+            <td class="headerCovTableEntryLo">18.2&nbsp;%</td>
+            <td class="headerCovTableEntry">11</td>
+            <td class="headerCovTableEntry">2</td>
           </tr>
                   <tr><td><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
                 </table>
@@ -269,13 +269,13 @@
 <span id="L207"><span class="lineNum">     207</span>              : </span>
 <span id="L208"><span class="lineNum">     208</span>              :   template&lt;typename _CharT&gt;</span>
 <span id="L209"><span class="lineNum">     209</span>              :     _GLIBCXX14_CONSTEXPR const typename char_traits&lt;_CharT&gt;::char_type*</span>
-<span id="L210"><span class="lineNum">     210</span>              :     char_traits&lt;_CharT&gt;::</span>
+<span id="L210"><span class="lineNum">     210</span> <span class="tlaUNC">           0 :     char_traits&lt;_CharT&gt;::</span></span>
 <span id="L211"><span class="lineNum">     211</span>              :     find(const char_type* __s, std::size_t __n, const char_type&amp; __a)</span>
 <span id="L212"><span class="lineNum">     212</span>              :     {</span>
-<span id="L213"><span class="lineNum">     213</span>              :       for (std::size_t __i = 0; __i &lt; __n; ++__i)</span>
-<span id="L214"><span class="lineNum">     214</span>              :         if (eq(__s[__i], __a))</span>
-<span id="L215"><span class="lineNum">     215</span>              :           return __s + __i;</span>
-<span id="L216"><span class="lineNum">     216</span>              :       return 0;</span>
+<span id="L213"><span class="lineNum">     213</span> <span class="tlaUNC">           0 :       for (std::size_t __i = 0; __i &lt; __n; ++__i)</span></span>
+<span id="L214"><span class="lineNum">     214</span> <span class="tlaUNC">           0 :         if (eq(__s[__i], __a))</span></span>
+<span id="L215"><span class="lineNum">     215</span> <span class="tlaUNC">           0 :           return __s + __i;</span></span>
+<span id="L216"><span class="lineNum">     216</span> <span class="tlaUNC">           0 :       return 0;</span></span>
 <span id="L217"><span class="lineNum">     217</span>              :     }</span>
 <span id="L218"><span class="lineNum">     218</span>              : </span>
 <span id="L219"><span class="lineNum">     219</span>              :   template&lt;typename _CharT&gt;</span>
@@ -433,14 +433,14 @@
 <span id="L371"><span class="lineNum">     371</span>              :       }</span>
 <span id="L372"><span class="lineNum">     372</span>              : </span>
 <span id="L373"><span class="lineNum">     373</span>              :       static _GLIBCXX17_CONSTEXPR int</span>
-<span id="L374"><span class="lineNum">     374</span> <span class="tlaUNC">           0 :       compare(const char_type* __s1, const char_type* __s2, size_t __n)</span></span>
+<span id="L374"><span class="lineNum">     374</span> <span class="tlaGNC tlaBgGNC">         632 :       compare(const char_type* __s1, const char_type* __s2, size_t __n)</span></span>
 <span id="L375"><span class="lineNum">     375</span>              :       {</span>
-<span id="L376"><span class="lineNum">     376</span> <span class="tlaUNC">           0 :         if (__n == 0)</span></span>
-<span id="L377"><span class="lineNum">     377</span> <span class="tlaUNC">           0 :           return 0;</span></span>
+<span id="L376"><span class="lineNum">     376</span> <span class="tlaGNC">         632 :         if (__n == 0)</span></span>
+<span id="L377"><span class="lineNum">     377</span> <span class="tlaGNC">           8 :           return 0;</span></span>
 <span id="L378"><span class="lineNum">     378</span>              : #if __cplusplus &gt;= 201703L</span>
-<span id="L379"><span class="lineNum">     379</span> <span class="tlaUNC">           0 :         if (std::__is_constant_evaluated())</span></span>
+<span id="L379"><span class="lineNum">     379</span> <span class="tlaGNC">         624 :         if (std::__is_constant_evaluated())</span></span>
 <span id="L380"><span class="lineNum">     380</span>              :           {</span>
-<span id="L381"><span class="lineNum">     381</span> <span class="tlaUNC">           0 :             for (size_t __i = 0; __i &lt; __n; ++__i)</span></span>
+<span id="L381"><span class="lineNum">     381</span> <span class="tlaUNC tlaBgUNC">           0 :             for (size_t __i = 0; __i &lt; __n; ++__i)</span></span>
 <span id="L382"><span class="lineNum">     382</span> <span class="tlaUNC">           0 :               if (lt(__s1[__i], __s2[__i]))</span></span>
 <span id="L383"><span class="lineNum">     383</span> <span class="tlaUNC">           0 :                 return -1;</span></span>
 <span id="L384"><span class="lineNum">     384</span> <span class="tlaUNC">           0 :               else if (lt(__s2[__i], __s1[__i]))</span></span>
@@ -448,29 +448,29 @@
 <span id="L386"><span class="lineNum">     386</span> <span class="tlaUNC">           0 :             return 0;</span></span>
 <span id="L387"><span class="lineNum">     387</span>              :           }</span>
 <span id="L388"><span class="lineNum">     388</span>              : #endif</span>
-<span id="L389"><span class="lineNum">     389</span> <span class="tlaUNC">           0 :         return __builtin_memcmp(__s1, __s2, __n);</span></span>
+<span id="L389"><span class="lineNum">     389</span> <span class="tlaGNC tlaBgGNC">         624 :         return __builtin_memcmp(__s1, __s2, __n);</span></span>
 <span id="L390"><span class="lineNum">     390</span>              :       }</span>
 <span id="L391"><span class="lineNum">     391</span>              : </span>
 <span id="L392"><span class="lineNum">     392</span>              :       static _GLIBCXX17_CONSTEXPR size_t</span>
-<span id="L393"><span class="lineNum">     393</span> <span class="tlaUNC">           0 :       length(const char_type* __s)</span></span>
+<span id="L393"><span class="lineNum">     393</span> <span class="tlaGNC">        1001 :       length(const char_type* __s)</span></span>
 <span id="L394"><span class="lineNum">     394</span>              :       {</span>
 <span id="L395"><span class="lineNum">     395</span>              : #if __cplusplus &gt;= 201703L</span>
-<span id="L396"><span class="lineNum">     396</span> <span class="tlaUNC">           0 :         if (std::__is_constant_evaluated())</span></span>
-<span id="L397"><span class="lineNum">     397</span> <span class="tlaUNC">           0 :           return __gnu_cxx::char_traits&lt;char_type&gt;::length(__s);</span></span>
+<span id="L396"><span class="lineNum">     396</span> <span class="tlaGNC">        1001 :         if (std::__is_constant_evaluated())</span></span>
+<span id="L397"><span class="lineNum">     397</span> <span class="tlaUNC tlaBgUNC">           0 :           return __gnu_cxx::char_traits&lt;char_type&gt;::length(__s);</span></span>
 <span id="L398"><span class="lineNum">     398</span>              : #endif</span>
-<span id="L399"><span class="lineNum">     399</span> <span class="tlaUNC">           0 :         return __builtin_strlen(__s);</span></span>
+<span id="L399"><span class="lineNum">     399</span> <span class="tlaGNC tlaBgGNC">        1001 :         return __builtin_strlen(__s);</span></span>
 <span id="L400"><span class="lineNum">     400</span>              :       }</span>
 <span id="L401"><span class="lineNum">     401</span>              : </span>
 <span id="L402"><span class="lineNum">     402</span>              :       static _GLIBCXX17_CONSTEXPR const char_type*</span>
-<span id="L403"><span class="lineNum">     403</span>              :       find(const char_type* __s, size_t __n, const char_type&amp; __a)</span>
+<span id="L403"><span class="lineNum">     403</span> <span class="tlaUNC tlaBgUNC">           0 :       find(const char_type* __s, size_t __n, const char_type&amp; __a)</span></span>
 <span id="L404"><span class="lineNum">     404</span>              :       {</span>
-<span id="L405"><span class="lineNum">     405</span>              :         if (__n == 0)</span>
-<span id="L406"><span class="lineNum">     406</span>              :           return 0;</span>
+<span id="L405"><span class="lineNum">     405</span> <span class="tlaUNC">           0 :         if (__n == 0)</span></span>
+<span id="L406"><span class="lineNum">     406</span> <span class="tlaUNC">           0 :           return 0;</span></span>
 <span id="L407"><span class="lineNum">     407</span>              : #if __cplusplus &gt;= 201703L</span>
-<span id="L408"><span class="lineNum">     408</span>              :         if (std::__is_constant_evaluated())</span>
-<span id="L409"><span class="lineNum">     409</span>              :           return __gnu_cxx::char_traits&lt;char_type&gt;::find(__s, __n, __a);</span>
+<span id="L408"><span class="lineNum">     408</span> <span class="tlaUNC">           0 :         if (std::__is_constant_evaluated())</span></span>
+<span id="L409"><span class="lineNum">     409</span> <span class="tlaUNC">           0 :           return __gnu_cxx::char_traits&lt;char_type&gt;::find(__s, __n, __a);</span></span>
 <span id="L410"><span class="lineNum">     410</span>              : #endif</span>
-<span id="L411"><span class="lineNum">     411</span>              :         return static_cast&lt;const char_type*&gt;(__builtin_memchr(__s, __a, __n));</span>
+<span id="L411"><span class="lineNum">     411</span> <span class="tlaUNC">           0 :         return static_cast&lt;const char_type*&gt;(__builtin_memchr(__s, __a, __n));</span></span>
 <span id="L412"><span class="lineNum">     412</span>              :       }</span>
 <span id="L413"><span class="lineNum">     413</span>              : </span>
 <span id="L414"><span class="lineNum">     414</span>              :       static _GLIBCXX20_CONSTEXPR char_type*</span>

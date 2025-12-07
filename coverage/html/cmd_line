@@ -1,1 +1,1 @@
-genhtml coverage/coverage.info --output-directory coverage/html
+genhtml coverage/coverage_filtered.info --output-directory coverage/html

@@ -4,7 +4,7 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>LCOV - coverage.info - home/Kurbanov/lab3/cont/forward_list.cpp</title>
+  <title>LCOV - coverage_filtered.info - home/Kurbanov/lab3/cont/forward_list.cpp</title>
   <link rel="stylesheet" type="text/css" href="../../../../gcov.css">
 </head>
 
@@ -28,7 +28,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test:</td>
-            <td class="headerValue">coverage.info</td>
+            <td class="headerValue">coverage_filtered.info</td>
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntryHi">94.5&nbsp;%</td>
@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2025-12-02 18:56:06</td>
+            <td class="headerValue">2025-12-07 14:18:31</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntryHi">100.0&nbsp;%</td>
@@ -67,7 +67,7 @@
 <span id="L5"><span class="lineNum">       5</span>              : #include &lt;sstream&gt;</span>
 <span id="L6"><span class="lineNum">       6</span>              : #include &lt;stdexcept&gt;</span>
 <span id="L7"><span class="lineNum">       7</span>              : </span>
-<span id="L8"><span class="lineNum">       8</span>              : // ---------- базовые операции ----------</span>
+<span id="L8"><span class="lineNum">       8</span>              : //  базовые операции </span>
 <span id="L9"><span class="lineNum">       9</span>              : </span>
 <span id="L10"><span class="lineNum">      10</span> <span class="tlaGNC tlaBgGNC">          33 : ForwardList::ForwardList() noexcept = default;</span></span>
 <span id="L11"><span class="lineNum">      11</span>              : </span>
@@ -259,7 +259,7 @@
 <span id="L197"><span class="lineNum">     197</span> <span class="tlaGNC">           1 :     std::cout &lt;&lt; &quot;]\n&quot;;</span></span>
 <span id="L198"><span class="lineNum">     198</span> <span class="tlaGNC">           1 : }</span></span>
 <span id="L199"><span class="lineNum">     199</span>              : </span>
-<span id="L200"><span class="lineNum">     200</span>              : // ---------- текстовая сериализация ----------</span>
+<span id="L200"><span class="lineNum">     200</span>              : //  текстовая сериализация </span>
 <span id="L201"><span class="lineNum">     201</span>              : </span>
 <span id="L202"><span class="lineNum">     202</span> <span class="tlaGNC">           1 : void ForwardList::serializeText(std::ostream&amp; outputStream) const</span></span>
 <span id="L203"><span class="lineNum">     203</span>              : {</span>
@@ -295,7 +295,7 @@
 <span id="L233"><span class="lineNum">     233</span> <span class="tlaGNC">           3 :     deserializeText(input);</span></span>
 <span id="L234"><span class="lineNum">     234</span> <span class="tlaGNC">           3 : }</span></span>
 <span id="L235"><span class="lineNum">     235</span>              : </span>
-<span id="L236"><span class="lineNum">     236</span>              : // ---------- бинарная сериализация ----------</span>
+<span id="L236"><span class="lineNum">     236</span>              : //  бинарная сериализация </span>
 <span id="L237"><span class="lineNum">     237</span>              : </span>
 <span id="L238"><span class="lineNum">     238</span> <span class="tlaGNC">           3 : void ForwardList::serializeBinary(std::ostream&amp; outputStream) const</span></span>
 <span id="L239"><span class="lineNum">     239</span>              : {</span>
@@ -313,52 +313,50 @@
 <span id="L251"><span class="lineNum">     251</span> <span class="tlaGNC">           9 :     while (current != nullptr) {</span></span>
 <span id="L252"><span class="lineNum">     252</span>              :         std::uint64_t length =</span>
 <span id="L253"><span class="lineNum">     253</span> <span class="tlaGNC">           6 :             static_cast&lt;std::uint64_t&gt;(current-&gt;value.size());</span></span>
-<span id="L254"><span class="lineNum">     254</span> <span class="tlaGNC">           6 :         outputStream.write(reinterpret_cast&lt;const char*&gt;(&amp;length),</span></span>
-<span id="L255"><span class="lineNum">     255</span>              :                            sizeof(length));</span>
-<span id="L256"><span class="lineNum">     256</span> <span class="tlaGNC">           6 :         if (length &gt; 0) {</span></span>
-<span id="L257"><span class="lineNum">     257</span> <span class="tlaGNC">           5 :             outputStream.write(current-&gt;value.data(),</span></span>
-<span id="L258"><span class="lineNum">     258</span>              :                                static_cast&lt;std::streamsize&gt;(length));</span>
-<span id="L259"><span class="lineNum">     259</span>              :         }</span>
-<span id="L260"><span class="lineNum">     260</span> <span class="tlaGNC">           6 :         current = current-&gt;next;</span></span>
-<span id="L261"><span class="lineNum">     261</span>              :     }</span>
-<span id="L262"><span class="lineNum">     262</span>              : </span>
-<span id="L263"><span class="lineNum">     263</span> <span class="tlaGNC">           3 :     if (!outputStream) {</span></span>
-<span id="L264"><span class="lineNum">     264</span> <span class="tlaGNC">           1 :         throw std::runtime_error(&quot;ForwardList::serializeBinary: write error&quot;);</span></span>
-<span id="L265"><span class="lineNum">     265</span>              :     }</span>
-<span id="L266"><span class="lineNum">     266</span> <span class="tlaGNC">           2 : }</span></span>
-<span id="L267"><span class="lineNum">     267</span>              : </span>
-<span id="L268"><span class="lineNum">     268</span> <span class="tlaGNC">           3 : void ForwardList::deserializeBinary(std::istream&amp; inputStream)</span></span>
-<span id="L269"><span class="lineNum">     269</span>              : {</span>
-<span id="L270"><span class="lineNum">     270</span> <span class="tlaGNC">           3 :     clear();</span></span>
-<span id="L271"><span class="lineNum">     271</span>              : </span>
-<span id="L272"><span class="lineNum">     272</span> <span class="tlaGNC">           3 :     std::uint64_t count = 0;</span></span>
-<span id="L273"><span class="lineNum">     273</span> <span class="tlaGNC">           3 :     inputStream.read(reinterpret_cast&lt;char*&gt;(&amp;count), sizeof(count));</span></span>
-<span id="L274"><span class="lineNum">     274</span> <span class="tlaGNC">           3 :     if (!inputStream) {</span></span>
-<span id="L275"><span class="lineNum">     275</span>              :         throw std::runtime_error(</span>
-<span id="L276"><span class="lineNum">     276</span> <span class="tlaGNC">           1 :             &quot;ForwardList::deserializeBinary: cannot read count&quot;);</span></span>
-<span id="L277"><span class="lineNum">     277</span>              :     }</span>
-<span id="L278"><span class="lineNum">     278</span>              : </span>
-<span id="L279"><span class="lineNum">     279</span> <span class="tlaGNC">           6 :     for (std::uint64_t i = 0; i &lt; count; ++i) {</span></span>
-<span id="L280"><span class="lineNum">     280</span> <span class="tlaGNC">           4 :         std::uint64_t length = 0;</span></span>
-<span id="L281"><span class="lineNum">     281</span> <span class="tlaGNC">           4 :         inputStream.read(reinterpret_cast&lt;char*&gt;(&amp;length), sizeof(length));</span></span>
-<span id="L282"><span class="lineNum">     282</span> <span class="tlaGNC">           4 :         if (!inputStream) {</span></span>
-<span id="L283"><span class="lineNum">     283</span>              :             throw std::runtime_error(</span>
-<span id="L284"><span class="lineNum">     284</span> <span class="tlaUNC tlaBgUNC">           0 :                 &quot;ForwardList::deserializeBinary: cannot read string size&quot;);</span></span>
-<span id="L285"><span class="lineNum">     285</span>              :         }</span>
-<span id="L286"><span class="lineNum">     286</span>              : </span>
-<span id="L287"><span class="lineNum">     287</span> <span class="tlaGNC tlaBgGNC">           4 :         std::string value;</span></span>
-<span id="L288"><span class="lineNum">     288</span> <span class="tlaGNC">           4 :         value.resize(static_cast&lt;std::size_t&gt;(length));</span></span>
-<span id="L289"><span class="lineNum">     289</span> <span class="tlaGNC">           4 :         if (length &gt; 0) {</span></span>
-<span id="L290"><span class="lineNum">     290</span> <span class="tlaGNC">           3 :             inputStream.read(value.data(),</span></span>
-<span id="L291"><span class="lineNum">     291</span>              :                              static_cast&lt;std::streamsize&gt;(length));</span>
-<span id="L292"><span class="lineNum">     292</span> <span class="tlaGNC">           3 :             if (!inputStream) {</span></span>
-<span id="L293"><span class="lineNum">     293</span>              :                 throw std::runtime_error(</span>
-<span id="L294"><span class="lineNum">     294</span> <span class="tlaUNC tlaBgUNC">           0 :                     &quot;ForwardList::deserializeBinary: cannot read string data&quot;);</span></span>
-<span id="L295"><span class="lineNum">     295</span>              :             }</span>
-<span id="L296"><span class="lineNum">     296</span>              :         }</span>
-<span id="L297"><span class="lineNum">     297</span> <span class="tlaGNC tlaBgGNC">           4 :         pushBack(value);</span></span>
-<span id="L298"><span class="lineNum">     298</span> <span class="tlaGNC">           4 :     }</span></span>
-<span id="L299"><span class="lineNum">     299</span> <span class="tlaGNC">           2 : }</span></span>
+<span id="L254"><span class="lineNum">     254</span> <span class="tlaGNC">           6 :         outputStream.write(reinterpret_cast&lt;const char*&gt;(&amp;length), sizeof(length));</span></span>
+<span id="L255"><span class="lineNum">     255</span> <span class="tlaGNC">           6 :         if (length &gt; 0) {</span></span>
+<span id="L256"><span class="lineNum">     256</span> <span class="tlaGNC">           5 :             outputStream.write(current-&gt;value.data(), static_cast&lt;std::streamsize&gt;(length));</span></span>
+<span id="L257"><span class="lineNum">     257</span>              :         }</span>
+<span id="L258"><span class="lineNum">     258</span> <span class="tlaGNC">           6 :         current = current-&gt;next;</span></span>
+<span id="L259"><span class="lineNum">     259</span>              :     }</span>
+<span id="L260"><span class="lineNum">     260</span>              : </span>
+<span id="L261"><span class="lineNum">     261</span> <span class="tlaGNC">           3 :     if (!outputStream) {</span></span>
+<span id="L262"><span class="lineNum">     262</span> <span class="tlaGNC">           1 :         throw std::runtime_error(&quot;ForwardList::serializeBinary:  error&quot;);</span></span>
+<span id="L263"><span class="lineNum">     263</span>              :     }</span>
+<span id="L264"><span class="lineNum">     264</span> <span class="tlaGNC">           2 : }</span></span>
+<span id="L265"><span class="lineNum">     265</span>              : </span>
+<span id="L266"><span class="lineNum">     266</span> <span class="tlaGNC">           3 : void ForwardList::deserializeBinary(std::istream&amp; inputStream)</span></span>
+<span id="L267"><span class="lineNum">     267</span>              : {</span>
+<span id="L268"><span class="lineNum">     268</span> <span class="tlaGNC">           3 :     clear();</span></span>
+<span id="L269"><span class="lineNum">     269</span>              : </span>
+<span id="L270"><span class="lineNum">     270</span> <span class="tlaGNC">           3 :     std::uint64_t count = 0;</span></span>
+<span id="L271"><span class="lineNum">     271</span> <span class="tlaGNC">           3 :     inputStream.read(reinterpret_cast&lt;char*&gt;(&amp;count), sizeof(count));</span></span>
+<span id="L272"><span class="lineNum">     272</span> <span class="tlaGNC">           3 :     if (!inputStream) {</span></span>
+<span id="L273"><span class="lineNum">     273</span>              :         throw std::runtime_error(</span>
+<span id="L274"><span class="lineNum">     274</span> <span class="tlaGNC">           1 :             &quot;ForwardList::deserializeBinary: error&quot;);</span></span>
+<span id="L275"><span class="lineNum">     275</span>              :     }</span>
+<span id="L276"><span class="lineNum">     276</span>              : </span>
+<span id="L277"><span class="lineNum">     277</span> <span class="tlaGNC">           6 :     for (std::uint64_t i = 0; i &lt; count; ++i) {</span></span>
+<span id="L278"><span class="lineNum">     278</span> <span class="tlaGNC">           4 :         std::uint64_t length = 0;</span></span>
+<span id="L279"><span class="lineNum">     279</span> <span class="tlaGNC">           4 :         inputStream.read(reinterpret_cast&lt;char*&gt;(&amp;length), sizeof(length));</span></span>
+<span id="L280"><span class="lineNum">     280</span> <span class="tlaGNC">           4 :         if (!inputStream) {</span></span>
+<span id="L281"><span class="lineNum">     281</span>              :             throw std::runtime_error(</span>
+<span id="L282"><span class="lineNum">     282</span> <span class="tlaUNC tlaBgUNC">           0 :                 &quot;ForwardList::deserializeBinary: error&quot;);</span></span>
+<span id="L283"><span class="lineNum">     283</span>              :         }</span>
+<span id="L284"><span class="lineNum">     284</span>              : </span>
+<span id="L285"><span class="lineNum">     285</span> <span class="tlaGNC tlaBgGNC">           4 :         std::string value;</span></span>
+<span id="L286"><span class="lineNum">     286</span> <span class="tlaGNC">           4 :         value.resize(static_cast&lt;std::size_t&gt;(length));</span></span>
+<span id="L287"><span class="lineNum">     287</span> <span class="tlaGNC">           4 :         if (length &gt; 0) {</span></span>
+<span id="L288"><span class="lineNum">     288</span> <span class="tlaGNC">           3 :             inputStream.read(value.data(),</span></span>
+<span id="L289"><span class="lineNum">     289</span>              :                              static_cast&lt;std::streamsize&gt;(length));</span>
+<span id="L290"><span class="lineNum">     290</span> <span class="tlaGNC">           3 :             if (!inputStream) {</span></span>
+<span id="L291"><span class="lineNum">     291</span>              :                 throw std::runtime_error(</span>
+<span id="L292"><span class="lineNum">     292</span> <span class="tlaUNC tlaBgUNC">           0 :                     &quot;ForwardList::deserializeBinary: error&quot;);</span></span>
+<span id="L293"><span class="lineNum">     293</span>              :             }</span>
+<span id="L294"><span class="lineNum">     294</span>              :         }</span>
+<span id="L295"><span class="lineNum">     295</span> <span class="tlaGNC tlaBgGNC">           4 :         pushBack(value);</span></span>
+<span id="L296"><span class="lineNum">     296</span> <span class="tlaGNC">           4 :     }</span></span>
+<span id="L297"><span class="lineNum">     297</span> <span class="tlaGNC">           2 : }</span></span>
         </pre>
               </td>
             </tr>

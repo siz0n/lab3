@@ -1,0 +1,11 @@
+g++ -std=c++17 -O0 --coverage \
+    tests/*.cpp cont/*.cpp utils/catch_amalgamated.cpp \
+    -Iutils -Icont \
+    -o tests_run
+
+
+./tests_run
+lcov --capture --directory . --output-file coverage/coverage.info
+
+genhtml coverage/coverage_filtered.info \
+    --output-directory coverage/html

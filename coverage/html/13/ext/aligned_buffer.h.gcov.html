@@ -4,7 +4,7 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>LCOV - coverage.info - 13/ext/aligned_buffer.h</title>
+  <title>LCOV - coverage_filtered.info - 13/ext/aligned_buffer.h</title>
   <link rel="stylesheet" type="text/css" href="../../gcov.css">
 </head>
 
@@ -28,7 +28,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test:</td>
-            <td class="headerValue">coverage.info</td>
+            <td class="headerValue">coverage_filtered.info</td>
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntryHi">100.0&nbsp;%</td>
@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2025-12-02 18:56:06</td>
+            <td class="headerValue">2025-12-07 14:18:31</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntryLo">65.9&nbsp;%</td>
@@ -123,20 +123,20 @@
 <span id="L61"><span class="lineNum">      61</span>              :       __aligned_membuf(std::nullptr_t) { }</span>
 <span id="L62"><span class="lineNum">      62</span>              : </span>
 <span id="L63"><span class="lineNum">      63</span>              :       void*</span>
-<span id="L64"><span class="lineNum">      64</span> <span class="tlaGNC tlaBgGNC">         854 :       _M_addr() noexcept</span></span>
-<span id="L65"><span class="lineNum">      65</span> <span class="tlaGNC">         854 :       { return static_cast&lt;void*&gt;(&amp;_M_storage); }</span></span>
+<span id="L64"><span class="lineNum">      64</span> <span class="tlaGNC tlaBgGNC">         882 :       _M_addr() noexcept</span></span>
+<span id="L65"><span class="lineNum">      65</span> <span class="tlaGNC">         882 :       { return static_cast&lt;void*&gt;(&amp;_M_storage); }</span></span>
 <span id="L66"><span class="lineNum">      66</span>              : </span>
 <span id="L67"><span class="lineNum">      67</span>              :       const void*</span>
-<span id="L68"><span class="lineNum">      68</span> <span class="tlaGNC">        2667 :       _M_addr() const noexcept</span></span>
-<span id="L69"><span class="lineNum">      69</span> <span class="tlaGNC">        2667 :       { return static_cast&lt;const void*&gt;(&amp;_M_storage); }</span></span>
+<span id="L68"><span class="lineNum">      68</span> <span class="tlaGNC">        2811 :       _M_addr() const noexcept</span></span>
+<span id="L69"><span class="lineNum">      69</span> <span class="tlaGNC">        2811 :       { return static_cast&lt;const void*&gt;(&amp;_M_storage); }</span></span>
 <span id="L70"><span class="lineNum">      70</span>              : </span>
 <span id="L71"><span class="lineNum">      71</span>              :       _Tp*</span>
-<span id="L72"><span class="lineNum">      72</span> <span class="tlaGNC">         854 :       _M_ptr() noexcept</span></span>
-<span id="L73"><span class="lineNum">      73</span> <span class="tlaGNC">         854 :       { return static_cast&lt;_Tp*&gt;(_M_addr()); }</span></span>
+<span id="L72"><span class="lineNum">      72</span> <span class="tlaGNC">         882 :       _M_ptr() noexcept</span></span>
+<span id="L73"><span class="lineNum">      73</span> <span class="tlaGNC">         882 :       { return static_cast&lt;_Tp*&gt;(_M_addr()); }</span></span>
 <span id="L74"><span class="lineNum">      74</span>              : </span>
 <span id="L75"><span class="lineNum">      75</span>              :       const _Tp*</span>
-<span id="L76"><span class="lineNum">      76</span> <span class="tlaGNC">        2667 :       _M_ptr() const noexcept</span></span>
-<span id="L77"><span class="lineNum">      77</span> <span class="tlaGNC">        2667 :       { return static_cast&lt;const _Tp*&gt;(_M_addr()); }</span></span>
+<span id="L76"><span class="lineNum">      76</span> <span class="tlaGNC">        2811 :       _M_ptr() const noexcept</span></span>
+<span id="L77"><span class="lineNum">      77</span> <span class="tlaGNC">        2811 :       { return static_cast&lt;const _Tp*&gt;(_M_addr()); }</span></span>
 <span id="L78"><span class="lineNum">      78</span>              :     };</span>
 <span id="L79"><span class="lineNum">      79</span>              : </span>
 <span id="L80"><span class="lineNum">      80</span>              : #if _GLIBCXX_INLINE_VERSION</span>

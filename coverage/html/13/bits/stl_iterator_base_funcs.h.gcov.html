@@ -4,7 +4,7 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>LCOV - coverage.info - 13/bits/stl_iterator_base_funcs.h</title>
+  <title>LCOV - coverage_filtered.info - 13/bits/stl_iterator_base_funcs.h</title>
   <link rel="stylesheet" type="text/css" href="../../gcov.css">
 </head>
 
@@ -28,16 +28,16 @@
           </tr>
           <tr>
             <td class="headerItem">Test:</td>
-            <td class="headerValue">coverage.info</td>
+            <td class="headerValue">coverage_filtered.info</td>
             <td></td>
             <td class="headerItem">Lines:</td>
-            <td class="headerCovTableEntryLo">10.5&nbsp;%</td>
+            <td class="headerCovTableEntryLo">15.8&nbsp;%</td>
             <td class="headerCovTableEntry">19</td>
-            <td class="headerCovTableEntry">2</td>
+            <td class="headerCovTableEntry">3</td>
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2025-12-02 18:56:06</td>
+            <td class="headerValue">2025-12-07 14:18:31</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntryLo">0.0&nbsp;%</td>
@@ -165,7 +165,7 @@
 <span id="L103"><span class="lineNum">     103</span>              :       // concept requirements</span>
 <span id="L104"><span class="lineNum">     104</span>              :       __glibcxx_function_requires(_RandomAccessIteratorConcept&lt;</span>
 <span id="L105"><span class="lineNum">     105</span>              :                                   _RandomAccessIterator&gt;)</span>
-<span id="L106"><span class="lineNum">     106</span> <span class="tlaUNC tlaBgUNC">           0 :       return __last - __first;</span></span>
+<span id="L106"><span class="lineNum">     106</span> <span class="tlaGNC tlaBgGNC">        1416 :       return __last - __first;</span></span>
 <span id="L107"><span class="lineNum">     107</span>              :     }</span>
 <span id="L108"><span class="lineNum">     108</span>              : </span>
 <span id="L109"><span class="lineNum">     109</span>              : #if _GLIBCXX_USE_CXX11_ABI</span>
@@ -210,8 +210,8 @@
 <span id="L148"><span class="lineNum">     148</span>              :     distance(_InputIterator __first, _InputIterator __last)</span>
 <span id="L149"><span class="lineNum">     149</span>              :     {</span>
 <span id="L150"><span class="lineNum">     150</span>              :       // concept requirements -- taken care of in __distance</span>
-<span id="L151"><span class="lineNum">     151</span> <span class="tlaGNC tlaBgGNC">        1718 :       return std::__distance(__first, __last,</span></span>
-<span id="L152"><span class="lineNum">     152</span> <span class="tlaGNC">        1718 :                              std::__iterator_category(__first));</span></span>
+<span id="L151"><span class="lineNum">     151</span> <span class="tlaGNC">        4614 :       return std::__distance(__first, __last,</span></span>
+<span id="L152"><span class="lineNum">     152</span> <span class="tlaGNC">        4614 :                              std::__iterator_category(__first));</span></span>
 <span id="L153"><span class="lineNum">     153</span>              :     }</span>
 <span id="L154"><span class="lineNum">     154</span>              : </span>
 <span id="L155"><span class="lineNum">     155</span>              :   template&lt;typename _InputIterator, typename _Distance&gt;</span>

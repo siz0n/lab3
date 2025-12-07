@@ -4,7 +4,7 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>LCOV - coverage.info - 13/bits/stl_algobase.h</title>
+  <title>LCOV - coverage_filtered.info - 13/bits/stl_algobase.h</title>
   <link rel="stylesheet" type="text/css" href="../../gcov.css">
 </head>
 
@@ -28,21 +28,21 @@
           </tr>
           <tr>
             <td class="headerItem">Test:</td>
-            <td class="headerValue">coverage.info</td>
+            <td class="headerValue">coverage_filtered.info</td>
             <td></td>
             <td class="headerItem">Lines:</td>
-            <td class="headerCovTableEntryLo">35.3&nbsp;%</td>
+            <td class="headerCovTableEntryLo">39.1&nbsp;%</td>
             <td class="headerCovTableEntry">238</td>
-            <td class="headerCovTableEntry">84</td>
+            <td class="headerCovTableEntry">93</td>
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2025-12-02 18:56:06</td>
+            <td class="headerValue">2025-12-07 14:18:31</td>
             <td></td>
             <td class="headerItem">Functions:</td>
-            <td class="headerCovTableEntryLo">8.7&nbsp;%</td>
-            <td class="headerCovTableEntry">423</td>
-            <td class="headerCovTableEntry">37</td>
+            <td class="headerCovTableEntryLo">9.2&nbsp;%</td>
+            <td class="headerCovTableEntry">425</td>
+            <td class="headerCovTableEntry">39</td>
           </tr>
                   <tr><td><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
                 </table>
@@ -214,7 +214,7 @@
 <span id="L152"><span class="lineNum">     152</span>              :   template&lt;typename _ForwardIterator1, typename _ForwardIterator2&gt;</span>
 <span id="L153"><span class="lineNum">     153</span>              :     _GLIBCXX20_CONSTEXPR</span>
 <span id="L154"><span class="lineNum">     154</span>              :     inline void</span>
-<span id="L155"><span class="lineNum">     155</span> <span class="tlaGNC tlaBgGNC">          91 :     iter_swap(_ForwardIterator1 __a, _ForwardIterator2 __b)</span></span>
+<span id="L155"><span class="lineNum">     155</span> <span class="tlaGNC tlaBgGNC">         118 :     iter_swap(_ForwardIterator1 __a, _ForwardIterator2 __b)</span></span>
 <span id="L156"><span class="lineNum">     156</span>              :     {</span>
 <span id="L157"><span class="lineNum">     157</span>              :       // concept requirements</span>
 <span id="L158"><span class="lineNum">     158</span>              :       __glibcxx_function_requires(_Mutable_ForwardIteratorConcept&lt;</span>
@@ -244,9 +244,9 @@
 <span id="L182"><span class="lineNum">     182</span>              : #else</span>
 <span id="L183"><span class="lineNum">     183</span>              :       // _GLIBCXX_RESOLVE_LIB_DEFECTS</span>
 <span id="L184"><span class="lineNum">     184</span>              :       // 187. iter_swap underspecified</span>
-<span id="L185"><span class="lineNum">     185</span> <span class="tlaGNC">          91 :       swap(*__a, *__b);</span></span>
+<span id="L185"><span class="lineNum">     185</span> <span class="tlaGNC">         118 :       swap(*__a, *__b);</span></span>
 <span id="L186"><span class="lineNum">     186</span>              : #endif</span>
-<span id="L187"><span class="lineNum">     187</span> <span class="tlaGNC">          91 :     }</span></span>
+<span id="L187"><span class="lineNum">     187</span> <span class="tlaGNC">         118 :     }</span></span>
 <span id="L188"><span class="lineNum">     188</span>              : </span>
 <span id="L189"><span class="lineNum">     189</span>              :   /**</span>
 <span id="L190"><span class="lineNum">     190</span>              :    *  @brief Swap the elements of two sequences.</span>
@@ -292,14 +292,14 @@
 <span id="L230"><span class="lineNum">     230</span>              :   template&lt;typename _Tp&gt;</span>
 <span id="L231"><span class="lineNum">     231</span>              :     _GLIBCXX14_CONSTEXPR</span>
 <span id="L232"><span class="lineNum">     232</span>              :     inline const _Tp&amp;</span>
-<span id="L233"><span class="lineNum">     233</span> <span class="tlaGNC">         833 :     min(const _Tp&amp; __a, const _Tp&amp; __b)</span></span>
+<span id="L233"><span class="lineNum">     233</span> <span class="tlaGNC">         901 :     min(const _Tp&amp; __a, const _Tp&amp; __b)</span></span>
 <span id="L234"><span class="lineNum">     234</span>              :     {</span>
 <span id="L235"><span class="lineNum">     235</span>              :       // concept requirements</span>
 <span id="L236"><span class="lineNum">     236</span>              :       __glibcxx_function_requires(_LessThanComparableConcept&lt;_Tp&gt;)</span>
 <span id="L237"><span class="lineNum">     237</span>              :       //return __b &lt; __a ? __b : __a;</span>
-<span id="L238"><span class="lineNum">     238</span> <span class="tlaGNC">         833 :       if (__b &lt; __a)</span></span>
+<span id="L238"><span class="lineNum">     238</span> <span class="tlaGNC">         901 :       if (__b &lt; __a)</span></span>
 <span id="L239"><span class="lineNum">     239</span> <span class="tlaGNC">           6 :         return __b;</span></span>
-<span id="L240"><span class="lineNum">     240</span> <span class="tlaGNC">         827 :       return __a;</span></span>
+<span id="L240"><span class="lineNum">     240</span> <span class="tlaGNC">         895 :       return __a;</span></span>
 <span id="L241"><span class="lineNum">     241</span>              :     }</span>
 <span id="L242"><span class="lineNum">     242</span>              : </span>
 <span id="L243"><span class="lineNum">     243</span>              :   /**</span>
@@ -316,14 +316,14 @@
 <span id="L254"><span class="lineNum">     254</span>              :   template&lt;typename _Tp&gt;</span>
 <span id="L255"><span class="lineNum">     255</span>              :     _GLIBCXX14_CONSTEXPR</span>
 <span id="L256"><span class="lineNum">     256</span>              :     inline const _Tp&amp;</span>
-<span id="L257"><span class="lineNum">     257</span> <span class="tlaGNC">         490 :     max(const _Tp&amp; __a, const _Tp&amp; __b)</span></span>
+<span id="L257"><span class="lineNum">     257</span> <span class="tlaGNC">         524 :     max(const _Tp&amp; __a, const _Tp&amp; __b)</span></span>
 <span id="L258"><span class="lineNum">     258</span>              :     {</span>
 <span id="L259"><span class="lineNum">     259</span>              :       // concept requirements</span>
 <span id="L260"><span class="lineNum">     260</span>              :       __glibcxx_function_requires(_LessThanComparableConcept&lt;_Tp&gt;)</span>
 <span id="L261"><span class="lineNum">     261</span>              :       //return  __a &lt; __b ? __b : __a;</span>
-<span id="L262"><span class="lineNum">     262</span> <span class="tlaGNC">         490 :       if (__a &lt; __b)</span></span>
-<span id="L263"><span class="lineNum">     263</span> <span class="tlaGNC">         348 :         return __b;</span></span>
-<span id="L264"><span class="lineNum">     264</span> <span class="tlaGNC">         142 :       return __a;</span></span>
+<span id="L262"><span class="lineNum">     262</span> <span class="tlaGNC">         524 :       if (__a &lt; __b)</span></span>
+<span id="L263"><span class="lineNum">     263</span> <span class="tlaGNC">         362 :         return __b;</span></span>
+<span id="L264"><span class="lineNum">     264</span> <span class="tlaGNC">         162 :       return __a;</span></span>
 <span id="L265"><span class="lineNum">     265</span>              :     }</span>
 <span id="L266"><span class="lineNum">     266</span>              : </span>
 <span id="L267"><span class="lineNum">     267</span>              :   /**</span>
@@ -375,9 +375,9 @@
 <span id="L313"><span class="lineNum">     313</span>              :   template&lt;typename _Iterator&gt;</span>
 <span id="L314"><span class="lineNum">     314</span>              :     _GLIBCXX20_CONSTEXPR</span>
 <span id="L315"><span class="lineNum">     315</span>              :     inline _Iterator</span>
-<span id="L316"><span class="lineNum">     316</span> <span class="tlaGNC">        2460 :     __niter_base(_Iterator __it)</span></span>
+<span id="L316"><span class="lineNum">     316</span> <span class="tlaGNC">        2664 :     __niter_base(_Iterator __it)</span></span>
 <span id="L317"><span class="lineNum">     317</span>              :     _GLIBCXX_NOEXCEPT_IF(std::is_nothrow_copy_constructible&lt;_Iterator&gt;::value)</span>
-<span id="L318"><span class="lineNum">     318</span> <span class="tlaGNC">        2460 :     { return __it; }</span></span>
+<span id="L318"><span class="lineNum">     318</span> <span class="tlaGNC">        2664 :     { return __it; }</span></span>
 <span id="L319"><span class="lineNum">     319</span>              : </span>
 <span id="L320"><span class="lineNum">     320</span>              :   template&lt;typename _Ite, typename _Seq&gt;</span>
 <span id="L321"><span class="lineNum">     321</span>              :     _Ite</span>
@@ -390,8 +390,8 @@
 <span id="L328"><span class="lineNum">     328</span>              :   template&lt;typename _From, typename _To&gt;</span>
 <span id="L329"><span class="lineNum">     329</span>              :     _GLIBCXX20_CONSTEXPR</span>
 <span id="L330"><span class="lineNum">     330</span>              :     inline _From</span>
-<span id="L331"><span class="lineNum">     331</span> <span class="tlaGNC">           2 :     __niter_wrap(_From __from, _To __res)</span></span>
-<span id="L332"><span class="lineNum">     332</span> <span class="tlaGNC">           2 :     { return __from + (__res - std::__niter_base(__from)); }</span></span>
+<span id="L331"><span class="lineNum">     331</span> <span class="tlaGNC">           4 :     __niter_wrap(_From __from, _To __res)</span></span>
+<span id="L332"><span class="lineNum">     332</span> <span class="tlaGNC">           4 :     { return __from + (__res - std::__niter_base(__from)); }</span></span>
 <span id="L333"><span class="lineNum">     333</span>              : </span>
 <span id="L334"><span class="lineNum">     334</span>              :   // No need to wrap, iterator already has the right type.</span>
 <span id="L335"><span class="lineNum">     335</span>              :   template&lt;typename _Iterator&gt;</span>
@@ -786,13 +786,13 @@
 <span id="L724"><span class="lineNum">     724</span>              :       template&lt;typename _BI1, typename _BI2&gt;</span>
 <span id="L725"><span class="lineNum">     725</span>              :         _GLIBCXX20_CONSTEXPR</span>
 <span id="L726"><span class="lineNum">     726</span>              :         static _BI2</span>
-<span id="L727"><span class="lineNum">     727</span> <span class="tlaGNC tlaBgGNC">           2 :         __copy_move_b(_BI1 __first, _BI1 __last, _BI2 __result)</span></span>
+<span id="L727"><span class="lineNum">     727</span> <span class="tlaGNC tlaBgGNC">           4 :         __copy_move_b(_BI1 __first, _BI1 __last, _BI2 __result)</span></span>
 <span id="L728"><span class="lineNum">     728</span>              :         {</span>
 <span id="L729"><span class="lineNum">     729</span>              :           typename iterator_traits&lt;_BI1&gt;::difference_type</span>
-<span id="L730"><span class="lineNum">     730</span> <span class="tlaGNC">           2 :             __n = __last - __first;</span></span>
-<span id="L731"><span class="lineNum">     731</span> <span class="tlaGNC">           7 :           for (; __n &gt; 0; --__n)</span></span>
-<span id="L732"><span class="lineNum">     732</span> <span class="tlaGNC">           5 :             *--__result = std::move(*--__last);</span></span>
-<span id="L733"><span class="lineNum">     733</span> <span class="tlaGNC">           2 :           return __result;</span></span>
+<span id="L730"><span class="lineNum">     730</span> <span class="tlaGNC">           4 :             __n = __last - __first;</span></span>
+<span id="L731"><span class="lineNum">     731</span> <span class="tlaGNC">          16 :           for (; __n &gt; 0; --__n)</span></span>
+<span id="L732"><span class="lineNum">     732</span> <span class="tlaGNC">          12 :             *--__result = std::move(*--__last);</span></span>
+<span id="L733"><span class="lineNum">     733</span> <span class="tlaGNC">           4 :           return __result;</span></span>
 <span id="L734"><span class="lineNum">     734</span>              :         }</span>
 <span id="L735"><span class="lineNum">     735</span>              :     };</span>
 <span id="L736"><span class="lineNum">     736</span>              : #endif</span>
@@ -818,7 +818,7 @@
 <span id="L756"><span class="lineNum">     756</span>              :   template&lt;bool _IsMove, typename _BI1, typename _BI2&gt;</span>
 <span id="L757"><span class="lineNum">     757</span>              :     _GLIBCXX20_CONSTEXPR</span>
 <span id="L758"><span class="lineNum">     758</span>              :     inline _BI2</span>
-<span id="L759"><span class="lineNum">     759</span> <span class="tlaGNC tlaBgGNC">           2 :     __copy_move_backward_a2(_BI1 __first, _BI1 __last, _BI2 __result)</span></span>
+<span id="L759"><span class="lineNum">     759</span> <span class="tlaGNC tlaBgGNC">           4 :     __copy_move_backward_a2(_BI1 __first, _BI1 __last, _BI2 __result)</span></span>
 <span id="L760"><span class="lineNum">     760</span>              :     {</span>
 <span id="L761"><span class="lineNum">     761</span>              :       typedef typename iterator_traits&lt;_BI1&gt;::iterator_category _Category;</span>
 <span id="L762"><span class="lineNum">     762</span>              : #ifdef __cpp_lib_is_constant_evaluated</span>
@@ -828,16 +828,16 @@
 <span id="L766"><span class="lineNum">     766</span>              : #endif</span>
 <span id="L767"><span class="lineNum">     767</span>              :       return std::__copy_move_backward&lt;_IsMove,</span>
 <span id="L768"><span class="lineNum">     768</span>              :                                        __memcpyable&lt;_BI2, _BI1&gt;::__value,</span>
-<span id="L769"><span class="lineNum">     769</span> <span class="tlaGNC">           2 :                                        _Category&gt;::__copy_move_b(__first,</span></span>
+<span id="L769"><span class="lineNum">     769</span> <span class="tlaGNC">           4 :                                        _Category&gt;::__copy_move_b(__first,</span></span>
 <span id="L770"><span class="lineNum">     770</span>              :                                                                  __last,</span>
-<span id="L771"><span class="lineNum">     771</span> <span class="tlaGNC">           2 :                                                                  __result);</span></span>
+<span id="L771"><span class="lineNum">     771</span> <span class="tlaGNC">           4 :                                                                  __result);</span></span>
 <span id="L772"><span class="lineNum">     772</span>              :     }</span>
 <span id="L773"><span class="lineNum">     773</span>              : </span>
 <span id="L774"><span class="lineNum">     774</span>              :   template&lt;bool _IsMove, typename _BI1, typename _BI2&gt;</span>
 <span id="L775"><span class="lineNum">     775</span>              :     _GLIBCXX20_CONSTEXPR</span>
 <span id="L776"><span class="lineNum">     776</span>              :     inline _BI2</span>
-<span id="L777"><span class="lineNum">     777</span> <span class="tlaGNC">           2 :     __copy_move_backward_a1(_BI1 __first, _BI1 __last, _BI2 __result)</span></span>
-<span id="L778"><span class="lineNum">     778</span> <span class="tlaGNC">           2 :     { return std::__copy_move_backward_a2&lt;_IsMove&gt;(__first, __last, __result); }</span></span>
+<span id="L777"><span class="lineNum">     777</span> <span class="tlaGNC">           4 :     __copy_move_backward_a1(_BI1 __first, _BI1 __last, _BI2 __result)</span></span>
+<span id="L778"><span class="lineNum">     778</span> <span class="tlaGNC">           4 :     { return std::__copy_move_backward_a2&lt;_IsMove&gt;(__first, __last, __result); }</span></span>
 <span id="L779"><span class="lineNum">     779</span>              : </span>
 <span id="L780"><span class="lineNum">     780</span>              :   template&lt;bool _IsMove,</span>
 <span id="L781"><span class="lineNum">     781</span>              :            typename _Tp, typename _Ref, typename _Ptr, typename _OI&gt;</span>
@@ -864,12 +864,12 @@
 <span id="L802"><span class="lineNum">     802</span>              :   template&lt;bool _IsMove, typename _II, typename _OI&gt;</span>
 <span id="L803"><span class="lineNum">     803</span>              :     _GLIBCXX20_CONSTEXPR</span>
 <span id="L804"><span class="lineNum">     804</span>              :     inline _OI</span>
-<span id="L805"><span class="lineNum">     805</span> <span class="tlaGNC">           2 :     __copy_move_backward_a(_II __first, _II __last, _OI __result)</span></span>
+<span id="L805"><span class="lineNum">     805</span> <span class="tlaGNC">           4 :     __copy_move_backward_a(_II __first, _II __last, _OI __result)</span></span>
 <span id="L806"><span class="lineNum">     806</span>              :     {</span>
-<span id="L807"><span class="lineNum">     807</span> <span class="tlaGNC">           2 :       return std::__niter_wrap(__result,</span></span>
+<span id="L807"><span class="lineNum">     807</span> <span class="tlaGNC">           4 :       return std::__niter_wrap(__result,</span></span>
 <span id="L808"><span class="lineNum">     808</span>              :                 std::__copy_move_backward_a1&lt;_IsMove&gt;</span>
 <span id="L809"><span class="lineNum">     809</span>              :                   (std::__niter_base(__first), std::__niter_base(__last),</span>
-<span id="L810"><span class="lineNum">     810</span> <span class="tlaGNC">           2 :                    std::__niter_base(__result)));</span></span>
+<span id="L810"><span class="lineNum">     810</span> <span class="tlaGNC">           4 :                    std::__niter_base(__result)));</span></span>
 <span id="L811"><span class="lineNum">     811</span>              :     }</span>
 <span id="L812"><span class="lineNum">     812</span>              : </span>
 <span id="L813"><span class="lineNum">     813</span>              :   template&lt;bool _IsMove,</span>
@@ -951,7 +951,7 @@
 <span id="L889"><span class="lineNum">     889</span>              :   template&lt;typename _BI1, typename _BI2&gt;</span>
 <span id="L890"><span class="lineNum">     890</span>              :     _GLIBCXX20_CONSTEXPR</span>
 <span id="L891"><span class="lineNum">     891</span>              :     inline _BI2</span>
-<span id="L892"><span class="lineNum">     892</span> <span class="tlaGNC tlaBgGNC">           2 :     move_backward(_BI1 __first, _BI1 __last, _BI2 __result)</span></span>
+<span id="L892"><span class="lineNum">     892</span> <span class="tlaGNC tlaBgGNC">           4 :     move_backward(_BI1 __first, _BI1 __last, _BI2 __result)</span></span>
 <span id="L893"><span class="lineNum">     893</span>              :     {</span>
 <span id="L894"><span class="lineNum">     894</span>              :       // concept requirements</span>
 <span id="L895"><span class="lineNum">     895</span>              :       __glibcxx_function_requires(_BidirectionalIteratorConcept&lt;_BI1&gt;)</span>
@@ -960,9 +960,9 @@
 <span id="L898"><span class="lineNum">     898</span>              :             typename iterator_traits&lt;_BI1&gt;::value_type&amp;&amp;&gt;)</span>
 <span id="L899"><span class="lineNum">     899</span>              :       __glibcxx_requires_can_decrement_range(__first, __last, __result);</span>
 <span id="L900"><span class="lineNum">     900</span>              : </span>
-<span id="L901"><span class="lineNum">     901</span> <span class="tlaGNC">           2 :       return std::__copy_move_backward_a&lt;true&gt;(std::__miter_base(__first),</span></span>
+<span id="L901"><span class="lineNum">     901</span> <span class="tlaGNC">           4 :       return std::__copy_move_backward_a&lt;true&gt;(std::__miter_base(__first),</span></span>
 <span id="L902"><span class="lineNum">     902</span>              :                                                std::__miter_base(__last),</span>
-<span id="L903"><span class="lineNum">     903</span> <span class="tlaGNC">           2 :                                                __result);</span></span>
+<span id="L903"><span class="lineNum">     903</span> <span class="tlaGNC">           4 :                                                __result);</span></span>
 <span id="L904"><span class="lineNum">     904</span>              :     }</span>
 <span id="L905"><span class="lineNum">     905</span>              : </span>
 <span id="L906"><span class="lineNum">     906</span>              : #define _GLIBCXX_MOVE_BACKWARD3(_Tp, _Up, _Vp) std::move_backward(_Tp, _Up, _Vp)</span>
@@ -1331,26 +1331,26 @@
 <span id="L1269"><span class="lineNum">    1269</span>              :       template&lt;typename _RAI1, typename _RAI2&gt;</span>
 <span id="L1270"><span class="lineNum">    1270</span>              :         _GLIBCXX20_CONSTEXPR</span>
 <span id="L1271"><span class="lineNum">    1271</span>              :         static _RAI1</span>
-<span id="L1272"><span class="lineNum">    1272</span> <span class="tlaGNC tlaBgGNC">          44 :         __newlast1(_RAI1 __first1, _RAI1 __last1,</span></span>
+<span id="L1272"><span class="lineNum">    1272</span> <span class="tlaGNC tlaBgGNC">          78 :         __newlast1(_RAI1 __first1, _RAI1 __last1,</span></span>
 <span id="L1273"><span class="lineNum">    1273</span>              :                    _RAI2 __first2, _RAI2 __last2)</span>
 <span id="L1274"><span class="lineNum">    1274</span>              :         {</span>
 <span id="L1275"><span class="lineNum">    1275</span>              :           const typename iterator_traits&lt;_RAI1&gt;::difference_type</span>
-<span id="L1276"><span class="lineNum">    1276</span> <span class="tlaGNC">          44 :             __diff1 = __last1 - __first1;</span></span>
+<span id="L1276"><span class="lineNum">    1276</span> <span class="tlaGNC">          78 :             __diff1 = __last1 - __first1;</span></span>
 <span id="L1277"><span class="lineNum">    1277</span>              :           const typename iterator_traits&lt;_RAI2&gt;::difference_type</span>
-<span id="L1278"><span class="lineNum">    1278</span> <span class="tlaGNC">          44 :             __diff2 = __last2 - __first2;</span></span>
-<span id="L1279"><span class="lineNum">    1279</span> <span class="tlaGNC">          44 :           return __diff2 &lt; __diff1 ? __first1 + __diff2 : __last1;</span></span>
+<span id="L1278"><span class="lineNum">    1278</span> <span class="tlaGNC">          78 :             __diff2 = __last2 - __first2;</span></span>
+<span id="L1279"><span class="lineNum">    1279</span> <span class="tlaGNC">          78 :           return __diff2 &lt; __diff1 ? __first1 + __diff2 : __last1;</span></span>
 <span id="L1280"><span class="lineNum">    1280</span>              :         }</span>
 <span id="L1281"><span class="lineNum">    1281</span>              : </span>
 <span id="L1282"><span class="lineNum">    1282</span>              :       template&lt;typename _RAI&gt;</span>
 <span id="L1283"><span class="lineNum">    1283</span>              :         static _GLIBCXX20_CONSTEXPR bool</span>
-<span id="L1284"><span class="lineNum">    1284</span> <span class="tlaGNC">          70 :         __cnd2(_RAI, _RAI)</span></span>
-<span id="L1285"><span class="lineNum">    1285</span> <span class="tlaGNC">          70 :         { return true; }</span></span>
+<span id="L1284"><span class="lineNum">    1284</span> <span class="tlaGNC">         104 :         __cnd2(_RAI, _RAI)</span></span>
+<span id="L1285"><span class="lineNum">    1285</span> <span class="tlaGNC">         104 :         { return true; }</span></span>
 <span id="L1286"><span class="lineNum">    1286</span>              :     };</span>
 <span id="L1287"><span class="lineNum">    1287</span>              : </span>
 <span id="L1288"><span class="lineNum">    1288</span>              :   template&lt;typename _II1, typename _II2, typename _Compare&gt;</span>
 <span id="L1289"><span class="lineNum">    1289</span>              :     _GLIBCXX20_CONSTEXPR</span>
 <span id="L1290"><span class="lineNum">    1290</span>              :     bool</span>
-<span id="L1291"><span class="lineNum">    1291</span> <span class="tlaGNC">          44 :     __lexicographical_compare_impl(_II1 __first1, _II1 __last1,</span></span>
+<span id="L1291"><span class="lineNum">    1291</span> <span class="tlaGNC">          78 :     __lexicographical_compare_impl(_II1 __first1, _II1 __last1,</span></span>
 <span id="L1292"><span class="lineNum">    1292</span>              :                                    _II2 __first2, _II2 __last2,</span>
 <span id="L1293"><span class="lineNum">    1293</span>              :                                    _Compare __comp)</span>
 <span id="L1294"><span class="lineNum">    1294</span>              :     {</span>
@@ -1358,14 +1358,14 @@
 <span id="L1296"><span class="lineNum">    1296</span>              :       typedef typename iterator_traits&lt;_II2&gt;::iterator_category _Category2;</span>
 <span id="L1297"><span class="lineNum">    1297</span>              :       typedef std::__lc_rai&lt;_Category1, _Category2&gt; __rai_type;</span>
 <span id="L1298"><span class="lineNum">    1298</span>              : </span>
-<span id="L1299"><span class="lineNum">    1299</span> <span class="tlaGNC">          44 :       __last1 = __rai_type::__newlast1(__first1, __last1, __first2, __last2);</span></span>
-<span id="L1300"><span class="lineNum">    1300</span> <span class="tlaGNC">          72 :       for (; __first1 != __last1 &amp;&amp; __rai_type::__cnd2(__first2, __last2);</span></span>
+<span id="L1299"><span class="lineNum">    1299</span> <span class="tlaGNC">          78 :       __last1 = __rai_type::__newlast1(__first1, __last1, __first2, __last2);</span></span>
+<span id="L1300"><span class="lineNum">    1300</span> <span class="tlaGNC">         106 :       for (; __first1 != __last1 &amp;&amp; __rai_type::__cnd2(__first2, __last2);</span></span>
 <span id="L1301"><span class="lineNum">    1301</span> <span class="tlaGNC">          28 :            ++__first1, (void)++__first2)</span></span>
 <span id="L1302"><span class="lineNum">    1302</span>              :         {</span>
-<span id="L1303"><span class="lineNum">    1303</span> <span class="tlaGNC">          70 :           if (__comp(__first1, __first2))</span></span>
-<span id="L1304"><span class="lineNum">    1304</span> <span class="tlaGNC">          32 :             return true;</span></span>
-<span id="L1305"><span class="lineNum">    1305</span> <span class="tlaGNC">          38 :           if (__comp(__first2, __first1))</span></span>
-<span id="L1306"><span class="lineNum">    1306</span> <span class="tlaGNC">          10 :             return false;</span></span>
+<span id="L1303"><span class="lineNum">    1303</span> <span class="tlaGNC">         104 :           if (__comp(__first1, __first2))</span></span>
+<span id="L1304"><span class="lineNum">    1304</span> <span class="tlaGNC">          34 :             return true;</span></span>
+<span id="L1305"><span class="lineNum">    1305</span> <span class="tlaGNC">          70 :           if (__comp(__first2, __first1))</span></span>
+<span id="L1306"><span class="lineNum">    1306</span> <span class="tlaGNC">          42 :             return false;</span></span>
 <span id="L1307"><span class="lineNum">    1307</span>              :         }</span>
 <span id="L1308"><span class="lineNum">    1308</span> <span class="tlaGNC">           2 :       return __first1 == __last1 &amp;&amp; __first2 != __last2;</span></span>
 <span id="L1309"><span class="lineNum">    1309</span>              :     }</span>
@@ -1574,10 +1574,10 @@
 <span id="L1512"><span class="lineNum">    1512</span>              :   //  Precondition: __n &gt; 0.</span>
 <span id="L1513"><span class="lineNum">    1513</span>              :   template&lt;typename _Tp&gt;</span>
 <span id="L1514"><span class="lineNum">    1514</span>              :     inline _GLIBCXX_CONSTEXPR _Tp</span>
-<span id="L1515"><span class="lineNum">    1515</span> <span class="tlaGNC tlaBgGNC">         119 :     __lg(_Tp __n)</span></span>
+<span id="L1515"><span class="lineNum">    1515</span> <span class="tlaGNC tlaBgGNC">         133 :     __lg(_Tp __n)</span></span>
 <span id="L1516"><span class="lineNum">    1516</span>              :     {</span>
 <span id="L1517"><span class="lineNum">    1517</span>              : #if __cplusplus &gt;= 201402L</span>
-<span id="L1518"><span class="lineNum">    1518</span> <span class="tlaGNC">         119 :       return std::__bit_width(make_unsigned_t&lt;_Tp&gt;(__n)) - 1;</span></span>
+<span id="L1518"><span class="lineNum">    1518</span> <span class="tlaGNC">         133 :       return std::__bit_width(make_unsigned_t&lt;_Tp&gt;(__n)) - 1;</span></span>
 <span id="L1519"><span class="lineNum">    1519</span>              : #else</span>
 <span id="L1520"><span class="lineNum">    1520</span>              :       // Use +__n so it promotes to at least int.</span>
 <span id="L1521"><span class="lineNum">    1521</span>              :       return (sizeof(+__n) * __CHAR_BIT__ - 1)</span>
@@ -1682,20 +1682,20 @@
 <span id="L1620"><span class="lineNum">    1620</span>              :   template&lt;typename _II1, typename _II2, typename _BinaryPredicate&gt;</span>
 <span id="L1621"><span class="lineNum">    1621</span>              :     _GLIBCXX20_CONSTEXPR</span>
 <span id="L1622"><span class="lineNum">    1622</span>              :     inline bool</span>
-<span id="L1623"><span class="lineNum">    1623</span> <span class="tlaUNC">           0 :     __equal4(_II1 __first1, _II1 __last1, _II2 __first2, _II2 __last2,</span></span>
+<span id="L1623"><span class="lineNum">    1623</span> <span class="tlaGNC tlaBgGNC">          16 :     __equal4(_II1 __first1, _II1 __last1, _II2 __first2, _II2 __last2,</span></span>
 <span id="L1624"><span class="lineNum">    1624</span>              :              _BinaryPredicate __binary_pred)</span>
 <span id="L1625"><span class="lineNum">    1625</span>              :     {</span>
 <span id="L1626"><span class="lineNum">    1626</span>              :       using _RATag = random_access_iterator_tag;</span>
 <span id="L1627"><span class="lineNum">    1627</span>              :       using _Cat1 = typename iterator_traits&lt;_II1&gt;::iterator_category;</span>
 <span id="L1628"><span class="lineNum">    1628</span>              :       using _Cat2 = typename iterator_traits&lt;_II2&gt;::iterator_category;</span>
 <span id="L1629"><span class="lineNum">    1629</span>              :       using _RAIters = __and_&lt;is_same&lt;_Cat1, _RATag&gt;, is_same&lt;_Cat2, _RATag&gt;&gt;;</span>
-<span id="L1630"><span class="lineNum">    1630</span> <span class="tlaUNC">           0 :       if (_RAIters())</span></span>
+<span id="L1630"><span class="lineNum">    1630</span> <span class="tlaGNC">          16 :       if (_RAIters())</span></span>
 <span id="L1631"><span class="lineNum">    1631</span>              :         {</span>
-<span id="L1632"><span class="lineNum">    1632</span> <span class="tlaUNC">           0 :           auto __d1 = std::distance(__first1, __last1);</span></span>
-<span id="L1633"><span class="lineNum">    1633</span> <span class="tlaUNC">           0 :           auto __d2 = std::distance(__first2, __last2);</span></span>
-<span id="L1634"><span class="lineNum">    1634</span> <span class="tlaUNC">           0 :           if (__d1 != __d2)</span></span>
-<span id="L1635"><span class="lineNum">    1635</span> <span class="tlaUNC">           0 :             return false;</span></span>
-<span id="L1636"><span class="lineNum">    1636</span> <span class="tlaUNC">           0 :           return _GLIBCXX_STD_A::equal(__first1, __last1, __first2,</span></span>
+<span id="L1632"><span class="lineNum">    1632</span> <span class="tlaGNC">          16 :           auto __d1 = std::distance(__first1, __last1);</span></span>
+<span id="L1633"><span class="lineNum">    1633</span> <span class="tlaGNC">          16 :           auto __d2 = std::distance(__first2, __last2);</span></span>
+<span id="L1634"><span class="lineNum">    1634</span> <span class="tlaGNC">          16 :           if (__d1 != __d2)</span></span>
+<span id="L1635"><span class="lineNum">    1635</span> <span class="tlaGNC">          16 :             return false;</span></span>
+<span id="L1636"><span class="lineNum">    1636</span> <span class="tlaUNC tlaBgUNC">           0 :           return _GLIBCXX_STD_A::equal(__first1, __last1, __first2,</span></span>
 <span id="L1637"><span class="lineNum">    1637</span> <span class="tlaUNC">           0 :                                        __binary_pred);</span></span>
 <span id="L1638"><span class="lineNum">    1638</span>              :         }</span>
 <span id="L1639"><span class="lineNum">    1639</span>              : </span>
@@ -1760,7 +1760,7 @@
 <span id="L1698"><span class="lineNum">    1698</span>              :   template&lt;typename _IIter1, typename _IIter2, typename _BinaryPredicate&gt;</span>
 <span id="L1699"><span class="lineNum">    1699</span>              :     _GLIBCXX20_CONSTEXPR</span>
 <span id="L1700"><span class="lineNum">    1700</span>              :     inline bool</span>
-<span id="L1701"><span class="lineNum">    1701</span> <span class="tlaUNC">           0 :     equal(_IIter1 __first1, _IIter1 __last1,</span></span>
+<span id="L1701"><span class="lineNum">    1701</span> <span class="tlaGNC tlaBgGNC">          16 :     equal(_IIter1 __first1, _IIter1 __last1,</span></span>
 <span id="L1702"><span class="lineNum">    1702</span>              :           _IIter2 __first2, _IIter2 __last2, _BinaryPredicate __binary_pred)</span>
 <span id="L1703"><span class="lineNum">    1703</span>              :     {</span>
 <span id="L1704"><span class="lineNum">    1704</span>              :       // concept requirements</span>
@@ -1769,8 +1769,8 @@
 <span id="L1707"><span class="lineNum">    1707</span>              :       __glibcxx_requires_valid_range(__first1, __last1);</span>
 <span id="L1708"><span class="lineNum">    1708</span>              :       __glibcxx_requires_valid_range(__first2, __last2);</span>
 <span id="L1709"><span class="lineNum">    1709</span>              : </span>
-<span id="L1710"><span class="lineNum">    1710</span> <span class="tlaUNC">           0 :       return _GLIBCXX_STD_A::__equal4(__first1, __last1, __first2, __last2,</span></span>
-<span id="L1711"><span class="lineNum">    1711</span> <span class="tlaUNC">           0 :                                       __binary_pred);</span></span>
+<span id="L1710"><span class="lineNum">    1710</span> <span class="tlaGNC">          16 :       return _GLIBCXX_STD_A::__equal4(__first1, __last1, __first2, __last2,</span></span>
+<span id="L1711"><span class="lineNum">    1711</span> <span class="tlaGNC">          16 :                                       __binary_pred);</span></span>
 <span id="L1712"><span class="lineNum">    1712</span>              :     }</span>
 <span id="L1713"><span class="lineNum">    1713</span>              : #endif // C++14</span>
 <span id="L1714"><span class="lineNum">    1714</span>              : </span>
@@ -1792,7 +1792,7 @@
 <span id="L1730"><span class="lineNum">    1730</span>              :   template&lt;typename _II1, typename _II2&gt;</span>
 <span id="L1731"><span class="lineNum">    1731</span>              :     _GLIBCXX20_CONSTEXPR</span>
 <span id="L1732"><span class="lineNum">    1732</span>              :     inline bool</span>
-<span id="L1733"><span class="lineNum">    1733</span> <span class="tlaUNC">           0 :     lexicographical_compare(_II1 __first1, _II1 __last1,</span></span>
+<span id="L1733"><span class="lineNum">    1733</span> <span class="tlaUNC tlaBgUNC">           0 :     lexicographical_compare(_II1 __first1, _II1 __last1,</span></span>
 <span id="L1734"><span class="lineNum">    1734</span>              :                             _II2 __first2, _II2 __last2)</span>
 <span id="L1735"><span class="lineNum">    1735</span>              :     {</span>
 <span id="L1736"><span class="lineNum">    1736</span>              : #ifdef _GLIBCXX_CONCEPT_CHECKS</span>
@@ -1827,7 +1827,7 @@
 <span id="L1765"><span class="lineNum">    1765</span>              :   template&lt;typename _II1, typename _II2, typename _Compare&gt;</span>
 <span id="L1766"><span class="lineNum">    1766</span>              :     _GLIBCXX20_CONSTEXPR</span>
 <span id="L1767"><span class="lineNum">    1767</span>              :     inline bool</span>
-<span id="L1768"><span class="lineNum">    1768</span> <span class="tlaGNC tlaBgGNC">          44 :     lexicographical_compare(_II1 __first1, _II1 __last1,</span></span>
+<span id="L1768"><span class="lineNum">    1768</span> <span class="tlaGNC tlaBgGNC">          78 :     lexicographical_compare(_II1 __first1, _II1 __last1,</span></span>
 <span id="L1769"><span class="lineNum">    1769</span>              :                             _II2 __first2, _II2 __last2, _Compare __comp)</span>
 <span id="L1770"><span class="lineNum">    1770</span>              :     {</span>
 <span id="L1771"><span class="lineNum">    1771</span>              :       // concept requirements</span>
@@ -1837,8 +1837,8 @@
 <span id="L1775"><span class="lineNum">    1775</span>              :       __glibcxx_requires_valid_range(__first2, __last2);</span>
 <span id="L1776"><span class="lineNum">    1776</span>              : </span>
 <span id="L1777"><span class="lineNum">    1777</span>              :       return std::__lexicographical_compare_impl</span>
-<span id="L1778"><span class="lineNum">    1778</span> <span class="tlaGNC">          44 :         (__first1, __last1, __first2, __last2,</span></span>
-<span id="L1779"><span class="lineNum">    1779</span> <span class="tlaGNC">          44 :          __gnu_cxx::__ops::__iter_comp_iter(__comp));</span></span>
+<span id="L1778"><span class="lineNum">    1778</span> <span class="tlaGNC">          78 :         (__first1, __last1, __first2, __last2,</span></span>
+<span id="L1779"><span class="lineNum">    1779</span> <span class="tlaGNC">          78 :          __gnu_cxx::__ops::__iter_comp_iter(__comp));</span></span>
 <span id="L1780"><span class="lineNum">    1780</span>              :     }</span>
 <span id="L1781"><span class="lineNum">    1781</span>              : </span>
 <span id="L1782"><span class="lineNum">    1782</span>              : #if __cpp_lib_three_way_comparison</span>

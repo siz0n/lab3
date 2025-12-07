@@ -4,7 +4,7 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>LCOV - coverage.info - home/Kurbanov/lab3/cont/queue.h</title>
+  <title>LCOV - coverage_filtered.info - home/Kurbanov/lab3/cont/queue.h</title>
   <link rel="stylesheet" type="text/css" href="../../../../gcov.css">
 </head>
 
@@ -28,7 +28,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test:</td>
-            <td class="headerValue">coverage.info</td>
+            <td class="headerValue">coverage_filtered.info</td>
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntryHi">100.0&nbsp;%</td>
@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2025-12-02 18:56:06</td>
+            <td class="headerValue">2025-12-07 14:18:31</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntryHi">100.0&nbsp;%</td>
@@ -83,7 +83,7 @@
 <span id="L21"><span class="lineNum">      21</span>              :     void push(const std::string&amp; value);        // в конец</span>
 <span id="L22"><span class="lineNum">      22</span>              :     std::string pop();                          // из начала, std::out_of_range если пусто</span>
 <span id="L23"><span class="lineNum">      23</span>              : </span>
-<span id="L24"><span class="lineNum">      24</span>              :     [[nodiscard]] const std::string&amp; front() const;  // линтер хочет nodiscard</span>
+<span id="L24"><span class="lineNum">      24</span>              :     [[nodiscard]] const std::string&amp; front() const;  </span>
 <span id="L25"><span class="lineNum">      25</span>              :     [[nodiscard]] const std::string&amp; back() const;</span>
 <span id="L26"><span class="lineNum">      26</span>              : </span>
 <span id="L27"><span class="lineNum">      27</span>              :     [[nodiscard]] std::size_t size() const noexcept;</span>
@@ -91,14 +91,14 @@
 <span id="L29"><span class="lineNum">      29</span>              : </span>
 <span id="L30"><span class="lineNum">      30</span>              :     void print() const;</span>
 <span id="L31"><span class="lineNum">      31</span>              : </span>
-<span id="L32"><span class="lineNum">      32</span>              :     // --- текстовая сериализация ---</span>
+<span id="L32"><span class="lineNum">      32</span>              :     //  текстовая сериализация </span>
 <span id="L33"><span class="lineNum">      33</span>              :     [[nodiscard]] std::string serialize() const;</span>
 <span id="L34"><span class="lineNum">      34</span>              :     void deserialize(const std::string&amp; textData);</span>
 <span id="L35"><span class="lineNum">      35</span>              : </span>
 <span id="L36"><span class="lineNum">      36</span>              :     void serializeText(std::ostream&amp; outputStream) const;</span>
 <span id="L37"><span class="lineNum">      37</span>              :     void deserializeText(std::istream&amp; inputStream);</span>
 <span id="L38"><span class="lineNum">      38</span>              : </span>
-<span id="L39"><span class="lineNum">      39</span>              :     // --- бинарная сериализация ---</span>
+<span id="L39"><span class="lineNum">      39</span>              :     //  бинарная сериализация </span>
 <span id="L40"><span class="lineNum">      40</span>              :     void serializeBinary(std::ostream&amp; outputStream) const;</span>
 <span id="L41"><span class="lineNum">      41</span>              :     void deserializeBinary(std::istream&amp; inputStream);</span>
 <span id="L42"><span class="lineNum">      42</span>              : </span>
@@ -115,7 +115,7 @@
 <span id="L53"><span class="lineNum">      53</span>              : </span>
 <span id="L54"><span class="lineNum">      54</span>              :     private:</span>
 <span id="L55"><span class="lineNum">      55</span>              :         std::string value;</span>
-<span id="L56"><span class="lineNum">      56</span>              :         Node*       next{nullptr};   // default member init</span>
+<span id="L56"><span class="lineNum">      56</span>              :         Node* next{nullptr};   </span>
 <span id="L57"><span class="lineNum">      57</span>              : </span>
 <span id="L58"><span class="lineNum">      58</span>              :         friend class Queue;</span>
 <span id="L59"><span class="lineNum">      59</span>              :     };</span>

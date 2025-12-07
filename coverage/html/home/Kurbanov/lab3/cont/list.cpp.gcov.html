@@ -4,7 +4,7 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>LCOV - coverage.info - home/Kurbanov/lab3/cont/list.cpp</title>
+  <title>LCOV - coverage_filtered.info - home/Kurbanov/lab3/cont/list.cpp</title>
   <link rel="stylesheet" type="text/css" href="../../../../gcov.css">
 </head>
 
@@ -28,7 +28,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test:</td>
-            <td class="headerValue">coverage.info</td>
+            <td class="headerValue">coverage_filtered.info</td>
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntryHi">98.0&nbsp;%</td>
@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2025-12-02 18:56:06</td>
+            <td class="headerValue">2025-12-07 14:18:31</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntryHi">100.0&nbsp;%</td>
@@ -67,7 +67,7 @@
 <span id="L5"><span class="lineNum">       5</span>              : #include &lt;sstream&gt;</span>
 <span id="L6"><span class="lineNum">       6</span>              : #include &lt;stdexcept&gt;</span>
 <span id="L7"><span class="lineNum">       7</span>              : </span>
-<span id="L8"><span class="lineNum">       8</span>              : // ---------- базовые операции ----------</span>
+<span id="L8"><span class="lineNum">       8</span>              : // базовые операции</span>
 <span id="L9"><span class="lineNum">       9</span>              : </span>
 <span id="L10"><span class="lineNum">      10</span> <span class="tlaGNC tlaBgGNC">          38 : List::List() noexcept = default;</span></span>
 <span id="L11"><span class="lineNum">      11</span>              : </span>
@@ -299,7 +299,7 @@
 <span id="L237"><span class="lineNum">     237</span> <span class="tlaGNC">           1 :     std::cout &lt;&lt; &quot;]\n&quot;;</span></span>
 <span id="L238"><span class="lineNum">     238</span> <span class="tlaGNC">           1 : }</span></span>
 <span id="L239"><span class="lineNum">     239</span>              : </span>
-<span id="L240"><span class="lineNum">     240</span>              : // ---------- текстовая сериализация ----------</span>
+<span id="L240"><span class="lineNum">     240</span>              : // текстовая сериализация</span>
 <span id="L241"><span class="lineNum">     241</span>              : </span>
 <span id="L242"><span class="lineNum">     242</span> <span class="tlaGNC">           1 : void List::serializeText(std::ostream&amp; outputStream) const</span></span>
 <span id="L243"><span class="lineNum">     243</span>              : {</span>
@@ -335,7 +335,7 @@
 <span id="L273"><span class="lineNum">     273</span> <span class="tlaGNC">           3 :     deserializeText(input);</span></span>
 <span id="L274"><span class="lineNum">     274</span> <span class="tlaGNC">           3 : }</span></span>
 <span id="L275"><span class="lineNum">     275</span>              : </span>
-<span id="L276"><span class="lineNum">     276</span>              : // ---------- бинарная сериализация ----------</span>
+<span id="L276"><span class="lineNum">     276</span>              : // бинарная сериализация</span>
 <span id="L277"><span class="lineNum">     277</span>              : </span>
 <span id="L278"><span class="lineNum">     278</span> <span class="tlaGNC">           3 : void List::serializeBinary(std::ostream&amp; outputStream) const</span></span>
 <span id="L279"><span class="lineNum">     279</span>              : {</span>
@@ -362,7 +362,7 @@
 <span id="L300"><span class="lineNum">     300</span>              :     }</span>
 <span id="L301"><span class="lineNum">     301</span>              : </span>
 <span id="L302"><span class="lineNum">     302</span> <span class="tlaGNC">           3 :     if (!outputStream) {</span></span>
-<span id="L303"><span class="lineNum">     303</span> <span class="tlaGNC">           1 :         throw std::runtime_error(&quot;List::serializeBinary: write error&quot;);</span></span>
+<span id="L303"><span class="lineNum">     303</span> <span class="tlaGNC">           1 :         throw std::runtime_error(&quot;List::serializeBinary: ERROR&quot;);</span></span>
 <span id="L304"><span class="lineNum">     304</span>              :     }</span>
 <span id="L305"><span class="lineNum">     305</span> <span class="tlaGNC">           2 : }</span></span>
 <span id="L306"><span class="lineNum">     306</span>              : </span>
@@ -374,7 +374,7 @@
 <span id="L312"><span class="lineNum">     312</span> <span class="tlaGNC">           3 :     inputStream.read(reinterpret_cast&lt;char*&gt;(&amp;count), sizeof(count));</span></span>
 <span id="L313"><span class="lineNum">     313</span> <span class="tlaGNC">           3 :     if (!inputStream) {</span></span>
 <span id="L314"><span class="lineNum">     314</span>              :         throw std::runtime_error(</span>
-<span id="L315"><span class="lineNum">     315</span> <span class="tlaGNC">           1 :             &quot;List::deserializeBinary: cannot read count&quot;);</span></span>
+<span id="L315"><span class="lineNum">     315</span> <span class="tlaGNC">           1 :             &quot;List::deserializeBinary: ERROR&quot;);</span></span>
 <span id="L316"><span class="lineNum">     316</span>              :     }</span>
 <span id="L317"><span class="lineNum">     317</span>              : </span>
 <span id="L318"><span class="lineNum">     318</span> <span class="tlaGNC">           6 :     for (std::uint64_t i = 0; i &lt; count; ++i) {</span></span>
@@ -382,7 +382,7 @@
 <span id="L320"><span class="lineNum">     320</span> <span class="tlaGNC">           4 :         inputStream.read(reinterpret_cast&lt;char*&gt;(&amp;length), sizeof(length));</span></span>
 <span id="L321"><span class="lineNum">     321</span> <span class="tlaGNC">           4 :         if (!inputStream) {</span></span>
 <span id="L322"><span class="lineNum">     322</span>              :             throw std::runtime_error(</span>
-<span id="L323"><span class="lineNum">     323</span> <span class="tlaUNC tlaBgUNC">           0 :                 &quot;List::deserializeBinary: cannot read string size&quot;);</span></span>
+<span id="L323"><span class="lineNum">     323</span> <span class="tlaUNC tlaBgUNC">           0 :                 &quot;List::deserializeBinary: ERROR &quot;);</span></span>
 <span id="L324"><span class="lineNum">     324</span>              :         }</span>
 <span id="L325"><span class="lineNum">     325</span>              : </span>
 <span id="L326"><span class="lineNum">     326</span> <span class="tlaGNC tlaBgGNC">           4 :         std::string value;</span></span>
@@ -392,7 +392,7 @@
 <span id="L330"><span class="lineNum">     330</span>              :                              static_cast&lt;std::streamsize&gt;(length));</span>
 <span id="L331"><span class="lineNum">     331</span> <span class="tlaGNC">           3 :             if (!inputStream) {</span></span>
 <span id="L332"><span class="lineNum">     332</span>              :                 throw std::runtime_error(</span>
-<span id="L333"><span class="lineNum">     333</span> <span class="tlaUNC tlaBgUNC">           0 :                     &quot;List::deserializeBinary: cannot read string data&quot;);</span></span>
+<span id="L333"><span class="lineNum">     333</span> <span class="tlaUNC tlaBgUNC">           0 :                     &quot;List::deserializeBinary: ERROR&quot;);</span></span>
 <span id="L334"><span class="lineNum">     334</span>              :             }</span>
 <span id="L335"><span class="lineNum">     335</span>              :         }</span>
 <span id="L336"><span class="lineNum">     336</span> <span class="tlaGNC tlaBgGNC">           4 :         pushBack(value);</span></span>
