@@ -13,8 +13,11 @@
 #include <string>
 #include <cstdint>
 
+// =======================
+// Типы структур данных
+// =======================
 
-enum class DSKind : std::uint8_t
+enum class DSKind
 {
     ARRAY,
     FLIST,
@@ -35,9 +38,9 @@ struct DSRecord
 
 static constexpr int MAX_DS = 64;
 
-
+// =======================
 // Класс DBMS
-
+// =======================
 
 class DBMS
 {
@@ -47,18 +50,18 @@ public:
 
     void clear();
 
-    // текст
+    // текстовый формат
     void load(const std::string& filename);
-    void save(const std::string& filename);
+    void save(const std::string& filename) const;
 
-    // бинарь
+    // бинарный формат
     void loadBinary(const std::string& filename);
-    void saveBinary(const std::string& filename);
+    void saveBinary(const std::string& filename) const;
 
     void execute(const std::string& query);
 
 private:
-    int       find(const std::string& name);
+    int       find(const std::string& name) const;
     DSRecord* add(const std::string& name, DSKind kind);
 
 private:
@@ -66,9 +69,9 @@ private:
     int      count;
 };
 
-
+// =======================
 // Реализация DBMS
-
+// =======================
 
 DBMS::DBMS()
     : count(0)
@@ -113,7 +116,7 @@ void DBMS::clear()
     count = 0;
 }
 
-int DBMS::find(const std::string& name)
+int DBMS::find(const std::string& name) const
 {
     for (int i = 0; i < count; ++i) {
         if (recs[i].name == name) {
@@ -163,13 +166,13 @@ DSRecord* DBMS::add(const std::string& name, DSKind kind)
     return &recs[count - 1];
 }
 
-
+// =======================
 // Текстовая сериализация
 // Формат:
 // TYPE NAME\n
 // (данные serialize())
 // END$\n
-
+// =======================
 
 void DBMS::load(const std::string& filename)
 {
@@ -189,12 +192,16 @@ void DBMS::load(const std::string& filename)
             continue;
         }
 
-        std::istringstream iss(line);
-        iss >> type >> name;
+        std::istringstream header(line);
+        header >> type >> name;
+        if (type.empty() || name.empty()) {
+            continue;
+        }
 
         content.clear();
         while (std::getline(fin, line) && line != "END$") {
-            content += line + "\n";
+            content += line;
+            content.push_back('\n');
         }
 
         if (type == "ARRAY") {
@@ -230,10 +237,14 @@ void DBMS::load(const std::string& filename)
             ho->deserialize(content);
             recs[count++] = DSRecord{name, DSKind::HOPEN, ho};
         }
+
+        if (count >= MAX_DS) {
+            break;
+        }
     }
 }
 
-void DBMS::save(const std::string& filename)
+void DBMS::save(const std::string& filename) const
 {
     std::ofstream fout(filename);
     if (!fout) {
@@ -279,22 +290,27 @@ void DBMS::save(const std::string& filename)
             break;
         }
 
-        fout << type << ' ' << recs[i].name << "\n";
+        fout << type << ' ' << recs[i].name << '\n';
         fout << data;
         fout << "END$\n";
     }
 }
 
-
+// =======================
 // Бинарная сериализация
-// Формат файла свой:
+//
+// Формат файла:
+//
 // [u32 count]
-//  для каждого:
-//    [u8 kind][u32 nameLen][name bytes][u32 dataLen][data bytes]
-// где data bytes — то, что пишет serializeBinary()
+//   повторить count раз:
+//      [u8 kind]
+//      [u32 nameLen] [name bytes]
+//      [u32 dataLen] [data bytes]
+//
+// где data bytes — это то, что пишут serializeBinary()
+// =======================
 
-
-void DBMS::saveBinary(const std::string& filename)
+void DBMS::saveBinary(const std::string& filename) const
 {
     std::ofstream out(filename, std::ios::binary);
     if (!out) {
@@ -313,7 +329,6 @@ void DBMS::saveBinary(const std::string& filename)
         out.write(reinterpret_cast<const char*>(&nameLen), sizeof(nameLen));
         out.write(recs[i].name.data(), nameLen);
 
-        // сериализуем контейнер во временный буфер
         std::ostringstream buf(std::ios::binary);
 
         switch (recs[i].kind) {
@@ -364,7 +379,7 @@ void DBMS::loadBinary(const std::string& filename)
         return;
     }
 
-    for (std::uint32_t i = 0; i < cnt; ++i) {
+    for (std::uint32_t i = 0; i < cnt && count < MAX_DS; ++i) {
         std::uint8_t kindByte = 0;
         if (!in.read(reinterpret_cast<char*>(&kindByte), sizeof(kindByte))) {
             break;
@@ -444,19 +459,15 @@ void DBMS::loadBinary(const std::string& filename)
         }
 
         recs[count++] = DSRecord{name, kind, ptr};
-        if (count >= MAX_DS) {
-            break;
-        }
     }
 }
 
-
+// =======================
 // execute + автосейв
-
+// =======================
 
 void DBMS::execute(const std::string& query)
 {
-    // простой split по пробелам
     std::string tokens[32];
     int         tokCount = 0;
 
@@ -519,7 +530,7 @@ void DBMS::execute(const std::string& query)
         MyArray* arr = static_cast<MyArray*>(recs[idx].ptr);
         int pos = std::stoi(tokens[2]);
         try {
-            std::cout << arr->at(static_cast<std::size_t>(pos)) << "\n";
+            std::cout << arr->at(static_cast<std::size_t>(pos)) << '\n';
         } catch (...) {
             std::cout << "<ERR>\n";
         }
@@ -727,7 +738,7 @@ void DBMS::execute(const std::string& query)
         const std::string& key = tokens[2];
         std::string        value = tokens[3];
         for (int i = 4; i < tokCount; ++i) {
-            value += ' ';
+            value.push_back(' ');
             value += tokens[i];
         }
 
@@ -753,7 +764,7 @@ void DBMS::execute(const std::string& query)
         const std::string& key = tokens[2];
         std::string        value = tokens[3];
         for (int i = 4; i < tokCount; ++i) {
-            value += ' ';
+            value.push_back(' ');
             value += tokens[i];
         }
 
@@ -767,18 +778,8 @@ void DBMS::execute(const std::string& query)
         h->print();
     }
 
-    // --------- ФАЙЛЫ / HELP / PRINT ---------
-    else if (cmd == "SAVE" && tokCount >= 2) {
-        save(tokens[1]);
-    } else if (cmd == "LOAD" && tokCount >= 2) {
-        load(tokens[1]);
-        autoSave();
-    } else if (cmd == "SAVEB" && tokCount >= 2) {
-        saveBinary(tokens[1]);
-    } else if (cmd == "LOADB" && tokCount >= 2) {
-        loadBinary(tokens[1]);
-        autoSave();
-    } else if (cmd == "HELP") {
+    // --------- HELP / PRINT ---------
+    else if (cmd == "HELP") {
         std::cout <<
             "МАССИВ (M): MPUSH name val | MINSERT name pos val | MDEL name pos | MSET name pos val | MGET name pos | MPRINT name\n"
             "ОДНОСВЯЗНЫЙ СПИСОК (F): FPUSH name HEAD/TAIL val | FDEL name HEAD/VAL val |\n"
@@ -792,8 +793,6 @@ void DBMS::execute(const std::string& query)
             "AVL-ДЕРЕВО (T): TINSERT name val | TDEL name val | TPRINT name\n"
             "ХЕШ-ТАБЛИЦА цепная: HSET name key value... | HPRINT name\n"
             "ХЕШ-ТАБЛИЦА откр.: H2SET name key value... | H2PRINT name\n"
-            "ФАЙЛ (текст): SAVE filename | LOAD filename\n"
-            "ФАЙЛ (бинарь): SAVEB filename | LOADB filename\n"
             "EXIT/QUIT — выход\n";
     } else if (cmd == "PRINT") {
         if (tokCount < 2) return;
@@ -828,18 +827,29 @@ void DBMS::execute(const std::string& query)
     }
 }
 
-
+// =======================
 // main: CLI
-
+// =======================
 
 int main()
 {
     DBMS db;
     std::string line;
 
-    // сразу пробуем подгрузить автосейв
-    db.load("db_autosave.txt");
-    db.loadBinary("db_autosave.bin");
+    // Автозагрузка:
+    // если есть бинарь — считаем, что проект 1 (бинарный формат) приоритетен,
+    // иначе пробуем текст.
+    {
+        std::ifstream bin("db_autosave.bin", std::ios::binary);
+        if (bin) {
+            db.loadBinary("db_autosave.bin");
+        } else {
+            std::ifstream txt("db_autosave.txt");
+            if (txt) {
+                db.load("db_autosave.txt");
+            }
+        }
+    }
 
     while (std::getline(std::cin, line)) {
         if (line == "EXIT" || line == "QUIT") {

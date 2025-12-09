@@ -7,5 +7,7 @@ g++ -std=c++17 -O0 --coverage \
 ./tests_run
 lcov --capture --directory . --output-file coverage/coverage.info
 
-genhtml coverage/coverage_filtered.info \
-    --output-directory coverage/html
+genhtml coverage/coverage.info -o coverage/html
+
+    
+    xxd db_autosave.bin

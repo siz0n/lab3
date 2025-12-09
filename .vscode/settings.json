@@ -68,11 +68,11 @@
         "stop_token": "cpp",
         "thread": "cpp"
     },
-    "clangd.arguments": [
+    /*"clangd.arguments": [
         "--enable-config",
         "--ignore-files=**/tests /**",
         "--ignore-files=**/utils /**",
         "--ignore-files=**/build /**"
-    ],
+    ],*/
     "C_Cpp.errorSquiggles": "disabled"
 }

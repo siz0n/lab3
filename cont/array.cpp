@@ -245,9 +245,9 @@ void MyArray::deserializeText(std::istream& inputStream)
         resize(newLength);
     }
 
-    length = newLength;
+    length = newLength; 
     for (std::size_t i = 0; i < length; ++i) {
-        if (!std::getline(inputStream, dataPtr[i])) {
+        if (!std::getline(inputStream, dataPtr[i])) { // чтение строки с учётом пробелов
             throw std::runtime_error("MyArray::deserializeText: error");
         }
     }
@@ -272,15 +272,15 @@ void MyArray::deserialize(const std::string& dataString)
 
 void MyArray::serializeBinary(std::ostream& outputStream) const
 {
-    std::uint64_t len = static_cast<std::uint64_t>(length);
-    outputStream.write(reinterpret_cast<const char*>(&len), sizeof(len));
+    std::uint64_t len = static_cast<std::uint64_t>(length); // запись количества элементов
+    outputStream.write(reinterpret_cast<const char*>(&len), sizeof(len)); // запись длины
 
-    for (std::size_t i = 0; i < length; ++i) {
-        const std::string& text = dataPtr[i];
-        std::uint64_t sizeValue = static_cast<std::uint64_t>(text.size());
-        outputStream.write(reinterpret_cast<const char*>(&sizeValue), sizeof(sizeValue));
-        if (sizeValue > 0) {
-            outputStream.write(text.data(), static_cast<std::streamsize>(sizeValue));
+    for (std::size_t i = 0; i < length; ++i) { // запись каждого элемента
+        const std::string& text = dataPtr[i]; // текущая строка
+        std::uint64_t sizeValue = static_cast<std::uint64_t>(text.size()); // размер строки
+        outputStream.write(reinterpret_cast<const char*>(&sizeValue), sizeof(sizeValue)); // запись размера строки
+        if (sizeValue > 0) { 
+            outputStream.write(text.data(), static_cast<std::streamsize>(sizeValue)); // запись данных строки
         }
     }
 

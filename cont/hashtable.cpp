@@ -6,18 +6,18 @@
 #include <sstream>
 #include <stdexcept>
 
-
+using namespace std;
 // Вспомогательный хеш для строки
 
 
 namespace
 {
-std::size_t rawHash(const std::string& keyValue) noexcept
+size_t rawHash(const string& keyValue) noexcept
 {
-    std::size_t hash = 146527;
-    for (unsigned char characterValue : keyValue) {
-        hash ^= (hash << 5) + (hash >> 2)
-              + static_cast<std::size_t>(characterValue);
+    size_t hash = 146527;
+    for (unsigned char characterValue : keyValue) { // перебор каждого символа
+        hash ^= (hash << 5) + (hash >> 2) // 
+              + static_cast<size_t>(characterValue);
     }
     return hash;
 }
@@ -28,20 +28,20 @@ std::size_t rawHash(const std::string& keyValue) noexcept
 
 
 HashTable::HashTable()
-    : bucketCountValue(8)
+    : bucketCountValue(8) // начальное количество бакетов
 {
     bucketArray = new Node*[bucketCountValue];
-    for (std::size_t i = 0; i < bucketCountValue; ++i) {
+    for (size_t i = 0; i < bucketCountValue; ++i) {
         bucketArray[i] = nullptr;
     }
 }
 
-HashTable::HashTable(std::size_t initialBucketCount)
-    : bucketCountValue(initialBucketCount == 0 ? 1 : initialBucketCount)
+HashTable::HashTable(size_t initialBucketCount) // конструктор
+    : bucketCountValue(initialBucketCount == 0 ? 1 : initialBucketCount) // начальное количество бакетов
 {
     bucketArray = new Node*[bucketCountValue];
-    for (std::size_t i = 0; i < bucketCountValue; ++i) {
-        bucketArray[i] = nullptr;
+    for (size_t i = 0; i < bucketCountValue; ++i) {
+        bucketArray[i] = nullptr; // инициализация бакетов нулевыми указателями
     }
 }
 
@@ -54,12 +54,12 @@ HashTable::~HashTable()
     elementCount = 0;
 }
 
-void HashTable::freeBuckets() noexcept
+void HashTable::freeBuckets() noexcept // освобождение памяти бакетов
 {
     if (bucketArray == nullptr) {
         return;
     }
-    for (std::size_t i = 0; i < bucketCountValue; ++i) {
+    for (size_t i = 0; i < bucketCountValue; ++i) {
         Node* current = bucketArray[i];
         while (current != nullptr) {
             Node* toDelete = current;
@@ -76,7 +76,7 @@ void HashTable::clear() noexcept
     freeBuckets();
 }
 
-std::size_t HashTable::hashString(const std::string& keyValue) const noexcept
+size_t HashTable::hashString(const string& keyValue) const noexcept
 {
     if (bucketCountValue == 0) {
         return 0;
@@ -84,32 +84,32 @@ std::size_t HashTable::hashString(const std::string& keyValue) const noexcept
     return rawHash(keyValue) % bucketCountValue;
 }
 
-void HashTable::rehash(std::size_t newBucketCount)
+void HashTable::rehash(size_t newBucketCount)
 {
     if (newBucketCount == 0) {
         newBucketCount = 1;
     }
 
     Node** oldBuckets = bucketArray;
-    std::size_t oldCount = bucketCountValue;
+    size_t oldCount = bucketCountValue;
 
     bucketArray = new Node*[newBucketCount];
-    for (std::size_t i = 0; i < newBucketCount; ++i) {
+    for (size_t i = 0; i < newBucketCount; ++i) {
         bucketArray[i] = nullptr;
     }
     bucketCountValue = newBucketCount;
     elementCount     = 0;
 
     // Перехэшируем элементы, сохраняя относительный порядок в списках
-    for (std::size_t i = 0; i < oldCount; ++i) {
+    for (size_t i = 0; i < oldCount; ++i) {
         Node* current = oldBuckets[i];
         while (current != nullptr) {
             Node* nextNode = current->getNext();
 
-            const std::string& keyValue = current->getKey();
-            const std::string& valueValue = current->getValue();
+            const string& keyValue = current->getKey();
+            const string& valueValue = current->getValue();
 
-            std::size_t index = hashString(keyValue);
+            size_t index = hashString(keyValue);
 
             // вставляем в начало списка нового бакета
             current->getNextRef() = bucketArray[index];
@@ -130,11 +130,11 @@ HashTable::HashTable(const HashTable& other)
     : bucketCountValue(other.bucketCountValue)
 {
     bucketArray = new Node*[bucketCountValue];
-    for (std::size_t i = 0; i < bucketCountValue; ++i) {
+    for (size_t i = 0; i < bucketCountValue; ++i) {
         bucketArray[i] = nullptr;
     }
 
-    for (std::size_t i = 0; i < bucketCountValue; ++i) {
+    for (size_t i = 0; i < bucketCountValue; ++i) {
         Node* current = other.bucketArray[i];
         // копируем по порядку, чтобы сохранить структуру
         while (current != nullptr) {
@@ -167,11 +167,11 @@ HashTable& HashTable::operator=(const HashTable& other)
     elementCount = 0;
 
     bucketArray = new Node*[bucketCountValue];
-    for (std::size_t i = 0; i < bucketCountValue; ++i) {
+    for (size_t i = 0; i < bucketCountValue; ++i) {
         bucketArray[i] = nullptr;
     }
 
-    for (std::size_t i = 0; i < bucketCountValue; ++i) {
+    for (size_t i = 0; i < bucketCountValue; ++i) {
         Node* current = other.bucketArray[i];
         while (current != nullptr) {
             insert(current->getKey(), current->getValue());
@@ -204,13 +204,13 @@ HashTable& HashTable::operator=(HashTable&& other) noexcept
 
 //  основные операции 
 
-void HashTable::insert(const std::string& keyValue, const std::string& valueValue)
+void HashTable::insert(const string& keyValue, const string& valueValue)
 {
     if (bucketCountValue == 0) {
         rehash(1);
     }
 
-    const std::size_t index = hashString(keyValue);
+    const size_t index = hashString(keyValue);
     Node* current = bucketArray[index];
 
     while (current != nullptr) {
@@ -221,7 +221,7 @@ void HashTable::insert(const std::string& keyValue, const std::string& valueValu
         current = current->getNext();
     }
 
-    Node* newNode      = new Node(keyValue, valueValue, bucketArray[index]);
+    Node* newNode = new Node(keyValue, valueValue, bucketArray[index]);
     bucketArray[index] = newNode;
     ++elementCount;
 
@@ -231,13 +231,13 @@ void HashTable::insert(const std::string& keyValue, const std::string& valueValu
     }
 }
 
-void HashTable::erase(const std::string& keyValue)
+void HashTable::erase(const string& keyValue)
 {
     if (bucketArray == nullptr || bucketCountValue == 0 || elementCount == 0) {
         return;
     }
 
-    const std::size_t index = hashString(keyValue);
+    const size_t index = hashString(keyValue);
     Node* current = bucketArray[index];
     Node* previous = nullptr;
 
@@ -257,13 +257,13 @@ void HashTable::erase(const std::string& keyValue)
     }
 }
 
-std::string* HashTable::find(const std::string& keyValue)
+string* HashTable::find(const string& keyValue)
 {
     if (bucketArray == nullptr || bucketCountValue == 0) {
         return nullptr;
     }
 
-    const std::size_t index = hashString(keyValue);
+    const size_t index = hashString(keyValue);
     Node* current = bucketArray[index];
 
     while (current != nullptr) {
@@ -275,13 +275,13 @@ std::string* HashTable::find(const std::string& keyValue)
     return nullptr;
 }
 
-const std::string* HashTable::find(const std::string& keyValue) const
+const string* HashTable::find(const string& keyValue) const
 {
     if (bucketArray == nullptr || bucketCountValue == 0) {
         return nullptr;
     }
 
-    const std::size_t index = hashString(keyValue);
+    const size_t index = hashString(keyValue);
     Node* current = bucketArray[index];
 
     while (current != nullptr) {
@@ -293,20 +293,20 @@ const std::string* HashTable::find(const std::string& keyValue) const
     return nullptr;
 }
 
-std::string& HashTable::operator[](const std::string& keyValue)
+string& HashTable::operator[](const string& keyValue)
 {
-    std::string* valuePtr = find(keyValue);
+    string* valuePtr = find(keyValue);
     if (valuePtr != nullptr) {
         return *valuePtr;
     }
 
-    insert(keyValue, std::string{});
+    insert(keyValue, string{});
     valuePtr = find(keyValue);
     // по логике теперь точно не null
     return *valuePtr;
 }
 
-std::size_t HashTable::size() const noexcept
+size_t HashTable::size() const noexcept
 {
     return elementCount;
 }
@@ -316,175 +316,171 @@ bool HashTable::empty() const noexcept
     return elementCount == 0;
 }
 
-std::size_t HashTable::bucketCount() const noexcept
+size_t HashTable::bucketCount() const noexcept
 {
     return bucketCountValue;
 }
 
 void HashTable::print() const
 {
-    std::cout << "HashTable(size=" << elementCount
+    cout << "HashTable(size=" << elementCount
               << ", buckets=" << bucketCountValue << ")\n";
-    for (std::size_t i = 0; i < bucketCountValue; ++i) {
-        std::cout << "  [" << i << "]: ";
+    for (size_t i = 0; i < bucketCountValue; ++i) {
+        cout << "  [" << i << "]: ";
         Node* current = bucketArray[i];
         while (current != nullptr) {
-            std::cout << "(" << current->getKey()
+            cout << "(" << current->getKey()
                       << " -> " << current->getValue() << ")";
             if (current->getNext() != nullptr) {
-                std::cout << " -> ";
+                cout << " -> ";
             }
             current = current->getNext();
         }
-        std::cout << "\n";
+        cout << "\n";
     }
 }
 
 //  текстовая сериализация 
 
-void HashTable::serializeText(std::ostream& outStream) const
+void HashTable::serializeText(ostream& outStream) const
 {
-    outStream << elementCount << '\n';
-    for (std::size_t i = 0; i < bucketCountValue; ++i) {
-        Node* current = bucketArray[i];
-        while (current != nullptr) {
-            outStream << current->getKey() << '\t' << current->getValue() << '\n';
+    outStream << elementCount << '\n'; // записываем количество элементов
+    for (size_t i = 0; i < bucketCountValue; ++i) { // перебираем бакеты
+        Node* current = bucketArray[i]; // текущий узел в списке бакета
+        while (current != nullptr) { 
+            outStream << current->getKey() << '\t' << current->getValue() << '\n'; // записываем ключ и значение
             current = current->getNext();
         }
     }
 }
 
-std::string HashTable::serialize() const
+string HashTable::serialize() const
 {
-    std::ostringstream oss;
-    serializeText(oss);
-    return oss.str();
+    ostringstream oss; // используем строковый поток для накопления данных
+    serializeText(oss); // сериализуем данные в поток
+    return oss.str(); // возвращаем строковое представление
 }
 
-void HashTable::deserializeText(std::istream& inStream)
+void HashTable::deserializeText(istream& inStream)
 {
-    clear();
+    clear(); // очищаем текущие данные
 
-    std::size_t declaredCount = 0;
+    size_t declaredCount = 0;
     if (!(inStream >> declaredCount)) {
         // не смогли прочитать count — считаем, что таблица остаётся пустой
         inStream.clear();
         return;
     }
-    inStream.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+    inStream.ignore(numeric_limits<streamsize>::max(), '\n'); // пропускаем остаток строки после числа
 
-    for (std::size_t i = 0; i < declaredCount; ++i) {
-        std::string keyValue;
-        std::string valueValue;
+    for (size_t i = 0; i < declaredCount; ++i) {
+        string keyValue;
+        string valueValue;
 
-        if (!std::getline(inStream, keyValue, '\t')) {
-            throw std::runtime_error("HashTable::deserializeText: cannot read key");
+        if (!getline(inStream, keyValue, '\t')) {
+            throw runtime_error("HashTable::deserializeText: cannot read key");
         }
-        if (!std::getline(inStream, valueValue)) {
-            throw std::runtime_error("HashTable::deserializeText: cannot read value");
+        if (!getline(inStream, valueValue)) {
+            throw runtime_error("HashTable::deserializeText: cannot read value");
         }
 
-        const std::size_t index = hashString(keyValue);
+        const size_t index = hashString(keyValue); // вычисляем индекс бакета
 
-        Node* newNode = new Node(keyValue, valueValue, nullptr);
-        if (bucketArray[index] == nullptr) {
-            bucketArray[index] = newNode;
-        } else {
-            Node* tail = bucketArray[index];
-            while (tail->getNext() != nullptr) {
-                tail = tail->getNext();
+        Node* newNode = new Node(keyValue, valueValue, nullptr); // создаём новый узел
+        if (bucketArray[index] == nullptr) { // если бакет пустой
+            bucketArray[index] = newNode;// вставляем новый узел
+        } else { // если бакет не пустой, добавляем в конец списка
+            Node* tail = bucketArray[index]; // находим конец списка 
+            while (tail->getNext() != nullptr) { // перебираем до конца
+                tail = tail->getNext(); // переходим к следующему узлу
             }
-            tail->getNextRef() = newNode;
+            tail->getNextRef() = newNode; // добавляем новый узел в конец списка
         }
         ++elementCount;
     }
 }
 
-void HashTable::deserialize(const std::string& textData)
+void HashTable::deserialize(const string& textData)
 {
-    std::istringstream iss(textData);
-    deserializeText(iss);
+    istringstream iss(textData); // создаём поток из строки
+    deserializeText(iss); // десериализуем данные из потока
 }
 
 //  бинарная сериализация 
 
-void HashTable::serializeBinary(std::ostream& outStream) const
+void HashTable::serializeBinary(ostream& outStream) const   
 {
-    const std::uint64_t count64 = static_cast<std::uint64_t>(elementCount);
-    outStream.write(reinterpret_cast<const char*>(&count64), sizeof(count64));
+    const uint64_t count64 = static_cast<uint64_t>(elementCount); // записываем количество элементов в 8 байт
+    outStream.write(reinterpret_cast<const char*>(&count64), sizeof(count64)); // запись количества элементов
 
-    for (std::size_t i = 0; i < bucketCountValue; ++i) {
+    for (size_t i = 0; i < bucketCountValue; ++i) { // перебираем бакеты
         Node* current = bucketArray[i];
         while (current != nullptr) {
-            const std::string& keyValue   = current->getKey();
-            const std::string& valueValue = current->getValue();
+            const string& keyValue = current->getKey();
+            const string& valueValue = current->getValue();
 
-            const std::uint64_t keySize =
-                static_cast<std::uint64_t>(keyValue.size());
-            const std::uint64_t valSize =
-                static_cast<std::uint64_t>(valueValue.size());
+            const uint64_t keySize = static_cast<uint64_t>(keyValue.size()); // размер ключа
+            const uint64_t valSize = static_cast<uint64_t>(valueValue.size()); // размер значения
 
-            outStream.write(reinterpret_cast<const char*>(&keySize), sizeof(keySize));
-            if (keySize > 0) {
-                outStream.write(keyValue.data(),
-                                static_cast<std::streamsize>(keySize));
+            outStream.write(reinterpret_cast<const char*>(&keySize), sizeof(keySize)); // запись размера ключа
+            if (keySize > 0) { 
+                outStream.write(keyValue.data(), static_cast<streamsize>(keySize)); // запись данных ключа
             }
 
             outStream.write(reinterpret_cast<const char*>(&valSize), sizeof(valSize));
-            if (valSize > 0) {
-                outStream.write(valueValue.data(),
-                                static_cast<std::streamsize>(valSize));
+            if (valSize > 0) { 
+                outStream.write(valueValue.data(), static_cast<streamsize>(valSize));
             }
 
-            current = current->getNext();
+            current = current->getNext(); // переходим к следующему узлу
         }
     }
 
     if (!outStream) {
-        throw std::runtime_error("HashTable::serializeBinary: write error");
+        throw runtime_error("HashTable::serializeBinary: write error");
     }
 }
 
-void HashTable::deserializeBinary(std::istream& inStream)
+void HashTable::deserializeBinary(istream& inStream)
 {
     clear();
 
-    std::uint64_t count64 = 0;
-    inStream.read(reinterpret_cast<char*>(&count64), sizeof(count64));
+    uint64_t count64 = 0;
+    inStream.read(reinterpret_cast<char*>(&count64), sizeof(count64)); // чтение количества элементов
     if (!inStream) {
-        throw std::runtime_error("HashTable::deserializeBinary: cannot read count");
+        throw runtime_error("HashTable::deserializeBinary: cannot read count");
     }
 
-    for (std::uint64_t i = 0; i < count64; ++i) {
-        std::uint64_t keySize = 0;
-        inStream.read(reinterpret_cast<char*>(&keySize), sizeof(keySize));
+    for (uint64_t i = 0; i < count64; ++i) { // перебор элементов
+        uint64_t keySize = 0;
+        inStream.read(reinterpret_cast<char*>(&keySize), sizeof(keySize)); // чтение размера ключа
         if (!inStream) {
-            throw std::runtime_error("HashTable::deserializeBinary: cannot read key size");
+            throw runtime_error("HashTable::deserializeBinary: cannot read key size");
         }
 
-        std::string keyValue;
-        keyValue.resize(static_cast<std::size_t>(keySize));
-        if (keySize > 0) {
+        string keyValue;
+        keyValue.resize(static_cast<size_t>(keySize)); // выделение места под ключ
+        if (keySize > 0) { // чтение данных ключа
             inStream.read(keyValue.data(),
-                          static_cast<std::streamsize>(keySize));
+                          static_cast<streamsize>(keySize));
             if (!inStream) {
-                throw std::runtime_error("HashTable::deserializeBinary: cannot read key data");
+                throw runtime_error("HashTable::deserializeBinary: cannot read key data");
             }
         }
 
-        std::uint64_t valSize = 0;
+        uint64_t valSize = 0;
         inStream.read(reinterpret_cast<char*>(&valSize), sizeof(valSize));
         if (!inStream) {
-            throw std::runtime_error("HashTable::deserializeBinary: cannot read value size");
+            throw runtime_error("HashTable::deserializeBinary: cannot read value size");
         }
 
-        std::string valueValue;
-        valueValue.resize(static_cast<std::size_t>(valSize));
+        string valueValue;
+        valueValue.resize(static_cast<size_t>(valSize));
         if (valSize > 0) {
             inStream.read(valueValue.data(),
-                          static_cast<std::streamsize>(valSize));
+                          static_cast<streamsize>(valSize));
             if (!inStream) {
-                throw std::runtime_error("HashTable::deserializeBinary: cannot read value data");
+                throw runtime_error("HashTable::deserializeBinary: cannot read value data");
             }
         }
 
@@ -502,7 +498,7 @@ HashTableOpen::HashTableOpen()
     tableArray = new Cell[capacityValue];
 }
 
-HashTableOpen::HashTableOpen(std::size_t initialCapacity)
+HashTableOpen::HashTableOpen(size_t initialCapacity)
     : capacityValue(initialCapacity == 0 ? 1 : initialCapacity)
 {
     tableArray = new Cell[capacityValue];
@@ -516,7 +512,7 @@ HashTableOpen::~HashTableOpen()
     elementCount  = 0;
 }
 
-std::size_t HashTableOpen::hashString(const std::string& keyValue) const noexcept
+size_t HashTableOpen::hashString(const string& keyValue) const noexcept
 {
     if (capacityValue == 0) {
         return 0;
@@ -529,7 +525,7 @@ HashTableOpen::HashTableOpen(const HashTableOpen& other)
       elementCount(other.elementCount)
 {
     tableArray = new Cell[capacityValue];
-    for (std::size_t i = 0; i < capacityValue; ++i) {
+    for (size_t i = 0; i < capacityValue; ++i) {
         tableArray[i] = other.tableArray[i];
     }
 }
@@ -556,7 +552,7 @@ HashTableOpen& HashTableOpen::operator=(const HashTableOpen& other)
     elementCount  = other.elementCount;
 
     tableArray = new Cell[capacityValue];
-    for (std::size_t i = 0; i < capacityValue; ++i) {
+    for (size_t i = 0; i < capacityValue; ++i) {
         tableArray[i] = other.tableArray[i];
     }
 
@@ -582,10 +578,10 @@ HashTableOpen& HashTableOpen::operator=(HashTableOpen&& other) noexcept
     return *this;
 }
 
-std::size_t HashTableOpen::findSlotForInsert(const std::string& keyValue) const noexcept
+size_t HashTableOpen::findSlotForInsert(const string& keyValue) const noexcept
 {
-    std::size_t index = hashString(keyValue);
-    std::size_t start = index;
+    size_t index = hashString(keyValue);
+    size_t start = index;
 
     while (tableArray[index].isOccupied && !tableArray[index].isDeleted
            && tableArray[index].key != keyValue) {
@@ -597,10 +593,10 @@ std::size_t HashTableOpen::findSlotForInsert(const std::string& keyValue) const 
     return index;
 }
 
-std::size_t HashTableOpen::findSlotForKey(const std::string& keyValue) const noexcept
+size_t HashTableOpen::findSlotForKey(const string& keyValue) const noexcept
 {
-    std::size_t index = hashString(keyValue);
-    std::size_t start = index;
+    size_t index = hashString(keyValue);
+    size_t start = index;
 
     while (tableArray[index].isOccupied) {
         if (!tableArray[index].isDeleted && tableArray[index].key == keyValue) {
@@ -611,23 +607,23 @@ std::size_t HashTableOpen::findSlotForKey(const std::string& keyValue) const noe
             break;
         }
     }
-    return static_cast<std::size_t>(-1);
+    return static_cast<size_t>(-1);
 }
 
-void HashTableOpen::rehash(std::size_t newCapacity)
+void HashTableOpen::rehash(size_t newCapacity)
 {
     if (newCapacity == 0) {
         newCapacity = 1;
     }
 
     Cell* oldTable      = tableArray;
-    std::size_t oldCap  = capacityValue;
+    size_t oldCap  = capacityValue;
 
     tableArray    = new Cell[newCapacity];
     capacityValue = newCapacity;
     elementCount  = 0;
 
-    for (std::size_t i = 0; i < oldCap; ++i) {
+    for (size_t i = 0; i < oldCap; ++i) {
         if (oldTable[i].isOccupied && !oldTable[i].isDeleted) {
             insert(oldTable[i].key, oldTable[i].value);
         }
@@ -636,7 +632,7 @@ void HashTableOpen::rehash(std::size_t newCapacity)
     delete[] oldTable;
 }
 
-void HashTableOpen::insert(const std::string& keyValue, const std::string& valueValue)
+void HashTableOpen::insert(const string& keyValue, const string& valueValue)
 {
     if (capacityValue == 0) {
         rehash(1);
@@ -646,7 +642,7 @@ void HashTableOpen::insert(const std::string& keyValue, const std::string& value
         rehash(capacityValue * 2);
     }
 
-    const std::size_t index = findSlotForInsert(keyValue);
+    const size_t index = findSlotForInsert(keyValue);
     Cell& cell              = tableArray[index];
 
     if (cell.isOccupied && !cell.isDeleted) {
@@ -661,10 +657,10 @@ void HashTableOpen::insert(const std::string& keyValue, const std::string& value
     ++elementCount;
 }
 
-void HashTableOpen::erase(const std::string& keyValue)
+void HashTableOpen::erase(const string& keyValue)
 {
-    const std::size_t index = findSlotForKey(keyValue);
-    if (index == static_cast<std::size_t>(-1)) {
+    const size_t index = findSlotForKey(keyValue);
+    if (index == static_cast<size_t>(-1)) {
         return;
     }
     Cell& cell    = tableArray[index];
@@ -672,36 +668,36 @@ void HashTableOpen::erase(const std::string& keyValue)
     --elementCount;
 }
 
-std::string* HashTableOpen::find(const std::string& keyValue)
+string* HashTableOpen::find(const string& keyValue)
 {
-    const std::size_t index = findSlotForKey(keyValue);
-    if (index == static_cast<std::size_t>(-1)) {
+    const size_t index = findSlotForKey(keyValue);
+    if (index == static_cast<size_t>(-1)) {
         return nullptr;
     }
     return &tableArray[index].value;
 }
 
-const std::string* HashTableOpen::find(const std::string& keyValue) const
+const string* HashTableOpen::find(const string& keyValue) const
 {
-    const std::size_t index = findSlotForKey(keyValue);
-    if (index == static_cast<std::size_t>(-1)) {
+    const size_t index = findSlotForKey(keyValue);
+    if (index == static_cast<size_t>(-1)) {
         return nullptr;
     }
     return &tableArray[index].value;
 }
 
-std::string& HashTableOpen::operator[](const std::string& keyValue)
+string& HashTableOpen::operator[](const string& keyValue)
 {
-    std::string* valuePtr = find(keyValue);
+    string* valuePtr = find(keyValue);
     if (valuePtr != nullptr) {
         return *valuePtr;
     }
-    insert(keyValue, std::string{});
+    insert(keyValue, string{});
     valuePtr = find(keyValue);
     return *valuePtr;
 }
 
-std::size_t HashTableOpen::size() const noexcept
+size_t HashTableOpen::size() const noexcept
 {
     return elementCount;
 }
@@ -711,14 +707,14 @@ bool HashTableOpen::empty() const noexcept
     return elementCount == 0;
 }
 
-std::size_t HashTableOpen::capacity() const noexcept
+size_t HashTableOpen::capacity() const noexcept
 {
     return capacityValue;
 }
 
 void HashTableOpen::clear() noexcept
 {
-    for (std::size_t i = 0; i < capacityValue; ++i) {
+    for (size_t i = 0; i < capacityValue; ++i) {
         tableArray[i].key.clear();
         tableArray[i].value.clear();
         tableArray[i].isOccupied = false;
@@ -729,28 +725,28 @@ void HashTableOpen::clear() noexcept
 
 void HashTableOpen::print() const
 {
-    std::cout << "HashTableOpen(size=" << elementCount
+    cout << "HashTableOpen(size=" << elementCount
               << ", capacity=" << capacityValue << ")\n";
-    for (std::size_t i = 0; i < capacityValue; ++i) {
+    for (size_t i = 0; i < capacityValue; ++i) {
         const Cell& cell = tableArray[i];
-        std::cout << "  [" << i << "]: ";
+        cout << "  [" << i << "]: ";
         if (!cell.isOccupied) {
-            std::cout << "EMPTY";
+            cout << "EMPTY";
         } else if (cell.isDeleted) {
-            std::cout << "DELETED";
+            cout << "DELETED";
         } else {
-            std::cout << "(" << cell.key << " -> " << cell.value << ")";
+            cout << "(" << cell.key << " -> " << cell.value << ")";
         }
-        std::cout << "\n";
+        cout << "\n";
     }
 }
 
 //  текстовая сериализация 
 
-void HashTableOpen::serializeText(std::ostream& outStream) const
+void HashTableOpen::serializeText(ostream& outStream) const
 {
     outStream << elementCount << '\n';
-    for (std::size_t i = 0; i < capacityValue; ++i) {
+    for (size_t i = 0; i < capacityValue; ++i) {
         const Cell& cell = tableArray[i];
         if (cell.isOccupied && !cell.isDeleted) {
             outStream << cell.key << '\t' << cell.value << '\n';
@@ -758,118 +754,118 @@ void HashTableOpen::serializeText(std::ostream& outStream) const
     }
 }
 
-std::string HashTableOpen::serialize() const
+string HashTableOpen::serialize() const
 {
-    std::ostringstream oss;
+    ostringstream oss;
     serializeText(oss);
     return oss.str();
 }
 
-void HashTableOpen::deserializeText(std::istream& inStream)
+void HashTableOpen::deserializeText(istream& inStream)
 {
     clear();
 
-    std::size_t declaredCount = 0;
+    size_t declaredCount = 0;
     if (!(inStream >> declaredCount)) {
         inStream.clear();
         return;
     }
-    inStream.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+    inStream.ignore(numeric_limits<streamsize>::max(), '\n');
 
-    for (std::size_t i = 0; i < declaredCount; ++i) {
-        std::string keyValue;
-        std::string valueValue;
+    for (size_t i = 0; i < declaredCount; ++i) {
+        string keyValue;
+        string valueValue;
 
-        if (!std::getline(inStream, keyValue, '\t')) {
-            throw std::runtime_error("HashTableOpen::deserializeText: cannot read key");
+        if (!getline(inStream, keyValue, '\t')) {
+            throw runtime_error("HashTableOpen::deserializeText: cannot read key");
         }
-        if (!std::getline(inStream, valueValue)) {
-            throw std::runtime_error("HashTableOpen::deserializeText: cannot read value");
+        if (!getline(inStream, valueValue)) {
+            throw runtime_error("HashTableOpen::deserializeText: cannot read value");
         }
         insert(keyValue, valueValue);
     }
 }
 
-void HashTableOpen::deserialize(const std::string& textData)
+void HashTableOpen::deserialize(const string& textData)
 {
-    std::istringstream iss(textData);
+    istringstream iss(textData);
     deserializeText(iss);
 }
 
 //  бинарная сериализация 
 
-void HashTableOpen::serializeBinary(std::ostream& outStream) const
+void HashTableOpen::serializeBinary(ostream& outStream) const
 {
-    const std::uint64_t count64 = static_cast<std::uint64_t>(elementCount);
+    const uint64_t count64 = static_cast<uint64_t>(elementCount);
     outStream.write(reinterpret_cast<const char*>(&count64), sizeof(count64));
 
-    for (std::size_t i = 0; i < capacityValue; ++i) {
+    for (size_t i = 0; i < capacityValue; ++i) {
         const Cell& cell = tableArray[i];
         if (cell.isOccupied && !cell.isDeleted) {
-            const std::uint64_t keySize =
-                static_cast<std::uint64_t>(cell.key.size());
-            const std::uint64_t valSize =
-                static_cast<std::uint64_t>(cell.value.size());
+            const uint64_t keySize =
+                static_cast<uint64_t>(cell.key.size());
+            const uint64_t valSize =
+                static_cast<uint64_t>(cell.value.size());
 
             outStream.write(reinterpret_cast<const char*>(&keySize), sizeof(keySize));
             if (keySize > 0) {
                 outStream.write(cell.key.data(),
-                                static_cast<std::streamsize>(keySize));
+                                static_cast<streamsize>(keySize));
             }
 
             outStream.write(reinterpret_cast<const char*>(&valSize), sizeof(valSize));
             if (valSize > 0) {
                 outStream.write(cell.value.data(),
-                                static_cast<std::streamsize>(valSize));
+                                static_cast<streamsize>(valSize));
             }
         }
     }
 
     if (!outStream) {
-        throw std::runtime_error("HashTableOpen::serializeBinary: write error");
+        throw runtime_error("HashTableOpen::serializeBinary: write error");
     }
 }
 
-void HashTableOpen::deserializeBinary(std::istream& inStream)
+void HashTableOpen::deserializeBinary(istream& inStream)
 {
     clear();
 
-    std::uint64_t count64 = 0;
+    uint64_t count64 = 0;
     inStream.read(reinterpret_cast<char*>(&count64), sizeof(count64));
     if (!inStream) {
-        throw std::runtime_error("HashTableOpen::deserializeBinary: cannot read count");
+        throw runtime_error("HashTableOpen::deserializeBinary: cannot read count");
     }
 
-    for (std::uint64_t i = 0; i < count64; ++i) {
-        std::uint64_t keySize = 0;
+    for (uint64_t i = 0; i < count64; ++i) {
+        uint64_t keySize = 0;
         inStream.read(reinterpret_cast<char*>(&keySize), sizeof(keySize));
         if (!inStream) {
-            throw std::runtime_error("HashTableOpen::deserializeBinary: cannot read key size");
+            throw runtime_error("HashTableOpen::deserializeBinary: cannot read key size");
         }
 
-        std::string keyValue;
-        keyValue.resize(static_cast<std::size_t>(keySize));
+        string keyValue;
+        keyValue.resize(static_cast<size_t>(keySize));
         if (keySize > 0) {
             inStream.read(keyValue.data(),
-                          static_cast<std::streamsize>(keySize));
+                          static_cast<streamsize>(keySize));
             if (!inStream) {
-                throw std::runtime_error("HashTableOpen::deserializeBinary: cannot read key data");
+                throw runtime_error("HashTableOpen::deserializeBinary: cannot read key data");
             }
         }
 
-        std::uint64_t valSize = 0;
+        uint64_t valSize = 0;
         inStream.read(reinterpret_cast<char*>(&valSize), sizeof(valSize));
         if (!inStream) {
-            throw std::runtime_error("HashTableOpen::deserializeBinary: cannot read value size");
+            throw runtime_error("HashTableOpen::deserializeBinary: cannot read value size");
         }
 
-        std::string valueValue;
-        valueValue.resize(static_cast<std::size_t>(valSize));
+        string valueValue;
+        valueValue.resize(static_cast<size_t>(valSize));
         if (valSize > 0) {
             inStream.read(valueValue.data(),
-                          static_cast<std::streamsize>(valSize));
+                          static_cast<streamsize>(valSize));
             if (!inStream) {
-                throw std::runtime_error("HashTableOpen::deserializeBinary: cannot read value data");
+                throw runtime_error("HashTableOpen::deserializeBinary: cannot read value data");
             }
         }
 

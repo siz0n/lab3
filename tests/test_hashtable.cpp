@@ -1,4 +1,4 @@
-// test_hashtable.cpp
+
 #include "catch_amalgamated.hpp"
 #include "hashtable.h"
 
@@ -9,7 +9,7 @@
 
 
 // HashTable — базовые свойства / конструкторы
-
+using namespace std;
 
 TEST_CASE("HashTable: конструктор по умолчанию и базовые свойства", "[HashTable]")
 {
@@ -23,10 +23,10 @@ TEST_CASE("HashTable: конструктор по умолчанию и базо
     REQUIRE(table.size() == 0U);
 
     // print (для покрытия)
-    std::ostringstream oss;
-    std::streambuf* oldBuf = std::cout.rdbuf(oss.rdbuf());
+    ostringstream oss;
+    streambuf* oldBuf = cout.rdbuf(oss.rdbuf());
     table.print();
-    std::cout.rdbuf(oldBuf);
+    cout.rdbuf(oldBuf);
 }
 
 TEST_CASE("HashTable: пользовательское число бакетов и нормализация нуля", "[HashTable]")
@@ -55,13 +55,13 @@ TEST_CASE("HashTable: вставка, поиск, удаление, обновл
     REQUIRE_FALSE(table.empty());
 
     // find (неконстантный)
-    std::string* pa = table.find("a");
+    string* pa = table.find("a");
     REQUIRE(pa != nullptr);
     REQUIRE(*pa == "1");
 
     // find (константный)
     const HashTable& cref = table;
-    const std::string* pb = cref.find("b");
+    const string* pb = cref.find("b");
     REQUIRE(pb != nullptr);
     REQUIRE(*pb == "2");
 
@@ -91,13 +91,13 @@ TEST_CASE("HashTable: operator[] вставляет при промахе и в�
     table.insert("x", "42");
 
     // существующий
-    std::string& ref = table["x"];
+    string& ref = table["x"];
     REQUIRE(ref == "42");
     ref = "99";
     REQUIRE(*table.find("x") == "99");
 
     // отсутствующий — вставляется с пустой строкой
-    std::string& refNew = table["newKey"];
+    string& refNew = table["newKey"];
     REQUIRE(refNew.empty());
     REQUIRE(table.size() == 2U);
     refNew = "val";
@@ -108,7 +108,7 @@ TEST_CASE("HashTable: rehash вызывается при росте нагруз
 {
     HashTable table(2); // маленькое число бакетов для быстрого rehash
 
-    std::size_t oldBuckets = table.bucketCount();
+    size_t oldBuckets = table.bucketCount();
     REQUIRE(oldBuckets == 2U);
 
     table.insert("k1", "v1");
@@ -129,7 +129,7 @@ TEST_CASE("HashTable: clear удаляет элементы, но сохраня
     table.insert("a", "1");
     table.insert("b", "2");
 
-    std::size_t buckets = table.bucketCount();
+    size_t buckets = table.bucketCount();
     table.clear();
 
     REQUIRE(table.size() == 0U);
@@ -192,10 +192,10 @@ TEST_CASE("HashTable: move-конструктор переносит бакет�
     src.insert("a", "1");
     src.insert("b", "2");
 
-    std::size_t oldBuckets = src.bucketCount();
-    std::size_t oldSize    = src.size();
+    size_t oldBuckets = src.bucketCount();
+    size_t oldSize    = src.size();
 
-    HashTable dst(std::move(src));
+    HashTable dst(move(src));
 
     REQUIRE(dst.size() == oldSize);
     REQUIRE(dst.bucketCount() == oldBuckets);
@@ -216,7 +216,7 @@ TEST_CASE("HashTable: move-присваивание переносит баке�
     HashTable dst;
     dst.insert("old", "q");
 
-    dst = std::move(src);
+    dst = move(src);
 
     REQUIRE(dst.size() == 2U);
     REQUIRE(dst.find("old") == nullptr);
@@ -238,7 +238,7 @@ TEST_CASE("HashTable: текстовая serialize/deserialize round-trip", "[Ha
     table.insert("beta", "2");
     table.insert("gamma", "3");
 
-    std::string text = table.serialize();
+    string text = table.serialize();
 
     HashTable restored;
     restored.deserialize(text);
@@ -254,7 +254,7 @@ TEST_CASE("HashTable: deserializeText с нечисловым count оставл
     HashTable table;
     table.insert("x", "1");
 
-    std::istringstream iss("not_a_number\nkey\tvalue\n");
+    istringstream iss("not_a_number\nkey\tvalue\n");
     table.deserializeText(iss);
 
     REQUIRE(table.size() == 0U);
@@ -267,14 +267,14 @@ TEST_CASE("HashTable: deserializeText бросает, если не удалос
 
     SECTION("нет строк после count")
     {
-        std::istringstream iss("1\n");
-        REQUIRE_THROWS_AS(table.deserializeText(iss), std::runtime_error);
+        istringstream iss("1\n");
+        REQUIRE_THROWS_AS(table.deserializeText(iss), runtime_error);
     }
 
     SECTION("есть строка с ключом, но без значения")
     {
-        std::istringstream iss("1\nkey_without_value_line\n");
-        REQUIRE_THROWS_AS(table.deserializeText(iss), std::runtime_error);
+        istringstream iss("1\nkey_without_value_line\n");
+        REQUIRE_THROWS_AS(table.deserializeText(iss), runtime_error);
     }
 }
 
@@ -289,11 +289,11 @@ TEST_CASE("HashTable: binary serialize/deserialize round-trip", "[HashTable]")
     table.insert("k2", "");
     table.insert("русский", "текст");
 
-    std::ostringstream oss(std::ios::binary);
+    ostringstream oss(ios::binary);
     table.serializeBinary(oss);
-    std::string data = oss.str();
+    string data = oss.str();
 
-    std::istringstream iss(data, std::ios::binary);
+    istringstream iss(data, ios::binary);
     HashTable restored;
     restored.deserializeBinary(iss);
 
@@ -305,10 +305,10 @@ TEST_CASE("HashTable: binary serialize/deserialize round-trip", "[HashTable]")
 
 TEST_CASE("HashTable: deserializeBinary бросает, если не может прочитать count", "[HashTable]")
 {
-    std::string empty;
-    std::istringstream iss(empty, std::ios::binary);
+    string empty;
+    istringstream iss(empty, ios::binary);
     HashTable table;
-    REQUIRE_THROWS_AS(table.deserializeBinary(iss), std::runtime_error);
+    REQUIRE_THROWS_AS(table.deserializeBinary(iss), runtime_error);
 }
 
 TEST_CASE("HashTable: serializeBinary бросает, если поток в состоянии ошибки", "[HashTable]")
@@ -316,10 +316,10 @@ TEST_CASE("HashTable: serializeBinary бросает, если поток в с�
     HashTable table;
     table.insert("x", "1");
 
-    std::ostringstream oss(std::ios::binary);
-    oss.setstate(std::ios::badbit);
+    ostringstream oss(ios::binary);
+    oss.setstate(ios::badbit);
 
-    REQUIRE_THROWS_AS(table.serializeBinary(oss), std::runtime_error);
+    REQUIRE_THROWS_AS(table.serializeBinary(oss), runtime_error);
 }
 
 // =============================================================
@@ -336,10 +336,10 @@ TEST_CASE("HashTableOpen: конструктор по умолчанию и св
     table.clear();
     REQUIRE(table.size() == 0U);
 
-    std::ostringstream oss;
-    std::streambuf* oldBuf = std::cout.rdbuf(oss.rdbuf());
+    ostringstream oss;
+    streambuf* oldBuf = cout.rdbuf(oss.rdbuf());
     table.print();
-    std::cout.rdbuf(oldBuf);
+    cout.rdbuf(oldBuf);
 }
 
 TEST_CASE("HashTableOpen: пользовательская ёмкость и нормализация нуля", "[HashTableOpen]")
@@ -361,12 +361,12 @@ TEST_CASE("HashTableOpen: insert, find, erase, update", "[HashTableOpen]")
     REQUIRE(table.size() == 3U);
     REQUIRE_FALSE(table.empty());
 
-    std::string* pa = table.find("a");
+    string* pa = table.find("a");
     REQUIRE(pa != nullptr);
     REQUIRE(*pa == "1");
 
     const HashTableOpen& cref = table;
-    const std::string* pb = cref.find("b");
+    const string* pb = cref.find("b");
     REQUIRE(pb != nullptr);
     REQUIRE(*pb == "2");
 
@@ -390,12 +390,12 @@ TEST_CASE("HashTableOpen: operator[] вставляет по умолчанию 
     HashTableOpen table;
     table.insert("x", "42");
 
-    std::string& ref = table["x"];
+    string& ref = table["x"];
     REQUIRE(ref == "42");
     ref = "99";
     REQUIRE(*table.find("x") == "99");
 
-    std::string& refNew = table["newKey"];
+    string& refNew = table["newKey"];
     REQUIRE(refNew.empty());
     REQUIRE(table.size() == 2U);
     refNew = "val";
@@ -405,7 +405,7 @@ TEST_CASE("HashTableOpen: operator[] вставляет по умолчанию 
 TEST_CASE("HashTableOpen: rehash увеличивает capacity", "[HashTableOpen]")
 {
     HashTableOpen table(2);
-    std::size_t oldCap = table.capacity();
+    size_t oldCap = table.capacity();
     REQUIRE(oldCap == 2U);
 
     table.insert("k1", "v1");
@@ -423,7 +423,7 @@ TEST_CASE("HashTableOpen: clear очищает элементы, но остав
     table.insert("a", "1");
     table.insert("b", "2");
 
-    std::size_t cap = table.capacity();
+    size_t cap = table.capacity();
     table.clear();
 
     REQUIRE(table.size() == 0U);
@@ -481,10 +481,10 @@ TEST_CASE("HashTableOpen: move-конструктор переносит таб�
     src.insert("a", "1");
     src.insert("b", "2");
 
-    std::size_t oldCap = src.capacity();
-    std::size_t oldSize = src.size();
+    size_t oldCap = src.capacity();
+    size_t oldSize = src.size();
 
-    HashTableOpen dst(std::move(src));
+    HashTableOpen dst(move(src));
 
     REQUIRE(dst.size() == oldSize);
     REQUIRE(dst.capacity() == oldCap);
@@ -504,7 +504,7 @@ TEST_CASE("HashTableOpen: move-присваивание переносит и о
     HashTableOpen dst;
     dst.insert("old", "q");
 
-    dst = std::move(src);
+    dst = move(src);
 
     REQUIRE(dst.size() == 2U);
     REQUIRE(dst.find("old") == nullptr);
@@ -526,7 +526,7 @@ TEST_CASE("HashTableOpen: текстовая serialize/deserialize round-trip", 
     table.insert("beta", "2");
     table.insert("gamma", "3");
 
-    std::string text = table.serialize();
+    string text = table.serialize();
 
     HashTableOpen restored;
     restored.deserialize(text);
@@ -542,7 +542,7 @@ TEST_CASE("HashTableOpen: deserializeText с нечисловым count очищ
     HashTableOpen table;
     table.insert("x", "1");
 
-    std::istringstream iss("not_number\nkey\tvalue\n");
+    istringstream iss("not_number\nkey\tvalue\n");
     table.deserializeText(iss);
 
     REQUIRE(table.size() == 0U);
@@ -555,14 +555,14 @@ TEST_CASE("HashTableOpen: deserializeText бросает при битых ст�
 
     SECTION("нет строк после count")
     {
-        std::istringstream iss("1\n");
-        REQUIRE_THROWS_AS(table.deserializeText(iss), std::runtime_error);
+        istringstream iss("1\n");
+        REQUIRE_THROWS_AS(table.deserializeText(iss), runtime_error);
     }
 
     SECTION("есть строка только с ключом")
     {
-        std::istringstream iss("1\nkey_only_line\n");
-        REQUIRE_THROWS_AS(table.deserializeText(iss), std::runtime_error);
+        istringstream iss("1\nkey_only_line\n");
+        REQUIRE_THROWS_AS(table.deserializeText(iss), runtime_error);
     }
 }
 
@@ -577,11 +577,11 @@ TEST_CASE("HashTableOpen: binary serialize/deserialize ", "[HashTableOpen]")
     table.insert("k2", "");
     table.insert("русский", "текст");
 
-    std::ostringstream oss(std::ios::binary);
+    ostringstream oss(ios::binary);
     table.serializeBinary(oss);
-    std::string data = oss.str();
+    string data = oss.str();
 
-    std::istringstream iss(data, std::ios::binary);
+    istringstream iss(data, ios::binary);
     HashTableOpen restored;
     restored.deserializeBinary(iss);
 
@@ -598,11 +598,11 @@ TEST_CASE("HashTableOpen: binary serialize/deserialize с удалёнными �
     table.insert("b", "2");
     table.erase("a"); // помечаем как DELETED
 
-    std::ostringstream oss(std::ios::binary);
+    ostringstream oss(ios::binary);
     table.serializeBinary(oss);
-    std::string data = oss.str();
+    string data = oss.str();
 
-    std::istringstream iss(data, std::ios::binary);
+    istringstream iss(data, ios::binary);
     HashTableOpen restored;
     restored.deserializeBinary(iss);
 
@@ -612,10 +612,10 @@ TEST_CASE("HashTableOpen: binary serialize/deserialize с удалёнными �
 
 TEST_CASE("HashTableOpen: deserializeBinary бросает, если не может прочитать count", "[HashTableOpen]")
 {
-    std::string empty;
-    std::istringstream iss(empty, std::ios::binary);
+    string empty;
+    istringstream iss(empty, ios::binary);
     HashTableOpen table;
-    REQUIRE_THROWS_AS(table.deserializeBinary(iss), std::runtime_error);
+    REQUIRE_THROWS_AS(table.deserializeBinary(iss), runtime_error);
 }
 
 TEST_CASE("HashTableOpen: serializeBinary бросает, если поток в состоянии ошибки", "[HashTableOpen]")
@@ -623,8 +623,8 @@ TEST_CASE("HashTableOpen: serializeBinary бросает, если поток в
     HashTableOpen table;
     table.insert("x", "1");
 
-    std::ostringstream oss(std::ios::binary);
-    oss.setstate(std::ios::badbit);
+    ostringstream oss(ios::binary);
+    oss.setstate(ios::badbit);
 
-    REQUIRE_THROWS_AS(table.serializeBinary(oss), std::runtime_error);
+    REQUIRE_THROWS_AS(table.serializeBinary(oss), runtime_error);
 }
